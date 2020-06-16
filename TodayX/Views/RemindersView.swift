@@ -10,7 +10,7 @@ import SwiftUI
 
 struct RemindersView: View {
     
-    @ObservedObject var reminderListVM: ReminderListViewModel
+    @ObservedObject var reminderListVM: ReminderListVM
     @State private var isPresented: Bool = false
     
     var dateFormatter: DateFormatter {
@@ -20,7 +20,7 @@ struct RemindersView: View {
     }
       
       init() {
-          self.reminderListVM = ReminderListViewModel()
+          self.reminderListVM = ReminderListVM()
       }
       
       private func delete(at offsets: IndexSet) {

@@ -16,8 +16,6 @@
 		9E1CEE502498C23A00F5EDC9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E1CEE4E2498C23A00F5EDC9 /* LaunchScreen.storyboard */; };
 		9E1CEE5B2498C23A00F5EDC9 /* TodayXTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1CEE5A2498C23A00F5EDC9 /* TodayXTests.swift */; };
 		9E1CEE662498C23A00F5EDC9 /* TodayXUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1CEE652498C23A00F5EDC9 /* TodayXUITests.swift */; };
-		9E1CEE7A2498C66D00F5EDC9 /* AddReminderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1CEE792498C66D00F5EDC9 /* AddReminderViewModel.swift */; };
-		9E1CEE7C2498C70700F5EDC9 /* ReminderListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1CEE7B2498C70700F5EDC9 /* ReminderListViewModel.swift */; };
 		9E1CEE7E2498C92400F5EDC9 /* NSManagedObjectContext+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1CEE7D2498C92400F5EDC9 /* NSManagedObjectContext+Extensions.swift */; };
 		9E1CEE802498CAD800F5EDC9 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1CEE7F2498CAD800F5EDC9 /* CoreDataManager.swift */; };
 		9E1CEE822498CB6500F5EDC9 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1CEE812498CB6500F5EDC9 /* Helper.swift */; };
@@ -34,6 +32,8 @@
 		9E1CEE992498F5D900F5EDC9 /* BottomAreaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1CEE982498F5D900F5EDC9 /* BottomAreaView.swift */; };
 		9E1CEE9B2498F70000F5EDC9 /* CityDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1CEE9A2498F70000F5EDC9 /* CityDetailsView.swift */; };
 		9E1CEE9D2498F71600F5EDC9 /* AddReminderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1CEE9C2498F71600F5EDC9 /* AddReminderView.swift */; };
+		9EA6DF5324991B0400C2F811 /* AddReminderVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA6DF5224991B0400C2F811 /* AddReminderVM.swift */; };
+		9EA6DF5524991B5600C2F811 /* ReminderListVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA6DF5424991B5600C2F811 /* ReminderListVM.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,8 +69,6 @@
 		9E1CEE612498C23A00F5EDC9 /* TodayXUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TodayXUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E1CEE652498C23A00F5EDC9 /* TodayXUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayXUITests.swift; sourceTree = "<group>"; };
 		9E1CEE672498C23A00F5EDC9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		9E1CEE792498C66D00F5EDC9 /* AddReminderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddReminderViewModel.swift; sourceTree = "<group>"; };
-		9E1CEE7B2498C70700F5EDC9 /* ReminderListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderListViewModel.swift; sourceTree = "<group>"; };
 		9E1CEE7D2498C92400F5EDC9 /* NSManagedObjectContext+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSManagedObjectContext+Extensions.swift"; sourceTree = "<group>"; };
 		9E1CEE7F2498CAD800F5EDC9 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		9E1CEE812498CB6500F5EDC9 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
@@ -87,6 +85,8 @@
 		9E1CEE982498F5D900F5EDC9 /* BottomAreaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomAreaView.swift; sourceTree = "<group>"; };
 		9E1CEE9A2498F70000F5EDC9 /* CityDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityDetailsView.swift; sourceTree = "<group>"; };
 		9E1CEE9C2498F71600F5EDC9 /* AddReminderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddReminderView.swift; sourceTree = "<group>"; };
+		9EA6DF5224991B0400C2F811 /* AddReminderVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddReminderVM.swift; sourceTree = "<group>"; };
+		9EA6DF5424991B5600C2F811 /* ReminderListVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderListVM.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -185,9 +185,9 @@
 		9E1CEE732498C5D600F5EDC9 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				9E1CEE792498C66D00F5EDC9 /* AddReminderViewModel.swift */,
-				9E1CEE7B2498C70700F5EDC9 /* ReminderListViewModel.swift */,
 				9E1CEE8A2498EEC000F5EDC9 /* APIViewModel.swift */,
+				9EA6DF5224991B0400C2F811 /* AddReminderVM.swift */,
+				9EA6DF5424991B5600C2F811 /* ReminderListVM.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -380,6 +380,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9EA6DF5324991B0400C2F811 /* AddReminderVM.swift in Sources */,
 				9E1CEE412498C23300F5EDC9 /* AppDelegate.swift in Sources */,
 				9E1CEE852498CE7300F5EDC9 /* WeatherAPIModel.swift in Sources */,
 				9E1CEE912498F53700F5EDC9 /* RemindersView.swift in Sources */,
@@ -391,11 +392,10 @@
 				9E1CEE462498C23300F5EDC9 /* TodayX.xcdatamodeld in Sources */,
 				9E1CEE992498F5D900F5EDC9 /* BottomAreaView.swift in Sources */,
 				9E1CEE932498F55100F5EDC9 /* BackgroundView.swift in Sources */,
+				9EA6DF5524991B5600C2F811 /* ReminderListVM.swift in Sources */,
 				9E1CEE482498C23300F5EDC9 /* ContentView.swift in Sources */,
-				9E1CEE7A2498C66D00F5EDC9 /* AddReminderViewModel.swift in Sources */,
 				9E1CEE822498CB6500F5EDC9 /* Helper.swift in Sources */,
 				9E1CEE8B2498EEC000F5EDC9 /* APIViewModel.swift in Sources */,
-				9E1CEE7C2498C70700F5EDC9 /* ReminderListViewModel.swift in Sources */,
 				9E1CEE802498CAD800F5EDC9 /* CoreDataManager.swift in Sources */,
 				9E1CEE8D2498F2C900F5EDC9 /* AQIAPIModel.swift in Sources */,
 				9E1CEE9D2498F71600F5EDC9 /* AddReminderView.swift in Sources */,

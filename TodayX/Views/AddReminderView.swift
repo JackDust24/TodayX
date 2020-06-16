@@ -11,7 +11,7 @@ import SwiftUI
 struct AddReminderView: View {
     
     @Binding var isPresented: Bool
-    @State var addReminderVM = AddReminderViewModel()
+    @State var addReminderVM = AddReminderVM()
     @State private var dateChosen = Date()
     
     var body: some View {
