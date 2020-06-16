@@ -16,6 +16,24 @@
 		9E1CEE502498C23A00F5EDC9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E1CEE4E2498C23A00F5EDC9 /* LaunchScreen.storyboard */; };
 		9E1CEE5B2498C23A00F5EDC9 /* TodayXTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1CEE5A2498C23A00F5EDC9 /* TodayXTests.swift */; };
 		9E1CEE662498C23A00F5EDC9 /* TodayXUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1CEE652498C23A00F5EDC9 /* TodayXUITests.swift */; };
+		9E1CEE7A2498C66D00F5EDC9 /* AddReminderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1CEE792498C66D00F5EDC9 /* AddReminderViewModel.swift */; };
+		9E1CEE7C2498C70700F5EDC9 /* ReminderListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1CEE7B2498C70700F5EDC9 /* ReminderListViewModel.swift */; };
+		9E1CEE7E2498C92400F5EDC9 /* NSManagedObjectContext+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1CEE7D2498C92400F5EDC9 /* NSManagedObjectContext+Extensions.swift */; };
+		9E1CEE802498CAD800F5EDC9 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1CEE7F2498CAD800F5EDC9 /* CoreDataManager.swift */; };
+		9E1CEE822498CB6500F5EDC9 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1CEE812498CB6500F5EDC9 /* Helper.swift */; };
+		9E1CEE852498CE7300F5EDC9 /* WeatherAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1CEE842498CE7300F5EDC9 /* WeatherAPIModel.swift */; };
+		9E1CEE872498ED5700F5EDC9 /* WeatherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1CEE862498ED5700F5EDC9 /* WeatherService.swift */; };
+		9E1CEE892498ED8F00F5EDC9 /* AQIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1CEE882498ED8F00F5EDC9 /* AQIService.swift */; };
+		9E1CEE8B2498EEC000F5EDC9 /* APIViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1CEE8A2498EEC000F5EDC9 /* APIViewModel.swift */; };
+		9E1CEE8D2498F2C900F5EDC9 /* AQIAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1CEE8C2498F2C900F5EDC9 /* AQIAPIModel.swift */; };
+		9E1CEE8F2498F49D00F5EDC9 /* AQIObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1CEE8E2498F49D00F5EDC9 /* AQIObjects.swift */; };
+		9E1CEE912498F53700F5EDC9 /* RemindersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1CEE902498F53700F5EDC9 /* RemindersView.swift */; };
+		9E1CEE932498F55100F5EDC9 /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1CEE922498F55100F5EDC9 /* BackgroundView.swift */; };
+		9E1CEE952498F59300F5EDC9 /* TopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1CEE942498F59300F5EDC9 /* TopView.swift */; };
+		9E1CEE972498F5C100F5EDC9 /* TopAreaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1CEE962498F5C100F5EDC9 /* TopAreaView.swift */; };
+		9E1CEE992498F5D900F5EDC9 /* BottomAreaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1CEE982498F5D900F5EDC9 /* BottomAreaView.swift */; };
+		9E1CEE9B2498F70000F5EDC9 /* CityDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1CEE9A2498F70000F5EDC9 /* CityDetailsView.swift */; };
+		9E1CEE9D2498F71600F5EDC9 /* AddReminderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1CEE9C2498F71600F5EDC9 /* AddReminderView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +69,24 @@
 		9E1CEE612498C23A00F5EDC9 /* TodayXUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TodayXUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E1CEE652498C23A00F5EDC9 /* TodayXUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayXUITests.swift; sourceTree = "<group>"; };
 		9E1CEE672498C23A00F5EDC9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9E1CEE792498C66D00F5EDC9 /* AddReminderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddReminderViewModel.swift; sourceTree = "<group>"; };
+		9E1CEE7B2498C70700F5EDC9 /* ReminderListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderListViewModel.swift; sourceTree = "<group>"; };
+		9E1CEE7D2498C92400F5EDC9 /* NSManagedObjectContext+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSManagedObjectContext+Extensions.swift"; sourceTree = "<group>"; };
+		9E1CEE7F2498CAD800F5EDC9 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		9E1CEE812498CB6500F5EDC9 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
+		9E1CEE842498CE7300F5EDC9 /* WeatherAPIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherAPIModel.swift; sourceTree = "<group>"; };
+		9E1CEE862498ED5700F5EDC9 /* WeatherService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherService.swift; sourceTree = "<group>"; };
+		9E1CEE882498ED8F00F5EDC9 /* AQIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AQIService.swift; sourceTree = "<group>"; };
+		9E1CEE8A2498EEC000F5EDC9 /* APIViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIViewModel.swift; sourceTree = "<group>"; };
+		9E1CEE8C2498F2C900F5EDC9 /* AQIAPIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AQIAPIModel.swift; sourceTree = "<group>"; };
+		9E1CEE8E2498F49D00F5EDC9 /* AQIObjects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AQIObjects.swift; sourceTree = "<group>"; };
+		9E1CEE902498F53700F5EDC9 /* RemindersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemindersView.swift; sourceTree = "<group>"; };
+		9E1CEE922498F55100F5EDC9 /* BackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundView.swift; sourceTree = "<group>"; };
+		9E1CEE942498F59300F5EDC9 /* TopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopView.swift; sourceTree = "<group>"; };
+		9E1CEE962498F5C100F5EDC9 /* TopAreaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopAreaView.swift; sourceTree = "<group>"; };
+		9E1CEE982498F5D900F5EDC9 /* BottomAreaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomAreaView.swift; sourceTree = "<group>"; };
+		9E1CEE9A2498F70000F5EDC9 /* CityDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityDetailsView.swift; sourceTree = "<group>"; };
+		9E1CEE9C2498F71600F5EDC9 /* AddReminderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddReminderView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +137,13 @@
 		9E1CEE3F2498C23300F5EDC9 /* TodayX */ = {
 			isa = PBXGroup;
 			children = (
+				9E1CEE832498CE4D00F5EDC9 /* APIData */,
+				9E1CEE762498C5F700F5EDC9 /* Helpers */,
+				9E1CEE782498C61D00F5EDC9 /* CoreData */,
+				9E1CEE772498C5FB00F5EDC9 /* Services */,
+				9E1CEE732498C5D600F5EDC9 /* ViewModels */,
+				9E1CEE752498C5F300F5EDC9 /* Models */,
+				9E1CEE742498C5ED00F5EDC9 /* Views */,
 				9E1CEE402498C23300F5EDC9 /* AppDelegate.swift */,
 				9E1CEE422498C23300F5EDC9 /* SceneDelegate.swift */,
 				9E1CEE472498C23300F5EDC9 /* ContentView.swift */,
@@ -137,6 +180,73 @@
 				9E1CEE672498C23A00F5EDC9 /* Info.plist */,
 			);
 			path = TodayXUITests;
+			sourceTree = "<group>";
+		};
+		9E1CEE732498C5D600F5EDC9 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				9E1CEE792498C66D00F5EDC9 /* AddReminderViewModel.swift */,
+				9E1CEE7B2498C70700F5EDC9 /* ReminderListViewModel.swift */,
+				9E1CEE8A2498EEC000F5EDC9 /* APIViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		9E1CEE742498C5ED00F5EDC9 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				9E1CEE902498F53700F5EDC9 /* RemindersView.swift */,
+				9E1CEE922498F55100F5EDC9 /* BackgroundView.swift */,
+				9E1CEE942498F59300F5EDC9 /* TopView.swift */,
+				9E1CEE962498F5C100F5EDC9 /* TopAreaView.swift */,
+				9E1CEE982498F5D900F5EDC9 /* BottomAreaView.swift */,
+				9E1CEE9A2498F70000F5EDC9 /* CityDetailsView.swift */,
+				9E1CEE9C2498F71600F5EDC9 /* AddReminderView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		9E1CEE752498C5F300F5EDC9 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				9E1CEE8E2498F49D00F5EDC9 /* AQIObjects.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		9E1CEE762498C5F700F5EDC9 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				9E1CEE812498CB6500F5EDC9 /* Helper.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		9E1CEE772498C5FB00F5EDC9 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				9E1CEE862498ED5700F5EDC9 /* WeatherService.swift */,
+				9E1CEE882498ED8F00F5EDC9 /* AQIService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		9E1CEE782498C61D00F5EDC9 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				9E1CEE7D2498C92400F5EDC9 /* NSManagedObjectContext+Extensions.swift */,
+				9E1CEE7F2498CAD800F5EDC9 /* CoreDataManager.swift */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
+		9E1CEE832498CE4D00F5EDC9 /* APIData */ = {
+			isa = PBXGroup;
+			children = (
+				9E1CEE842498CE7300F5EDC9 /* WeatherAPIModel.swift */,
+				9E1CEE8C2498F2C900F5EDC9 /* AQIAPIModel.swift */,
+			);
+			path = APIData;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -271,8 +381,26 @@
 			buildActionMask = 2147483647;
 			files = (
 				9E1CEE412498C23300F5EDC9 /* AppDelegate.swift in Sources */,
+				9E1CEE852498CE7300F5EDC9 /* WeatherAPIModel.swift in Sources */,
+				9E1CEE912498F53700F5EDC9 /* RemindersView.swift in Sources */,
+				9E1CEE872498ED5700F5EDC9 /* WeatherService.swift in Sources */,
+				9E1CEE892498ED8F00F5EDC9 /* AQIService.swift in Sources */,
+				9E1CEE7E2498C92400F5EDC9 /* NSManagedObjectContext+Extensions.swift in Sources */,
+				9E1CEE9B2498F70000F5EDC9 /* CityDetailsView.swift in Sources */,
+				9E1CEE972498F5C100F5EDC9 /* TopAreaView.swift in Sources */,
 				9E1CEE462498C23300F5EDC9 /* TodayX.xcdatamodeld in Sources */,
+				9E1CEE992498F5D900F5EDC9 /* BottomAreaView.swift in Sources */,
+				9E1CEE932498F55100F5EDC9 /* BackgroundView.swift in Sources */,
 				9E1CEE482498C23300F5EDC9 /* ContentView.swift in Sources */,
+				9E1CEE7A2498C66D00F5EDC9 /* AddReminderViewModel.swift in Sources */,
+				9E1CEE822498CB6500F5EDC9 /* Helper.swift in Sources */,
+				9E1CEE8B2498EEC000F5EDC9 /* APIViewModel.swift in Sources */,
+				9E1CEE7C2498C70700F5EDC9 /* ReminderListViewModel.swift in Sources */,
+				9E1CEE802498CAD800F5EDC9 /* CoreDataManager.swift in Sources */,
+				9E1CEE8D2498F2C900F5EDC9 /* AQIAPIModel.swift in Sources */,
+				9E1CEE9D2498F71600F5EDC9 /* AddReminderView.swift in Sources */,
+				9E1CEE8F2498F49D00F5EDC9 /* AQIObjects.swift in Sources */,
+				9E1CEE952498F59300F5EDC9 /* TopView.swift in Sources */,
 				9E1CEE432498C23300F5EDC9 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
