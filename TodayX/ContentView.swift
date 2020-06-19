@@ -28,12 +28,25 @@ struct ContentView: View {
             
             ZStack(alignment: .top) {
                 // Background Colour (we will change)
-                Color.green
-                .edgesIgnoringSafeArea(.all)
+                
+                BackgroundView()
                 
                 VStack {
                     // This shows the top area for doing a seach
+                    TopView(forecastViewModel: self.forecastViewModel).layoutPriority(100)
+                    //Spacer()
+                    
                     TopAreaView(showField: self.showSearchField, forecastViewModel: self.forecastViewModel)
+                    
+                    self.showReminder ? AnyView(Text("Reminder").offset(y: -60)) :
+                    AnyView(Text(""))
+                    
+                   
+                    
+                    Spacer()
+                  //  Spacer()
+                    
+                    
                 }
             }
                 .tabItem {
@@ -84,8 +97,8 @@ struct ContentView: View {
     }
 }
 
-//struct ContentView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ContentView()
-//    }
-//}
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+    }
+}

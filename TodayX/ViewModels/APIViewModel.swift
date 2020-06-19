@@ -40,7 +40,7 @@ class APIViewModel: ObservableObject {
         if let city = self.weatherResponse?.name {
             return city
         } else {
-            return ""
+            return "Bangkok"
         }
     }
     
@@ -49,7 +49,7 @@ class APIViewModel: ObservableObject {
         if let country = self.weatherResponse?.sys?.country {
             return country
         } else {
-             return ""
+             return "TH"
         }
     }
     
@@ -69,7 +69,7 @@ class APIViewModel: ObservableObject {
             let formattedString = String(format: "%.0f", temp)
             return formattedString + "°"
         }else {
-             return ""
+             return "21"
         }
     }
     
@@ -111,7 +111,7 @@ class APIViewModel: ObservableObject {
             let formattedString = "\(temp)"
             return formattedString
         } else {
-             return ""
+             return "99"
         }
     }
     // AQI has a status
@@ -120,7 +120,7 @@ class APIViewModel: ObservableObject {
             let formattedString = "\(temp)"
             return formattedString
         } else {
-             return ""
+             return "TBC"
         }
     }
    

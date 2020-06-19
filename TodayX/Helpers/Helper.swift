@@ -46,16 +46,17 @@ struct Helper {
     func showWeatherIcon(item: ForecastWeatherResponse?) -> String {
         
         
-        guard item != nil else { return "clear" }
+       // guard item != nil else { return "clear" }
         
         let main = item?.weather?.first?.main
         
         print("Weather icon - \(String(describing: main))")
         
+        
         if main == nil {
             // If nil then return clear.
             print("weather is nil")
-            return "clear"
+            return "cloud.sun.fill"
         }
        
         switch main {

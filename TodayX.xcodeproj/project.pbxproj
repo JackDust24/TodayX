@@ -32,6 +32,7 @@
 		9E1CEE992498F5D900F5EDC9 /* BottomAreaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1CEE982498F5D900F5EDC9 /* BottomAreaView.swift */; };
 		9E1CEE9B2498F70000F5EDC9 /* CityDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1CEE9A2498F70000F5EDC9 /* CityDetailsView.swift */; };
 		9E1CEE9D2498F71600F5EDC9 /* AddReminderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1CEE9C2498F71600F5EDC9 /* AddReminderView.swift */; };
+		9E40D52A249B8C0200DE70F0 /* ImageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E40D529249B8C0200DE70F0 /* ImageButton.swift */; };
 		9EA6DF5324991B0400C2F811 /* AddReminderVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA6DF5224991B0400C2F811 /* AddReminderVM.swift */; };
 		9EA6DF5524991B5600C2F811 /* ReminderListVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA6DF5424991B5600C2F811 /* ReminderListVM.swift */; };
 /* End PBXBuildFile section */
@@ -85,6 +86,7 @@
 		9E1CEE982498F5D900F5EDC9 /* BottomAreaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomAreaView.swift; sourceTree = "<group>"; };
 		9E1CEE9A2498F70000F5EDC9 /* CityDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityDetailsView.swift; sourceTree = "<group>"; };
 		9E1CEE9C2498F71600F5EDC9 /* AddReminderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddReminderView.swift; sourceTree = "<group>"; };
+		9E40D529249B8C0200DE70F0 /* ImageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageButton.swift; sourceTree = "<group>"; };
 		9EA6DF5224991B0400C2F811 /* AddReminderVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddReminderVM.swift; sourceTree = "<group>"; };
 		9EA6DF5424991B5600C2F811 /* ReminderListVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderListVM.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -210,6 +212,7 @@
 			isa = PBXGroup;
 			children = (
 				9E1CEE8E2498F49D00F5EDC9 /* AQIObjects.swift */,
+				9E40D529249B8C0200DE70F0 /* ImageButton.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -381,6 +384,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9EA6DF5324991B0400C2F811 /* AddReminderVM.swift in Sources */,
+				9E40D52A249B8C0200DE70F0 /* ImageButton.swift in Sources */,
 				9E1CEE412498C23300F5EDC9 /* AppDelegate.swift in Sources */,
 				9E1CEE852498CE7300F5EDC9 /* WeatherAPIModel.swift in Sources */,
 				9E1CEE912498F53700F5EDC9 /* RemindersView.swift in Sources */,
