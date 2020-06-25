@@ -3,7 +3,7 @@
     <entity name="Reminders" representedClassName="Reminders" syncable="YES" codeGenerationType="class">
         <attribute name="date" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="reminder" attributeType="String"/>
-        <attribute name="type" attributeType="String"/>
+        <attribute name="type" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
     </entity>
     <entity name="Routine" representedClassName="Routine" syncable="YES" codeGenerationType="class">
         <attribute name="routine" attributeType="String"/>

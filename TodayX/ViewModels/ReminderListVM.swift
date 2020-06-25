@@ -24,27 +24,31 @@ class ReminderListVM: ObservableObject {
     func deleteReminder(_ reminderVM: ReminderViewModel) {
         CoreDataManager.shared.deleteReminder(reminder: reminderVM.reminder)
         fetchAllReminders()
-
+        
     }
     
     func fetchAllReminders() {
         self.reminders = CoreDataManager.shared.getAllReminders().map(ReminderViewModel.init)
         print(self.reminders)
     }
+    
 
 }
+
+
+
 
 class ReminderViewModel {
     
     var reminder = ""
-    var type = ""
+    var type = 0
     var date = Date()
     
     init(reminder: Reminders) {
         self.reminder = reminder.reminder!
-        self.type = reminder.type!
+        self.type = Int(reminder.type)
         self.date = reminder.date!
-
+        
     }
     
 }

@@ -30,6 +30,15 @@ struct RemindersView: View {
           }
       }
       
+    private func getImagesForTheType(for type: Int) -> String {
+        if type == 0 {
+            return "urg"
+        } else if type == 1 {
+            return "imp"
+        } else {
+            return "nrm"
+        }
+    }
     
     
     var body: some View {
@@ -38,7 +47,8 @@ struct RemindersView: View {
             List {
                 ForEach(self.reminderListVM.reminders, id: \.reminder) { reminder in
                     HStack {
-                        Image(reminder.type)
+                       
+                        Image(self.getImagesForTheType(for: reminder.type))
                           .resizable()
                           .frame(width: 100, height: 100)
                           .cornerRadius(10)
@@ -66,7 +76,10 @@ struct RemindersView: View {
             })
         }
     }
+    
+//    private let imageType = self.reminderListVM.getImagesForType
 }
+
 
 struct RemindersView_Previews: PreviewProvider {
     static var previews: some View {

@@ -13,7 +13,6 @@ let UIHeight = UIScreen.main.bounds.height
 
 struct TopAreaView: View {
     // Properties for showing the City and the the Forecast
-    @State private var showReminder: Bool = false
     @State var showField: Bool = false
     @ObservedObject var forecastViewModel: APIViewModel
     
@@ -112,42 +111,13 @@ struct TopAreaView: View {
                         }
                         
                     }
-                    ZStack {
-                        
-                        Button(action: {
-                            
-                            self.showReminder = true
-                                                        
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                               // self.showReminder = false
-                                
-                               // self.onTap()
-                            }
-                            
-                            }) {
-                           
-                            Image("Spiral").renderingMode(.original)
-                                                     .resizable()
-                                                     .frame(width: 140, height: 140)
-                                                     .clipShape(Circle())
-                                                     .padding()
-                                                     .shadow(color: Color(#colorLiteral(red: 0.1294117719, green: 0.2156862766, blue: 0.06666667014, alpha: 1)), radius: 8, x: 9, y: 9)
-                                                     .shadow(color: Color(#colorLiteral(red: 0.3411764801, green: 0.6235294342, blue: 0.1686274558, alpha: 1)), radius: 8, x: -9, y: -9)
-                                             }.padding()
-                                                 .clipShape(Circle().inset(by: 6))
-                                                 .offset(y: -160)
-                                                 .shadow(color: Color(#colorLiteral(red: 0.1294117719, green: 0.2156862766, blue: 0.06666667014, alpha: 1)), radius: 10, x: 9, y: 9)
-                                                 .shadow(color: Color(#colorLiteral(red: 0.4666666687, green: 0.7647058964, blue: 0.2666666806, alpha: 1)), radius: 10, x: -9, y: -9)
-                        }.onTapGesture {
-                           // HighlightsView()
-                            self.showReminder.toggle()
-                    }
+
                     
                   
-                    self.showReminder ? AnyView(Text("Reminder").offset(y: -60)) :
-                    AnyView(Text(""))
-                    
-                    Spacer()
+//                    self.showReminder ? AnyView(Text("Reminder").offset(y: -60)) :
+//                    AnyView(Text(""))
+//
+//                    Spacer()
                      // DO On toggle whether to show and notify the bottom area
                
 //                    ImageButton(imageName: "heart.fill", size: CGSize(width: 60, height: 60))  {

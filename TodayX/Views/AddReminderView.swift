@@ -24,7 +24,7 @@ struct AddReminderView: View {
                     
                     TextField("Enter Reminder", text: self.$addReminderVM.reminder)
                     
-                    Picker(selection: self.$addReminderVM.type, label: Text("")) {
+                    Picker(selection: self.$addReminderVM.tag, label: Text("")) {
                         Text("Urgent").tag("urg")
                         Text("Important").tag("imp")
                         Text("Normal").tag("nrm")
@@ -36,7 +36,12 @@ struct AddReminderView: View {
                     
                     Button("Add Reminder") {
                         // place reminder
-                        self.addReminderVM.date = self.dateChosen
+                        let date = self.dateChosen
+                        let convertDate = Helper().convertDateFromPickerWithoutTime(for: date)
+                        print(convertDate)
+
+                        
+                        self.addReminderVM.date = convertDate
                         self.addReminderVM.saveReminder()
                         // self.isPresented = false
                         

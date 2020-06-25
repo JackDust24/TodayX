@@ -28,6 +28,8 @@ struct Helper {
      }
      */
     
+    
+    
     // Called by WeatherForecastViewModel, for getting the day.
     func getCurrentDate() -> String {
         // get the current date and time
@@ -93,7 +95,50 @@ struct Helper {
         
     }
     
+    func convertDateFromPickerWithoutTime(for date: Date) -> Date {
+       
+        let dateToConvert = date
+        let dateConverted = type(of: dateToConvert).init(year: date.GetYear(), month: date.GetMonth(), day: date.GetDay())
+        print("Check convertDateFromPickerWithoutTime \(dateConverted)")
+        return dateConverted
+        
+    }
     
+    func checkWhatDay(for date: Date) -> String {
+        // 1. Create Calendar property
+        var calendar = Calendar.current
+        calendar.timeZone = NSTimeZone.local
+        
+        print("Check date for checkWhatDay \(date)")
+        // 2. Check if today or tomorrow, if so return that string
+        if calendar.isDateInToday(date) {
+            print("Check date for checkWhatDay Today")
+
+            return "TODAY"
+        }
+        
+        if calendar.isDateInTomorrow(date) {
+            print("Check date for checkWhatDay Tomorrow")
+
+            return "TOMORROW"
+        }
+        
+        print("Check date for checkWhatDay Finish")
+
+        // 3. Create if the date is in the past
+        let formatDate = DateFormatter()
+        formatDate.dateFormat = "dd/MM/yyyy HH:mm:ss"
+        let drawDate = formatDate.string(from: date)
+        
+        if let date = formatDate.date(from: drawDate) {
+
+            if date < Date() {
+                return "Overdue"
+            }
+        }
+        // 4. Otherwise it will be in the future
+        return "" // We return nothing as its probably in the future .
+    }
     
     
     

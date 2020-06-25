@@ -15,9 +15,12 @@ struct ContentView: View {
     @State var showSearchField: Bool = false
     @ObservedObject var forecastViewModel: APIViewModel
     
+    @ObservedObject var testReminder: RemindersHomePageVM
+
+   
     init() {
         self.forecastViewModel = APIViewModel()
-        
+        self.testReminder = RemindersHomePageVM()
     }
 
 
@@ -37,15 +40,11 @@ struct ContentView: View {
                     //Spacer()
                     
                     TopAreaView(showField: self.showSearchField, forecastViewModel: self.forecastViewModel)
-                    
-                    self.showReminder ? AnyView(Text("Reminder").offset(y: -60)) :
-                    AnyView(Text(""))
-                    
-                   
-                    
+        
                     Spacer()
-                  //  Spacer()
+                    //  SpacetestReminder: TestRemindersVMr()
                     
+                    BottomAreaView(testReminder: self.testReminder)
                     
                 }
             }
