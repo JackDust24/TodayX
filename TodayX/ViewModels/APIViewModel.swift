@@ -21,7 +21,7 @@ class APIViewModel: ObservableObject {
     // Invoke the Networks
     var weatherService: WeatherService!
     var aqiService: AQIService!
-
+    
     //TODO: We will need to do a default place
     var cityName: String = "Bangkok"
     
@@ -36,7 +36,7 @@ class APIViewModel: ObservableObject {
     //MARK: Weather Forecast Properties
     // We need this to get the city
     var currentCity: String  {
-
+        
         if let city = self.weatherResponse?.name {
             return city
         } else {
@@ -49,7 +49,7 @@ class APIViewModel: ObservableObject {
         if let country = self.weatherResponse?.sys?.country {
             return country
         } else {
-             return "TH"
+            return "TH"
         }
     }
     
@@ -69,7 +69,7 @@ class APIViewModel: ObservableObject {
             let formattedString = String(format: "%.0f", temp)
             return formattedString + "°"
         }else {
-             return "21"
+            return "21"
         }
     }
     
@@ -77,8 +77,8 @@ class APIViewModel: ObservableObject {
     var weatherDay: String {
         let formattedDay = Helper().getCurrentDate()
         return formattedDay
-
-     }
+        
+    }
     
     // Search City
     func searchCity() {
@@ -92,7 +92,7 @@ class APIViewModel: ObservableObject {
         
         //TODO: - DO we need this on another queue?
         self.weatherService.getWeatherForecast(matching: city) {
-             forecast in
+            forecast in
             
             if let forecast = forecast {
                 DispatchQueue.main.async {
@@ -106,29 +106,49 @@ class APIViewModel: ObservableObject {
     
     //MARK: AQI API Call and properties
     var aqiData: String {
-
+        
         if let temp = self.aqiResponse?.data?.aqi {
             let formattedString = "\(temp)"
             return formattedString
         } else {
-             return "99"
+            return "99"
         }
     }
     // AQI has a status
-    var aqiStatus: String {
-        if let temp = self.aqiResponse?.status {
-            let formattedString = "\(temp)"
-            return formattedString
+    var aqiConcernLevel: String {
+        if let temp = self.aqiResponse?.data?.aqi {
+            let concernLevel = returnAQIConcernLevel(for: temp)
+            return concernLevel
         } else {
-             return "TBC"
+            return "TBC"
         }
     }
-   
+    
+    func returnAQIConcernLevel(for aqi: Int) -> String {
+        
+        switch aqi {
+        case 0...50:
+            return "Good"
+        case 51...100:
+            return "Moderate"
+        case 101...150:
+            return "Unhealthy for Sensitive Groups"
+        case 151...200:
+            return "Unhealthy"
+        case 201...300:
+            return "Very Unhealthy"
+        case 301...:
+            return "Hazardous"
+        default:
+            return "Good"
+        }
+    }
+    
     // TODO: Try getting this on a different background queue.
     func fetchAQIIndex(by city: String) {
         
         self.aqiService.getAQIIndex(matching: city) {
-             aqiIndex in
+            aqiIndex in
             if let aqiIndex = aqiIndex {
                 DispatchQueue.main.async {
                     self.aqiResponse = aqiIndex
@@ -142,9 +162,9 @@ class APIViewModel: ObservableObject {
     var populateTheIAQI: Array<AQIObjects> {
         
         arrayOfIAQIs = []
-
+        
         if let temp = self.aqiResponse?.data?.iaqi?.pm10?.v {
-
+            
             let type = "PM10"
             let formattedString = "\(temp)"
             let pm10 = AQIObjects.init(type: type, value: formattedString)
@@ -165,14 +185,14 @@ class APIViewModel: ObservableObject {
             let so2 = AQIObjects.init(type: type, value: formattedString)
             arrayOfIAQIs.append(so2)
         }
-
+        
         if let temp = self.aqiResponse?.data?.iaqi?.no2?.v {
             let type = "Nitrogen Dioxide (no2)"
             let formattedString = "\(temp)"
             let no2 = AQIObjects.init(type: type, value: formattedString)
             arrayOfIAQIs.append(no2)
         }
-
+        
         if let temp = self.aqiResponse?.data?.iaqi?.o3?.v {
             let type = "Ozone (o3)"
             let formattedString = "\(temp)"
@@ -180,7 +200,7 @@ class APIViewModel: ObservableObject {
             arrayOfIAQIs.append(o3)
         }
         print("CHECK ARRAY - \(arrayOfIAQIs)")
-
+        
         return arrayOfIAQIs as! Array<AQIObjects>
         
     }

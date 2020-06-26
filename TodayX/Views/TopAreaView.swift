@@ -66,15 +66,16 @@ struct TopAreaView: View {
                        // .offset(y: 30)
                     Spacer()
                     
-                    HStack(alignment: .top, spacing: 140) {
+                    HStack(alignment: .top) {
                         
                         
-                        VStack {
+                        VStack(alignment: .leading) {
                             Text("Temp")
                                 .foregroundColor(Color("customBlue"))
                                 .font(.custom("Arial Rounded MT Regular", size: 22))
                                 .bold()
-                                .padding()
+                               // .padding()
+                                
                             
                             Text(self.forecastViewModel.temperature)
                                 .foregroundColor(Color("customLGreen"))
@@ -87,28 +88,30 @@ struct TopAreaView: View {
                                 .frame(width: 40, height:  40, alignment: .center)
                                 .foregroundColor(.white)
                               //  .offset(x: 30, y: -140)
-                            Spacer()
-                            }
+                        }.padding()
                         
-                        VStack {
+                        Spacer()
+
+                        
+                        VStack(alignment: .trailing) {
                             
                             Text("AQI")
                                 .foregroundColor(Color("customBlue"))
                                 .font(.custom("Arial Rounded MT Regular", size: 22))
                                 .bold()
-                                .padding()
+//                                .padding()
                             
                             Text(self.forecastViewModel.aqiData)
                                 .foregroundColor(Color("customLGreen"))
                                 .font(.custom("Arial Rounded MT Bold", size: 26))
                                 .bold()
                                // .offset(y: (UIHeight / 6))
-                            Text(self.forecastViewModel.aqiStatus)
+                            Text(self.forecastViewModel.aqiConcernLevel)
                                 .foregroundColor(Color("customLGreen"))
                                 .font(.custom("Arial Rounded MT Bold", size: 26))
                                 .bold()
                                 .offset(y: 20)
-                        }
+                        }.padding()
                         
                     }
 

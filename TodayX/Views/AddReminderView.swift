@@ -14,6 +14,9 @@ struct AddReminderView: View {
     @State var addReminderVM = AddReminderVM()
     @State private var dateChosen = Date()
     
+    // For dismissing a view.
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    
     var body: some View {
         
         NavigationView {
@@ -34,7 +37,7 @@ struct AddReminderView: View {
                         Text("Select a date")
                     }
                     
-                    Button("Add Reminder") {
+                    Button("Add Reminder", action:  {
                         // place reminder
                         let date = self.dateChosen
                         let convertDate = Helper().convertDateFromPickerWithoutTime(for: date)
@@ -45,7 +48,9 @@ struct AddReminderView: View {
                         self.addReminderVM.saveReminder()
                         // self.isPresented = false
                         
-                    }.padding(8)
+                        self.presentationMode.wrappedValue.dismiss()
+                        
+                    }).padding(8)
                         .foregroundColor(Color.white)
                         .background(Color.green)
                         .cornerRadius(10)
