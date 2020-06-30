@@ -40,9 +40,9 @@ class ReminderListVM: ObservableObject {
 //
 //    }
     
-    func returnReminder() -> String {
+    func returnReminder() -> (String, Color) {
         if self.reminders.count == 0 {
-            return "There are no reminders set"
+            return ("There are no reminders set", Color.black)
         }
         
         print("returnReminder - \(self.reminders.count)")
@@ -54,9 +54,11 @@ class ReminderListVM: ObservableObject {
         }
         
         let index = counterReturn()
-        let stringToReturn = returnReminder(index: index)
+        //Get string and colour to return
+        let tupleToReturn = returnReminder(index: index)
+        print("returnReminder - \(tupleToReturn)")
 
-        return stringToReturn
+        return tupleToReturn
     }
            
     func deleteReminder(_ reminderVM: ReminderViewModel) {
@@ -103,7 +105,7 @@ class ReminderListVM: ObservableObject {
            counter = 0
        }
     
-    private func returnReminder(index: Int) -> String {
+    private func returnReminder(index: Int) -> (String, Color) {
         
         print("returnReminder1 Index Check")
         print(index)
@@ -121,10 +123,10 @@ class ReminderListVM: ObservableObject {
             resetCounter()
             // We know if the index is zero then there will be nothing imminient
             if index == 0 {
-                return "There are no reminders set for today or tomorrow."
+                return ("There are no reminders set for today or tomorrow.", Color.black)
             } else {
                 // Otherwise we let the user know that's all.
-                return "Access the Reminders tab to see other upcoming reminders."
+                return ("Access the Reminders tab to see other upcoming reminders.", Color.black)
             }
         }
         
@@ -135,26 +137,31 @@ class ReminderListVM: ObservableObject {
         // Get the priority
         let priority = returnReminderPriority(reminder: reminder.type)
         // Make a string with the date, priority and Reminder
-        let returnedStringForView = checkTheDay + priority + specificReminder
+        let returnedStringForView = checkTheDay + priority.0 + specificReminder
         print("Check reminder - \(returnedStringForView)")
         
-        return returnedStringForView
+        return (returnedStringForView, priority.1)
 
     }
     
-    private func returnReminderPriority(reminder: Int) -> String {
+    private func returnReminderPriority(reminder: Int) -> (String, Color) {
         
         if reminder == 0 {
-            return " - URGENT - "
+            return (" - URGENT - ", Color.red)
         } else if reminder == 1 {
-            return " - Important - "
+            return (" - Important - ", Color.yellow)
         }
-        return " "
+        return (" ", Color.black)
     }
 
 }
 
-
+struct Reminder {
+    var reminder: String
+    var priority: String
+    var day: String
+    var colour: Color
+}
 
 
 class ReminderViewModel {

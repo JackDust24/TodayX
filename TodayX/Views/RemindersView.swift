@@ -20,7 +20,7 @@ struct RemindersView: View {
     }
     
     init() {
-        print("init Reminders View")
+        print("Init ReminderListVM")
         self.reminderListVM = ReminderListVM()
     }
     
@@ -82,9 +82,15 @@ struct RemindersView: View {
                 AddReminderView(isPresented: self.$isPresented)
             })
                 .navigationBarTitle("Reminders")
-                .navigationBarItems(trailing: Button("Add New Reminder") {
-                    self.isPresented = true
-                })
+                .navigationBarItems(trailing:
+                   Button(action: { self.isPresented = true }, label: {Image(systemName: "plus")})
+                       )
+//                .navigationBarItems(trailing: Button("Add New Reminder") {
+//                    self.isPresented = true
+//                })
+        
+           
+        
         }
     }
     

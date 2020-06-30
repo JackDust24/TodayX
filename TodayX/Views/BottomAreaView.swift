@@ -22,8 +22,29 @@ struct BottomAreaView: View {
         self.reminderListVM = ReminderListVM()
     }
     
+//    let reminder: String?
+//    var reminderColour: Color?
+//    var reminderContents: (String, Color) {
+//        get {
+//            print("GET")
+//            return self.reminderListVM.returnReminder()
+//        }
+//        set {
+//            print("SET")
+//            self.reminderColour = newValue.1
+//        }
+//
+//    }
+   
+    var reminderContents: (String, Color) = {
+
+        let reminder = ReminderListVM().returnReminder()
+        
+        return (reminder.0, reminder.1)
+    }()
     
     var body: some View {
+        
         
         VStack {
             ZStack {
@@ -62,8 +83,11 @@ struct BottomAreaView: View {
                     
                     Text("Reminders").padding(20)
                     //                    Divider()
-                    self.showReminder ? AnyView(Text("\(reminderListVM.returnReminder()))").frame(width: UIWidth - 40, height: 60)) :
-                        AnyView(Text("\(reminderListVM.returnReminder())").frame(width: UIWidth - 40, height: 60))
+                  
+                    self.showReminder ? AnyView(Text("\(self.reminderContents.0)").frame(width: UIWidth - 40, height: 60)
+                        .foregroundColor(self.reminderContents.1)) :
+                        AnyView(Text("\(self.reminderContents.0)").frame(width: UIWidth - 40, height: 60)
+                        .foregroundColor(reminderContents.1))
                     
                     
                 }
