@@ -13,6 +13,7 @@ struct BottomAreaView: View {
     // This will be separate, with a model.
 //    @ObservedObject var testReminder: RemindersHomePageVM
     @ObservedObject var reminderListVM: ReminderListVM
+//    @ObservedObject var summaryReminder: SummaryReminder
     
     // For showing the Reminder View
     @State private var showReminder: Bool = false
@@ -36,12 +37,12 @@ struct BottomAreaView: View {
 //
 //    }
    
-    var reminderContents: (String, Color) = {
-
-        let reminder = ReminderListVM().returnReminder()
-        
-        return (reminder.0, reminder.1)
-    }()
+//    var reminderContents: (String, Color) = {
+//
+//        let reminder = ReminderListVM().returnReminder()
+//
+//        return (reminder.0, reminder.1)
+//    }()
     
     var body: some View {
         
@@ -52,6 +53,8 @@ struct BottomAreaView: View {
                 Button(action: {
                     
                     self.showReminder.toggle()
+                    
+                    self.reminderListVM.returnReminder()
                     
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
                         //self.showReminder = false
@@ -79,23 +82,27 @@ struct BottomAreaView: View {
                     .frame(width: UIWidth - 40, height: UIHeight / 3 - 66)
                 Spacer()
                 
-                VStack {
+                VStack(alignment: .center) {
                     
-                    Text("Reminders").padding(20)
+                    Text("Reminders").padding()
                     //                    Divider()
-                  
-                    self.showReminder ? AnyView(Text("\(self.reminderContents.0)").frame(width: UIWidth - 40, height: 60)
-                        .foregroundColor(self.reminderContents.1)) :
-                        AnyView(Text("\(self.reminderContents.0)").frame(width: UIWidth - 40, height: 60)
-                        .foregroundColor(reminderContents.1))
                     
-                    
-                }
-                .offset(y: -30)
+                    Group {
+//                        let summary = reminderListVM.returnReminder()
+                        
+                        self.showReminder ? AnyView(Text("\(self.reminderListVM.summaryReminder.title ?? "")\(self.reminderListVM.summaryReminder.priority ?? "")\(self.reminderListVM.summaryReminder.reminder)").frame(width: UIWidth - 40, height: 80)
+                            .foregroundColor(self.reminderListVM.summaryReminder.colour)
+                            .multilineTextAlignment(.center))
+                            
+                            :
+                            AnyView(Text("\(self.reminderListVM.summaryReminder.title ?? "")\(self.reminderListVM.summaryReminder.priority ?? "")\(self.reminderListVM.summaryReminder.reminder)").frame(width: UIWidth - 40, height:80)
+                           .foregroundColor(self.reminderListVM.summaryReminder.colour)
+                        .multilineTextAlignment(.center))
+                    }
+                 
+                }.offset(y: -10)
                 .padding()
-                
-                
-            }
+             }
             //                .padding(.bottom, 60)
             //            }.onTapGesture {
             //                // HighlightsView()

@@ -17,11 +17,14 @@ class ReminderListVM: ObservableObject {
     @Published
     var reminders = [ReminderViewModel]()
     
+    @Published var summaryReminder =  SummaryReminder(reminder: "Press Button To See Reminders")
+    
     private var counter: Int = 0
     
     init() {
         print("init ReminderListVM - do a Fetch")
         fetchAllReminders()
+//        summaryReminder = self.summaryReminder
     }
     
 //    var returnReminders: String {
@@ -40,36 +43,12 @@ class ReminderListVM: ObservableObject {
 //
 //    }
     
-    func returnReminder() -> (String, Color) {
-        if self.reminders.count == 0 {
-            return ("There are no reminders set", Color.black)
-        }
-        
-        print("returnReminder - \(self.reminders.count)")
-//        print(self.reminders.count)
-
-        reminders.withUnsafeBufferPointer { (point) in
-            print("returnReminder - \(point)")
-            // UnsafeBufferPointer(start: 0x00006000004681e0, count: 3)
-        }
-        
-        let index = counterReturn()
-        //Get string and colour to return
-        let tupleToReturn = returnReminder(index: index)
-        print("returnReminder - \(tupleToReturn)")
-
-        return tupleToReturn
-    }
-           
+            
     func deleteReminder(_ reminderVM: ReminderViewModel) {
         CoreDataManager.shared.deleteReminder(reminder: reminderVM.reminder)
         fetchAllReminders()
-        
-        
+       
     }
-    
-    //                 self.reminderListVM.fetchAllReminders()
-
     
     func fetchAllReminders() {
         
@@ -85,6 +64,32 @@ class ReminderListVM: ObservableObject {
     }
     
     //MARK: For the Home Page
+    
+    func returnReminder()  {
+         if self.reminders.count == 0 {
+             let message = "Access the reminders tab to set"
+            summaryReminder = SummaryReminder(reminder: message, priority: nil, title: "No Reminders Set", colour: nil)
+            return
+         }
+         
+         print("returnReminder - \(self.reminders.count)")
+ //        print(self.reminders.count)
+
+         reminders.withUnsafeBufferPointer { (point) in
+             print("returnReminder - \(point)")
+             // UnsafeBufferPointer(start: 0x00006000004681e0, count: 3)
+         }
+         
+         let index = counterReturn()
+         //Get string and colour to return
+         let getReminder = returnReminder(index: index)
+         print("Summary Reminer to return - \(getReminder)")
+
+         summaryReminder = getReminder
+     }
+    
+    
+    
     
     private func counterReturn() -> Int {
            
@@ -105,7 +110,7 @@ class ReminderListVM: ObservableObject {
            counter = 0
        }
     
-    private func returnReminder(index: Int) -> (String, Color) {
+    private func returnReminder(index: Int) -> SummaryReminder {
         
         print("returnReminder1 Index Check")
         print(index)
@@ -121,46 +126,76 @@ class ReminderListVM: ObservableObject {
             print("returnReminder3")
             // Reset the counter
             resetCounter()
+            var message = ""
+//            var headlineMessage = ""
             // We know if the index is zero then there will be nothing imminient
             if index == 0 {
-                return ("There are no reminders set for today or tomorrow.", Color.black)
+                
+                message = "There are no reminders for today or tomorrow."
+               
             } else {
                 // Otherwise we let the user know that's all.
-                return ("Access the Reminders tab to see other upcoming reminders.", Color.black)
+                message = "Access the Reminders tab to see later reminders."
             }
+            
+            return SummaryReminder(reminder: message, priority: nil, title: nil, colour: nil)
         }
         
         // Get the reminder String
         let specificReminder = reminder.reminder
         print("Check specificReminder - \(specificReminder)")
+        
+        
 
         // Get the priority
-        let priority = returnReminderPriority(reminder: reminder.type)
-        // Make a string with the date, priority and Reminder
-        let returnedStringForView = checkTheDay + priority.0 + specificReminder
-        print("Check reminder - \(returnedStringForView)")
+        let reminderPriority = returnReminderPriority(priority: reminder.type, day: checkTheDay)
+        let priority = reminderPriority.0
+        let color = reminderPriority.1
         
-        return (returnedStringForView, priority.1)
+        var amendedPriority = ""
+
+        // We want to do this to help out the view. Separate the day pointing to the priority, we will also add a new line.
+        if !priority.isEmpty {
+            amendedPriority = " - \(priority)\n"
+
+        } else {
+            amendedPriority = "\n"
+        }
+        
+        let reminderToReturn = SummaryReminder(reminder: specificReminder, priority: amendedPriority, title: checkTheDay, colour: color)
+        // Make a string with the date, priority and Reminder
+//        let returnedStringForView = checkTheDay + priority.0 + specificReminder
+        print("Check reminder to Return- \(reminderToReturn)")
+        
+        return reminderToReturn
 
     }
     
-    private func returnReminderPriority(reminder: Int) -> (String, Color) {
+    private func returnReminderPriority(priority: Int, day: String) -> (String, Color?) {
         
-        if reminder == 0 {
-            return (" - URGENT - ", Color.red)
-        } else if reminder == 1 {
-            return (" - Important - ", Color.yellow)
+        // If urgent due for today or overdue then Red.
+        if priority == 0 && (day == kTodayCAP || day == kOverdueCAP) {
+            return ("URGENT", Color.red)
+            // If urgent due for tomorrow then Red.
+        } else if priority == 0 && day == kTomorrowCAP {
+            return ("URGENT", Color.blue)
+        } else if priority == 1 && (day == kTodayCAP || day == kOverdueCAP) {
+            return ("Important", Color.red)
+        } else if priority == 1 && day == kTomorrowCAP {
+            return ("Important", Color.blue)
+        } else if priority >= 2 && (day == kTodayCAP || day == kOverdueCAP) {
+            return ("", Color.blue)
         }
-        return (" ", Color.black)
+        return ("", nil)
     }
 
 }
 
-struct Reminder {
+struct SummaryReminder {
     var reminder: String
-    var priority: String
-    var day: String
-    var colour: Color
+    var priority: String?
+    var title: String?
+    var colour: Color?
 }
 
 

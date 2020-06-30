@@ -114,13 +114,13 @@ struct Helper {
         if calendar.isDateInToday(date) {
             print("Check date for checkWhatDay Today")
 
-            return "TODAY"
+            return kTodayCAP
         }
         
         if calendar.isDateInTomorrow(date) {
             print("Check date for checkWhatDay Tomorrow")
 
-            return "TOMORROW"
+            return kTomorrowCAP
         }
         
         print("Check date for checkWhatDay Finish")
@@ -133,7 +133,7 @@ struct Helper {
         if let date = formatDate.date(from: drawDate) {
 
             if date < Date() {
-                return "Overdue"
+                return kOverdueCAP
             }
         }
         // 4. Otherwise it will be in the future

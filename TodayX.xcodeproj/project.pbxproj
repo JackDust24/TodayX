@@ -37,6 +37,7 @@
 		9E726C8224A49875002B020A /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E726C8124A49875002B020A /* Extensions.swift */; };
 		9EA6DF5324991B0400C2F811 /* AddReminderVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA6DF5224991B0400C2F811 /* AddReminderVM.swift */; };
 		9EA6DF5524991B5600C2F811 /* ReminderListVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA6DF5424991B5600C2F811 /* ReminderListVM.swift */; };
+		9EEE4EBC24AB5C330058027A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EEE4EBB24AB5C330058027A /* Constants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -93,6 +94,7 @@
 		9E726C8124A49875002B020A /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		9EA6DF5224991B0400C2F811 /* AddReminderVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddReminderVM.swift; sourceTree = "<group>"; };
 		9EA6DF5424991B5600C2F811 /* ReminderListVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderListVM.swift; sourceTree = "<group>"; };
+		9EEE4EBB24AB5C330058027A /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -226,6 +228,7 @@
 			isa = PBXGroup;
 			children = (
 				9E1CEE812498CB6500F5EDC9 /* Helper.swift */,
+				9EEE4EBB24AB5C330058027A /* Constants.swift */,
 				9E726C8124A49875002B020A /* Extensions.swift */,
 			);
 			path = Helpers;
@@ -396,6 +399,7 @@
 				9E1CEE912498F53700F5EDC9 /* RemindersView.swift in Sources */,
 				9E1CEE872498ED5700F5EDC9 /* WeatherService.swift in Sources */,
 				9E1CEE892498ED8F00F5EDC9 /* AQIService.swift in Sources */,
+				9EEE4EBC24AB5C330058027A /* Constants.swift in Sources */,
 				9E1CEE7E2498C92400F5EDC9 /* NSManagedObjectContext+Extensions.swift in Sources */,
 				9E1CEE9B2498F70000F5EDC9 /* CityDetailsView.swift in Sources */,
 				9E1CEE972498F5C100F5EDC9 /* TopAreaView.swift in Sources */,
