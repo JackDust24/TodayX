@@ -11,10 +11,17 @@ import SwiftUI
 struct BottomAreaView: View {
     
     // This will be separate, with a model.
-    @ObservedObject var testReminder: RemindersHomePageVM
+//    @ObservedObject var testReminder: RemindersHomePageVM
+    @ObservedObject var reminderListVM: ReminderListVM
     
     // For showing the Reminder View
     @State private var showReminder: Bool = false
+    
+    init() {
+        print("init BottomAreaView")
+        self.reminderListVM = ReminderListVM()
+    }
+    
     
     var body: some View {
         
@@ -55,8 +62,8 @@ struct BottomAreaView: View {
                     
                     Text("Reminders").padding(20)
                     //                    Divider()
-                    self.showReminder ? AnyView(Text("\(testReminder.returnReminders)").frame(width: UIWidth - 40, height: 60)) :
-                        AnyView(Text("\(testReminder.returnReminders)").frame(width: UIWidth - 40, height: 60))
+                    self.showReminder ? AnyView(Text("\(reminderListVM.returnReminder()))").frame(width: UIWidth - 40, height: 60)) :
+                        AnyView(Text("\(reminderListVM.returnReminder())").frame(width: UIWidth - 40, height: 60))
                     
                     
                 }
@@ -81,6 +88,6 @@ struct BottomAreaView: View {
 
 struct BottomAreaView_Previews: PreviewProvider {
     static var previews: some View {
-        BottomAreaView(testReminder: RemindersHomePageVM())
+        BottomAreaView()
     }
 }

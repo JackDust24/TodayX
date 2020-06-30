@@ -14,13 +14,15 @@ struct ContentView: View {
     // For Getting the Information about the weather
     @State var showSearchField: Bool = false
     @ObservedObject var forecastViewModel: APIViewModel
-    
-    @ObservedObject var testReminder: RemindersHomePageVM
+    @ObservedObject var reminderListVM: ReminderListVM
+
+//    @ObservedObject var testReminder: RemindersHomePageVM
 
    
     init() {
+        print("Content View init")
         self.forecastViewModel = APIViewModel()
-        self.testReminder = RemindersHomePageVM()
+        self.reminderListVM = ReminderListVM()
     }
 
 
@@ -44,7 +46,8 @@ struct ContentView: View {
                     Spacer()
                     //  SpacetestReminder: TestRemindersVMr()
                     
-                    BottomAreaView(testReminder: self.testReminder)
+//                    BottomAreaView(reminderListVM: self.reminderListVM)
+                    BottomAreaView()
                     
                 }
             }

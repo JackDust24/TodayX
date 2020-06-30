@@ -18,18 +18,19 @@ struct RemindersView: View {
         formatter.dateStyle = .long
         return formatter
     }
-      
-      init() {
-          self.reminderListVM = ReminderListVM()
-      }
-      
-      private func delete(at offsets: IndexSet) {
-          offsets.forEach { index in
-              let reminderVM = self.reminderListVM.reminders[index]
-              self.reminderListVM.deleteReminder(reminderVM)
-          }
-      }
-      
+    
+    init() {
+        print("init Reminders View")
+        self.reminderListVM = ReminderListVM()
+    }
+    
+    private func delete(at offsets: IndexSet) {
+        offsets.forEach { index in
+            let reminderVM = self.reminderListVM.reminders[index]
+            self.reminderListVM.deleteReminder(reminderVM)
+        }
+    }
+    
     private func getImagesForTheType(for type: Int) -> String {
         if type == 0 {
             return "urg"
@@ -42,42 +43,52 @@ struct RemindersView: View {
     
     
     var body: some View {
-         
+        
         NavigationView {
             List {
                 ForEach(self.reminderListVM.reminders, id: \.reminder) { reminder in
-                    HStack {
-                       
-                        Image(self.getImagesForTheType(for: reminder.type))
-                          .resizable()
-                          .frame(width: 100, height: 100)
-                          .cornerRadius(10)
-                                          
-                        Text(reminder.reminder)
-                          .font(.subheadline)
-                          .padding([.leading], 10)
-                        
-//                         Text(reminder.date)
-                        Text("\(reminder.date, formatter: self.dateFormatter)")
-                        //                          .font(.med)
-                         .padding([.leading], 5)
+                    NavigationLink(destination: Text(reminder.reminder)) {
+                        HStack {
+                            
+                            Image(self.getImagesForTheType(for: reminder.type))
+                                .resizable()
+                                .frame(width: 60, height: 60)
+                                .cornerRadius(10)
+                            
+                            VStack {
+                                Text(reminder.reminder)
+                                    .font(.headline)
+                                    .padding([.leading], 10)
+                                    .padding(.bottom, 5)
+                                    .frame(width: 200, height: 30, alignment: .leading)
+                                
+                                //                         Text(reminder.date)
+                                Text("\(reminder.date, formatter: self.dateFormatter)")
+                                    .font(.subheadline)
+
+                                    //                          .font(.med)
+                                    .padding([.leading], 10)
+                            }
+                            
+                        }
                     }
+
                 }.onDelete(perform: delete)
             }
             .sheet(isPresented: $isPresented, onDismiss: {
-                       print("ONDISMISS")
-                       self.reminderListVM.fetchAllReminders()
-                   }, content: {
-                       AddReminderView(isPresented: self.$isPresented)
-                   })
-            .navigationBarTitle("Reminders")
-            .navigationBarItems(trailing: Button("Add New Reminder") {
-                self.isPresented = true
+                print("ONDISMISS")
+                self.reminderListVM.fetchAllReminders()
+            }, content: {
+                AddReminderView(isPresented: self.$isPresented)
             })
+                .navigationBarTitle("Reminders")
+                .navigationBarItems(trailing: Button("Add New Reminder") {
+                    self.isPresented = true
+                })
         }
     }
     
-//    private let imageType = self.reminderListVM.getImagesForType
+    //    private let imageType = self.reminderListVM.getImagesForType
 }
 
 

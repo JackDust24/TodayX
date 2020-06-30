@@ -33,10 +33,12 @@ struct AddReminderView: View {
                         Text("Normal").tag("nrm")
                     }.pickerStyle(SegmentedPickerStyle())
                     
-                    DatePicker(selection: $dateChosen, in: Date()..., displayedComponents: .date) {
-                        Text("Select a date")
-                    }
+                    Text("Select a date")
                     
+                    DatePicker(selection: $dateChosen, in: Date()..., displayedComponents: .date) {
+                        Text("")
+                    }
+
                     Button("Add Reminder", action:  {
                         // place reminder
                         let date = self.dateChosen
