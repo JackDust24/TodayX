@@ -47,7 +47,7 @@ struct RemindersView: View {
         NavigationView {
             List {
                 ForEach(self.reminderListVM.reminders, id: \.reminder) { reminder in
-                    NavigationLink(destination: Text(reminder.reminder)) {
+                    NavigationLink(destination: EditReminderView(isEditedReminder: true, reminderObject: reminder)) {
                         HStack {
                             
                             Image(self.getImagesForTheType(for: reminder.type))

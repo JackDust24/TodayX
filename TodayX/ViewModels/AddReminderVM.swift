@@ -16,13 +16,26 @@ class AddReminderVM {
     var reminder: String = ""
     var type: Int = 0
     var date = Date()
+    var id = UUID()
     
     func saveReminder() {
-        
+        print("SAVE REMINDER")
         // Do tag coversion first
         self.type = tagConversion(from: self.tag)
         
+        print(self.reminder, self.type, self.date)
+        
         CoreDataManager.shared.saveReminder(reminder: self.reminder, type: self.type, date: self.date)
+    }
+    
+    func updateReminder() {
+                print("UPDATE REMINDER")
+        // Do tag coversion first
+        self.type = tagConversion(from: self.tag)
+        print(self.reminder, self.type, self.date, self.id)
+
+        
+        CoreDataManager.shared.updateReminder(reminder: self.reminder, type: self.type, date: self.date, id: self.id)
     }
     
     private func tagConversion(from tag: String) -> Int {

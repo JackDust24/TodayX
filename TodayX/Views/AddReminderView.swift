@@ -14,6 +14,7 @@ struct AddReminderView: View {
     @State var addReminderVM = AddReminderVM()
     @State private var dateChosen = Date()
     
+  
     // For dismissing a view.
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
