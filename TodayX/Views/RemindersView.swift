@@ -12,6 +12,8 @@ struct RemindersView: View {
     
     @ObservedObject var reminderListVM: ReminderListVM
     @State private var isPresented: Bool = false
+    @State private var isEditable: Bool = true
+
     
     var dateFormatter: DateFormatter {
         let formatter = DateFormatter()
@@ -25,6 +27,13 @@ struct RemindersView: View {
     }
     
     private func delete(at offsets: IndexSet) {
+        offsets.forEach { index in
+            let reminderVM = self.reminderListVM.reminders[index]
+            self.reminderListVM.deleteReminder(reminderVM)
+        }
+    }
+    
+    private func reload(at offsets: IndexSet) {
         offsets.forEach { index in
             let reminderVM = self.reminderListVM.reminders[index]
             self.reminderListVM.deleteReminder(reminderVM)
@@ -47,7 +56,7 @@ struct RemindersView: View {
         NavigationView {
             List {
                 ForEach(self.reminderListVM.reminders, id: \.reminder) { reminder in
-                    NavigationLink(destination: EditReminderView(isEditedReminder: true, reminderObject: reminder)) {
+                    NavigationLink(destination: EditReminderView(isEditedReminder: self.$isEditable, reminderObject: reminder))  {
                         HStack {
                             
                             Image(self.getImagesForTheType(for: reminder.type))
@@ -74,7 +83,11 @@ struct RemindersView: View {
                     }
 
                 }.onDelete(perform: delete)
-            }
+
+            }.onAppear(perform: {
+                print("On Appear Check")
+                self.reminderListVM.fetchAllReminders()
+            })
             .sheet(isPresented: $isPresented, onDismiss: {
                 print("ONDISMISS")
                 self.reminderListVM.fetchAllReminders()
@@ -91,7 +104,10 @@ struct RemindersView: View {
         
            
         
-        }
+        }.onAppear(perform: {
+            print("On Appear")
+
+        })
     }
     
     //    private let imageType = self.reminderListVM.getImagesForType

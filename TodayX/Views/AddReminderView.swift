@@ -20,25 +20,34 @@ struct AddReminderView: View {
     
     var body: some View {
         
-        NavigationView {
+       // NavigationView {
             
             Group {
                 
                 VStack {
                     
-                    TextField("Enter Reminder", text: self.$addReminderVM.reminder)
+                    Text("Set Reminder").padding()
+                    
+                    TextField("Enter Reminder", text: self.$addReminderVM.reminder).padding()
+                    
+                    Divider()
+                    
+                    Text("Set Priority").padding()
                     
                     Picker(selection: self.$addReminderVM.tag, label: Text("")) {
                         Text("Urgent").tag("urg")
                         Text("Important").tag("imp")
                         Text("Normal").tag("nrm")
                     }.pickerStyle(SegmentedPickerStyle())
+                        .padding()
                     
-                    Text("Select a date")
+                    //Spacer()
+                    
+                    Text("Select a date").padding()
                     
                     DatePicker(selection: $dateChosen, in: Date()..., displayedComponents: .date) {
                         Text("")
-                    }
+                    }.frame(width: UIWidth - 60, height: UIHeight / 4, alignment: .center)
 
                     Button("Add Reminder", action:  {
                         // place reminder
@@ -49,7 +58,7 @@ struct AddReminderView: View {
                         
                         self.addReminderVM.date = convertDate
                         self.addReminderVM.saveReminder()
-                        // self.isPresented = false
+                        self.isPresented = false
                         
                         self.presentationMode.wrappedValue.dismiss()
                         
@@ -59,9 +68,9 @@ struct AddReminderView: View {
                         .cornerRadius(10)
                     
                     
-                }
+              //  }
             }.padding()
-                .navigationBarTitle("Add Reminder")
+                .navigationBarTitle("Add Reminder", displayMode: .inline)
         }
     }
 }

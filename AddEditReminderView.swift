@@ -10,13 +10,25 @@ import SwiftUI
 
 struct EditReminderView: View {
     
-    var isEditedReminder: Bool
+//    @Binding var isPresented: Bool
+//    @ObservedObject var reminderListVM: ReminderListVM
+
+    @Binding var isEditedReminder: Bool
     var reminderObject: ReminderViewModel
     
-    init(isEditedReminder: Bool, reminderObject: ReminderViewModel) {
-        self.isEditedReminder = isEditedReminder
+//    init() {
+//        print("Init ReminderListVM")
+//        self.reminderListVM = ReminderListVM()
+//    }
+//
+    init(isEditedReminder: Binding<Bool>, reminderObject: ReminderViewModel) {
+        self._isEditedReminder = isEditedReminder
         self.reminderObject = reminderObject
+//        self.isPresented = isPresented
     }
+    
+    @State var addReminderVM = AddReminderVM()
+    @State private var dateChosen = Date()
     
     var reminder: String {
         reminderObject.reminder
@@ -38,16 +50,93 @@ struct EditReminderView: View {
         reminderObject.id
     }
     
-    // For dismissing a view.
+        // For dismissing a view.
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     var body: some View {
-        NavigationView {
-            AddEditReminderView(isEditedReminder: isEditedReminder, reminder: reminder, typeString: "typString", dateString: "dateString", id: uuid, presentationMode: presentationMode)
+       // NavigationView {
+//            AddEditReminderView(isEditedReminder: isEditedReminder, reminder: reminder, typeString: "typString", dateString: "dateString", id: uuid)
+                    Group {
+                        
+                        VStack {
+                            
+                            HStack {
+                                
+                                Text("Reminder Set - ")
+                                TextField(isEditedReminder ? "\(reminder)" : "Enter Reminder", text: self.$addReminderVM.reminder)
+                                .textFieldStyle(RoundedBorderTextFieldStyle())
+                                     
+                            }.padding()
+                            
+                            Divider()
+                           // Spacer()
+
+                            if isEditedReminder {
+                                Text("Current Priority: \(typeString)").padding()
+                            }
+                           // Spacer()
+
+                            Picker(selection: self.$addReminderVM.tag, label: Text("")) {
+                                Text("Urgent").tag("urg")
+                                Text("Important").tag("imp")
+                                Text("Normal").tag("nrm")
+                            }.pickerStyle(SegmentedPickerStyle())
+                          
+                           // Divider()
+                            
+                            if isEditedReminder {
+                                Text("Change the date. Current date: TBD").padding()
+                            }
+                                            
+//                            Text("Select a date").padding()
+                            
+                            DatePicker(selection: $dateChosen, in: Date()..., displayedComponents: .date) {
+                                Text("")
+                                }.frame(width: UIWidth - 60, height: UIHeight / 4, alignment: .center)
+                                .padding(.bottom, 20)
+                            
+                            Button(isEditedReminder ? "Save Changes" : "Add Reminder", action:  {
+                                // place reminder
+                                let date = self.dateChosen
+                                let convertDate = Helper().convertDateFromPickerWithoutTime(for: date)
+                                print(convertDate)
+                                                    
+                                self.addReminderVM.date = convertDate
+                                
+                                if self.isEditedReminder {
+                                    self.addReminderVM.id = self.uuid
+                                    if self.addReminderVM.reminder.isEmpty {
+                                        self.addReminderVM.reminder = self.reminder
+                                    }
+                                    self.addReminderVM.updateReminder()
+                                } else {
+                                 self.addReminderVM.saveReminder()
+
+                                }
+            //                    self.isEditedReminder = false
+                                
+                                self.presentationMode.wrappedValue.dismiss()
+                                
+                            }).padding(8)
+                                .foregroundColor(Color.white)
+                                .background(Color.green)
+                                .cornerRadius(10)
+                            
+                            
+                     //   }
+                           // Spacer()
+                    }.onDisappear(perform: {
+                        print("Dismiss Screen")
+                        
+            //            ReminderListVM.fetchAllReminders()
+
+                    })
+//                            .offset(y: -60)
             
-        }.padding()
-        .navigationBarTitle("Edit Reminder")
-        
+            }.padding()
+            .navigationBarTitle("Edit Reminder", displayMode: .inline)
+//        .navigationBarHidden(true)
+         
     }
 }
 
@@ -81,7 +170,8 @@ struct AddEditReminderView: View {
     var dateString: String
     var id: UUID
     
-    var presentationMode: Binding<PresentationMode>
+        // For dismissing a view.
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     var body: some View {
         Group {
@@ -131,7 +221,7 @@ struct AddEditReminderView: View {
                      self.addReminderVM.saveReminder()
 
                     }
-                    // self.isPresented = false
+//                    self.isEditedReminder = false
                     
                     self.presentationMode.wrappedValue.dismiss()
                     
@@ -142,12 +232,20 @@ struct AddEditReminderView: View {
                 
                 
             }
-        }
+        }.onDisappear(perform: {
+            print("Dismiss Screen")
+            
+//            ReminderListVM.fetchAllReminders()
+
+        })
     }
 }
 
-//struct AddEditReminderView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        AddEditReminderView()
-//    }
-//}
+struct AddEditReminderView_Previews: PreviewProvider {
+    
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+
+    static var previews: some View {
+        AddEditReminderView(isEditedReminder: true, reminder: "reminder", typeString: "type", dateString: "date", id: UUID())
+    }
+}

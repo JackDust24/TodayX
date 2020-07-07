@@ -104,7 +104,7 @@ class CoreDataManager {
         remAttribute.date = date
         remAttribute.id = UUID()
         
-        print(remAttribute.reminder, remAttribute.id)
+//        print(remAttribute.reminder, remAttribute.id)
         
         do {
             try self.moc.save()
