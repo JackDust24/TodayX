@@ -38,6 +38,7 @@
 		9E726C8224A49875002B020A /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E726C8124A49875002B020A /* Extensions.swift */; };
 		9EA6DF5324991B0400C2F811 /* AddReminderVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA6DF5224991B0400C2F811 /* AddReminderVM.swift */; };
 		9EA6DF5524991B5600C2F811 /* ReminderListVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA6DF5424991B5600C2F811 /* ReminderListVM.swift */; };
+		9EC5B41D24B4680600CB4C12 /* DefaultSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EC5B41C24B4680600CB4C12 /* DefaultSettings.swift */; };
 		9EEE4EBC24AB5C330058027A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EEE4EBB24AB5C330058027A /* Constants.swift */; };
 /* End PBXBuildFile section */
 
@@ -96,6 +97,7 @@
 		9E726C8124A49875002B020A /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		9EA6DF5224991B0400C2F811 /* AddReminderVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddReminderVM.swift; sourceTree = "<group>"; };
 		9EA6DF5424991B5600C2F811 /* ReminderListVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderListVM.swift; sourceTree = "<group>"; };
+		9EC5B41C24B4680600CB4C12 /* DefaultSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultSettings.swift; sourceTree = "<group>"; };
 		9EEE4EBB24AB5C330058027A /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -207,6 +209,7 @@
 		9E1CEE742498C5ED00F5EDC9 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				9E40D529249B8C0200DE70F0 /* ImageButton.swift */,
 				9E1CEE902498F53700F5EDC9 /* RemindersView.swift */,
 				9E1CEE922498F55100F5EDC9 /* BackgroundView.swift */,
 				9E1CEE942498F59300F5EDC9 /* TopView.swift */,
@@ -222,7 +225,7 @@
 			isa = PBXGroup;
 			children = (
 				9E1CEE8E2498F49D00F5EDC9 /* AQIObjects.swift */,
-				9E40D529249B8C0200DE70F0 /* ImageButton.swift */,
+				9EC5B41C24B4680600CB4C12 /* DefaultSettings.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -405,6 +408,7 @@
 				9EEE4EBC24AB5C330058027A /* Constants.swift in Sources */,
 				9E1CEE7E2498C92400F5EDC9 /* NSManagedObjectContext+Extensions.swift in Sources */,
 				9E1CEE9B2498F70000F5EDC9 /* CityDetailsView.swift in Sources */,
+				9EC5B41D24B4680600CB4C12 /* DefaultSettings.swift in Sources */,
 				9E1CEE972498F5C100F5EDC9 /* TopAreaView.swift in Sources */,
 				9E1CEE462498C23300F5EDC9 /* TodayX.xcdatamodeld in Sources */,
 				9E1CEE992498F5D900F5EDC9 /* BottomAreaView.swift in Sources */,

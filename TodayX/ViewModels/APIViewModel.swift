@@ -23,7 +23,9 @@ class APIViewModel: ObservableObject {
     var aqiService: AQIService!
     
     //TODO: We will need to do a default place
-    var cityName: String = "Bangkok"
+    var cityName: String {
+        "Bangkok"
+    }
     
     @Published var weatherResponse: ForecastWeatherResponse?
     @Published var aqiResponse: AQIIndexResponse?

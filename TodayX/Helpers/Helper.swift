@@ -28,6 +28,18 @@ struct Helper {
      }
      */
     
+    // To convert the date into a String
+    func convertDateIntoString(from dateToConvert: Date) -> String {
+        
+        let formatter = DateFormatter()
+        formatter.timeStyle = .none
+        formatter.dateStyle = .medium
+        //formatter.timeZone = TimeZone(identifier: "Europe/Paris")
+        formatter.timeZone = TimeZone(abbreviation: "GMT+7:00")
+        let dateToReturnAsString = formatter.string(from: dateToConvert)
+        return dateToReturnAsString
+    }
+    
     
     
     // Called by WeatherForecastViewModel, for getting the day.

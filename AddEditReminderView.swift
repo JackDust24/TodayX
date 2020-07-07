@@ -34,20 +34,49 @@ struct EditReminderView: View {
         reminderObject.reminder
     }
     
-    var typeString: Int {
-        reminderObject.type
-        // Call a function by sending Int and return string
-        // Change to a string
-        //
-    }
-    
-    var date: Date {
-        // Convert the date to a string
-        reminderObject.date
-    }
-    
     var uuid: UUID {
         reminderObject.id
+    }
+    
+    // Need to convert the date to a String for display
+    var dateString: String {
+        // Convert the date to a string
+        let dateConversion = convertDateToString(date: reminderObject.date)
+        
+        // TODO:- Need to come up with some error handling
+        var dateString = ""
+        if let stringForDate = dateConversion {
+            dateString = stringForDate
+        }
+        return dateString
+    }
+    
+    func convertDateToString(date: Date?) -> String? {
+        
+        guard date != nil else { return nil }
+        let dateAsString = Helper().convertDateIntoString(from: date!)
+        return dateAsString
+    }
+    
+    // Need to convert the type (priority) to a String for display
+    var typeString: String {
+        //reminderObject.type
+        // Convert the type to a string
+        let typeConversion = convertTypeToString(type: reminderObject.type)
+        
+        // TODO:- Need to come up with some error handling
+        var typeString = ""
+        if let stringForType = typeConversion {
+            typeString = stringForType
+        }
+        return typeString
+    }
+    
+    func convertTypeToString(type: Int?) -> String? {
+        
+        guard type != nil else { return nil }
+        let typeAsString = addReminderVM.convertIntsToTag(from: type!)
+        return typeAsString
     }
     
         // For dismissing a view.
@@ -85,7 +114,7 @@ struct EditReminderView: View {
                            // Divider()
                             
                             if isEditedReminder {
-                                Text("Change the date. Current date: TBD").padding()
+                                Text("Current date: \(dateString)").padding()
                             }
                                             
 //                            Text("Select a date").padding()
