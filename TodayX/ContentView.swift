@@ -15,21 +15,21 @@ struct ContentView: View {
     @State var showSearchField: Bool = false
     @ObservedObject var forecastViewModel: APIViewModel
     @ObservedObject var reminderListVM: ReminderListVM
-
-//    @ObservedObject var testReminder: RemindersHomePageVM
-
-   
+    
+    //    @ObservedObject var testReminder: RemindersHomePageVM
+    
+    
     init() {
         print("Content View init")
         self.forecastViewModel = APIViewModel()
         self.reminderListVM = ReminderListVM()
     }
-
-
+    
+    
     var body: some View {
         TabView(selection: $selection){
-//            Text("Home View")
-//                .font(.title)
+            //            Text("Home View")
+            //                .font(.title)
             
             ZStack(alignment: .top) {
                 // Background Colour (we will change)
@@ -42,59 +42,40 @@ struct ContentView: View {
                     //Spacer()
                     
                     TopAreaView(showField: self.showSearchField, forecastViewModel: self.forecastViewModel)
-        
+                    
                     Spacer()
                     //  SpacetestReminder: TestRemindersVMr()
                     
-//                    BottomAreaView(reminderListVM: self.reminderListVM)
+                    //                    BottomAreaView(reminderListVM: self.reminderListVM)
                     BottomAreaView()
                     
                 }
             }
-                .tabItem {
-                    VStack {
-                        Image("first")
-                        Text("First")
-                    }
+            .tabItem {
+                VStack {
+                    Image("first")
+                    Text("Home")
                 }
-                .tag(0)
-//            Text("Checklist View")
-//                .font(.title)
-              RemindersView()
-                .tabItem {
-                    VStack {
-                        Image("second")
-                        Text("Second")
-                    }
-                }
-                .tag(1)
-            Text("Routine View")
-                .font(.title)
-                .tabItem {
-                    VStack {
-                        Image("first")
-                        Text("First")
-                    }
-                }
-                .tag(2)
-            Text("Weights View")
-                .font(.title)
+            }
+            .tag(0)
+            //            Text("Checklist View")
+            //                .font(.title)
+            RemindersView()
                 .tabItem {
                     VStack {
                         Image("second")
-                        Text("Second")
+                        Text("Reminders")
                     }
-                }
-                .tag(3)
-            Text("Settings View")
-                .font(.title)
+            }
+            .tag(1)
+            SettingsView()
                 .tabItem {
                     VStack {
                         Image("first")
-                        Text("First")
+                        Text("Settings")
                     }
-                }
-                .tag(4)
+            }
+            .tag(2)
         }
     }
 }

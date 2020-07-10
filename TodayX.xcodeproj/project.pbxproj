@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9E17CCEB24B843C000A66E75 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E17CCEA24B843C000A66E75 /* SettingsView.swift */; };
 		9E1CEE412498C23300F5EDC9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1CEE402498C23300F5EDC9 /* AppDelegate.swift */; };
 		9E1CEE432498C23300F5EDC9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1CEE422498C23300F5EDC9 /* SceneDelegate.swift */; };
 		9E1CEE462498C23300F5EDC9 /* TodayX.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9E1CEE442498C23300F5EDC9 /* TodayX.xcdatamodeld */; };
@@ -60,6 +61,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9E17CCEA24B843C000A66E75 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		9E1CEE3D2498C23300F5EDC9 /* TodayX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TodayX.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E1CEE402498C23300F5EDC9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9E1CEE422498C23300F5EDC9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -217,6 +219,7 @@
 				9E1CEE982498F5D900F5EDC9 /* BottomAreaView.swift */,
 				9E1CEE9A2498F70000F5EDC9 /* CityDetailsView.swift */,
 				9E1CEE9C2498F71600F5EDC9 /* AddReminderView.swift */,
+				9E17CCEA24B843C000A66E75 /* SettingsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -416,6 +419,7 @@
 				9EA6DF5524991B5600C2F811 /* ReminderListVM.swift in Sources */,
 				9E1CEE482498C23300F5EDC9 /* ContentView.swift in Sources */,
 				9E1CEE822498CB6500F5EDC9 /* Helper.swift in Sources */,
+				9E17CCEB24B843C000A66E75 /* SettingsView.swift in Sources */,
 				9E1CEE8B2498EEC000F5EDC9 /* APIViewModel.swift in Sources */,
 				9E1CEE802498CAD800F5EDC9 /* CoreDataManager.swift in Sources */,
 				9E671BDB24AF3F0300C1242A /* AddEditReminderView.swift in Sources */,

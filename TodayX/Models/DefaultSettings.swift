@@ -8,16 +8,31 @@
 
 import Foundation
 
-struct LocationSet {
-    var cityName: String
+//struct LocationSet {
+//
+////    func setLocationName(set city: String) {
+////        UserDefaults.standard.set(city, forKey: "City")
+////
+////    }
+//
+//    func retrieveLocationName() -> String? {
+//        let storedCity : String? = UserDefaults.standard.object(forKey: "City") as? String
+//        return storedCity ?? nil
+//    }
+//}
+
+
+func setLocationNameFromUserDefaults(set city: String) {
+    print("setLocationNameFromUserDefaults")
+    print(city)
+    UserDefaults.standard.set(city, forKey: "City")
     
-    func setLocationName() {
-        UserDefaults.standard.set(cityName, forKey: "City")
-        
-    }
-    
-    func retrieveLocationName() -> String? {
-        let storedCity : String? = UserDefaults.standard.object(forKey: "City") as? String
-        return storedCity ?? nil
-    }
+}
+
+func retrieveLocationNameFromUserDefaults() -> String? {
+    print("retrieveLocationNameFromUserDefaults")
+    let storedCity : String? = UserDefaults.standard.object(forKey: "City") as? String
+    print(storedCity as Any)
+
+    return storedCity ?? nil
 }

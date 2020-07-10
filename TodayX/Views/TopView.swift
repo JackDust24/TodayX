@@ -8,12 +8,14 @@
 
 import SwiftUI
 
-
-
 struct TopView: View {
     
+    @State private var showingAlert = false
     @State var showField: Bool = false
     @ObservedObject var forecastViewModel: APIViewModel
+    
+        let pub = NotificationCenter.default
+            .publisher(for: NSNotification.Name("NoResponse"))
     
     var body: some View {
         
@@ -43,6 +45,20 @@ struct TopView: View {
                  Spacer()
             }.onAppear(perform: fetch)
                 .padding(.top, 60)
+            .onReceive(pub)
+                    { obj in
+                       // Change key as per your "userInfo"
+            //            if let userInfo = obj.userInfo, let info = userInfo["info"] {
+            //              print(info)
+            //           }
+                        self.showingAlert = true
+                        print("NOTIFICATION received")
+            }.alert(isPresented: $showingAlert) {
+                        Alert(title: Text("Unknown City"), message: Text("No City Found, Try Again"), dismissButton: .default(Text("Ok!")))
+            }.onDisappear(perform: {
+                print("Dismissed")
+                
+            })
            // Spacer()
             
             Text("TODAY")

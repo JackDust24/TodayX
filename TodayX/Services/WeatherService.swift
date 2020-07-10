@@ -65,6 +65,7 @@ class WeatherService {
                 
                 if weatherResponse.name == nil {
                     print("nilResponse - \(weatherResponse)")
+                    // Need to set alert
                     completion(nil)
 
                 } else {

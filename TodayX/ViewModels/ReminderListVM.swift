@@ -67,8 +67,8 @@ class ReminderListVM: ObservableObject {
     
     func returnReminder()  {
          if self.reminders.count == 0 {
-             let message = "Access the reminders tab to set"
-            summaryReminder = SummaryReminder(reminder: message, priority: nil, title: "No Reminders Set", colour: nil)
+             let message = "Access the reminders tab to set."
+            summaryReminder = SummaryReminder(reminder: message, priority: nil, title: "No Reminders Set\n", colour: nil)
             return
          }
          

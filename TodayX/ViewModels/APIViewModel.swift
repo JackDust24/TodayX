@@ -11,7 +11,7 @@ import Combine
 // TODO: What is Combine?
 
 //
-let nc = NotificationCenter.default
+let notification = NotificationCenter.default
 
 //TODO:- May not need this now
 var arrayOfIAQIs = [Any]()
@@ -22,10 +22,8 @@ class APIViewModel: ObservableObject {
     var weatherService: WeatherService!
     var aqiService: AQIService!
     
-    //TODO: We will need to do a default place
-    var cityName: String {
-        "Bangkok"
-    }
+    //This is called to do searches
+    var cityName: String = ""
     
     @Published var weatherResponse: ForecastWeatherResponse?
     @Published var aqiResponse: AQIIndexResponse?
@@ -42,7 +40,7 @@ class APIViewModel: ObservableObject {
         if let city = self.weatherResponse?.name {
             return city
         } else {
-            return "Bangkok"
+            return "Choose City"
         }
     }
     
@@ -51,7 +49,7 @@ class APIViewModel: ObservableObject {
         if let country = self.weatherResponse?.sys?.country {
             return country
         } else {
-            return "TH"
+            return "Use Search Bar"
         }
     }
     
@@ -71,7 +69,7 @@ class APIViewModel: ObservableObject {
             let formattedString = String(format: "%.0f", temp)
             return formattedString + "°"
         }else {
-            return "21"
+            return "Not Set"
         }
     }
     
@@ -84,9 +82,50 @@ class APIViewModel: ObservableObject {
     
     // Search City
     func searchCity() {
+        
+        if self.cityName == "" {
+            // Check Defaults
+            // Check Defaults
+            print("Check Defaults")
+            checkForDefaultLocation()
+        }
+        checkIfToSaveLocation()
         let city = self.cityName
         fetchWeatherForecast(by: city)
         fetchAQIIndex(by: city)
+        
+    }
+    
+    func checkForDefaultLocation() {
+        let cityStored = retrieveLocationNameFromUserDefaults()
+        
+        if let storedCity = cityStored {
+            self.cityName = storedCity
+            print("Loading Default")
+            
+        }
+    }
+    
+    func checkIfToSaveLocation() {
+        print("checkIfToSaveLocation")
+        
+        if self.cityName != "" {
+            // Check Defaults
+            let cityStored = retrieveLocationNameFromUserDefaults()
+            
+            if let storedCity = cityStored {
+                //                self.cityName = storedCity
+                print("TO DO - See if user wants to change location")
+                print(storedCity)
+            } else {
+                print("SaveLocation")
+                
+                setLocationNameFromUserDefaults(set: cityName)
+            }
+            
+            
+        }
+        
     }
     
     // Fetch Weather Forecast
@@ -95,13 +134,15 @@ class APIViewModel: ObservableObject {
         //TODO: - DO we need this on another queue?
         self.weatherService.getWeatherForecast(matching: city) {
             forecast in
-            
-            if let forecast = forecast {
-                DispatchQueue.main.async {
+            DispatchQueue.main.async {
+                
+                if let forecast = forecast {
                     self.weatherResponse = forecast
+                    
+                } else {
+                    print("No Response")
+                    notification.post(name: Notification.Name("NoResponse"), object: nil)
                 }
-            } else {
-                nc.post(name: Notification.Name("NoResponse"), object: nil)
             }
         }
     }
@@ -113,7 +154,7 @@ class APIViewModel: ObservableObject {
             let formattedString = "\(temp)"
             return formattedString
         } else {
-            return "99"
+            return "Not Set"
         }
     }
     // AQI has a status
@@ -122,7 +163,7 @@ class APIViewModel: ObservableObject {
             let concernLevel = returnAQIConcernLevel(for: temp)
             return concernLevel
         } else {
-            return "TBC"
+            return ""
         }
     }
     
@@ -154,7 +195,7 @@ class APIViewModel: ObservableObject {
             if let aqiIndex = aqiIndex {
                 DispatchQueue.main.async {
                     self.aqiResponse = aqiIndex
-                    nc.post(name: Notification.Name("ResponseFromAQIAPI"), object: nil)
+                    notification.post(name: Notification.Name("ResponseFromAQIAPI"), object: nil)
                 }
             }
         }

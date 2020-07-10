@@ -78,8 +78,8 @@ struct TopAreaView: View {
                                 
                             
                             Text(self.forecastViewModel.temperature)
-                                .foregroundColor(Color("customLGreen"))
-                                .font(.custom("Arial Rounded MT Regular", size: 26))
+                                .foregroundColor(Color("customPurple"))
+                                .font(.custom("Arial Rounded MT Bold", size: 24))
                                 .bold()
                                 //.offset(x: 10, y: -140)
                             
@@ -102,13 +102,13 @@ struct TopAreaView: View {
 //                                .padding()
                             
                             Text(self.forecastViewModel.aqiData)
-                                .foregroundColor(Color("customLGreen"))
-                                .font(.custom("Arial Rounded MT Bold", size: 26))
+                                .foregroundColor(Color("customPurple"))
+                                .font(.custom("Arial Rounded MT Bold", size: 24))
                                 .bold()
                                // .offset(y: (UIHeight / 6))
                             Text(self.forecastViewModel.aqiConcernLevel)
-                                .foregroundColor(Color("customLGreen"))
-                                .font(.custom("Arial Rounded MT Bold", size: 26))
+                                .foregroundColor(Color("customPurple"))
+                                .font(.custom("Arial Rounded MT Bold", size: 24))
                                 .bold()
                                 .offset(y: 20)
                         }.padding()
