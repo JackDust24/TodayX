@@ -13,6 +13,9 @@ import Combine
 //
 let notification = NotificationCenter.default
 
+//let responsePublisher = NotificationCenter.Publisher(center: .default, name: .responseForCity, object: nil)
+//let noResponsePublisher = NotificationCenter.Publisher(center: .default, name: .noResponseForCity, object: nil)
+
 //TODO:- May not need this now
 var arrayOfIAQIs = [Any]()
 
@@ -80,23 +83,39 @@ class APIViewModel: ObservableObject {
         
     }
     
-    // Search City
-    func searchCity() {
+    // Search City called by the views to search a specific city
+    // We take the paramater for userSeacrch boolean, as we want to make it clear the difference if this is a search by the user or just the page loading/reloading.
+    func searchCity(userSearch: Bool ) {
         
         if self.cityName == "" {
             // Check Defaults
-            // Check Defaults
             print("Check Defaults")
-            checkForDefaultLocation()
+            // Check if there is a default city
+            checkForDefaultLocation() // If there is a default location, then we will updated the City name variable
         }
+        // Check to see whether we store as defaults
         checkIfToSaveLocation()
         let city = self.cityName
-        fetchWeatherForecast(by: city)
+        // We also want to send the Bool to the fetchWeatherForecast
+        fetchWeatherForecast(by: city, userSearch: userSearch)
         fetchAQIIndex(by: city)
         
     }
     
-    func checkForDefaultLocation() {
+    // For when we want to retyrn the default city
+    func returnDefaultCity() -> String {
+        
+        let returnCityName = returnDefaultLocation()
+        return returnCityName
+    }
+    
+    func saveCityLocationAsDefault(cityName: String) {
+        print("View Model - saveCityLocationAsDefault - call setLocationNameFromUserDefaults ")
+        setLocationNameFromUserDefaults(set: cityName)
+
+    }
+    
+    private func checkForDefaultLocation() {
         let cityStored = retrieveLocationNameFromUserDefaults()
         
         if let storedCity = cityStored {
@@ -106,7 +125,17 @@ class APIViewModel: ObservableObject {
         }
     }
     
-    func checkIfToSaveLocation() {
+    private func returnDefaultLocation() -> String {
+        let cityStored = retrieveLocationNameFromUserDefaults()
+        
+        if let storedCity = cityStored {
+            return storedCity
+            
+        }
+        return "Not Set"
+    }
+    
+    private func checkIfToSaveLocation() {
         print("checkIfToSaveLocation")
         
         if self.cityName != "" {
@@ -114,10 +143,10 @@ class APIViewModel: ObservableObject {
             let cityStored = retrieveLocationNameFromUserDefaults()
             
             if let storedCity = cityStored {
-                //                self.cityName = storedCity
-                print("TO DO - See if user wants to change location")
-                print(storedCity)
+                
+                print("View Model - \(storedCity)")
             } else {
+                // If the Defaults are blank we will update this as the default property/
                 print("SaveLocation")
                 
                 setLocationNameFromUserDefaults(set: cityName)
@@ -129,21 +158,33 @@ class APIViewModel: ObservableObject {
     }
     
     // Fetch Weather Forecast
-    func fetchWeatherForecast(by city: String) {
-        
+    func fetchWeatherForecast(by city: String, userSearch: Bool) {
+        print("VM - fetchWeatherForecast")
         //TODO: - DO we need this on another queue?
         self.weatherService.getWeatherForecast(matching: city) {
             forecast in
             DispatchQueue.main.async {
                 
                 if let forecast = forecast {
+                    print("VM - fetchWeatherForecast - Found Response")
+
                     self.weatherResponse = forecast
+                    if userSearch {
+                        print("VM - fetchWeatherForecast - Found Response- User Search - YES")
+
+                       //notification.post(name: Notification.Name("Response"), object: nil, userInfo: ["City": city])
+                        NotificationCenter.default.post(name: .responseForCity, object: city)
+                        return
+                    }
                     
-                } else {
-                    print("No Response")
-                    notification.post(name: Notification.Name("NoResponse"), object: nil)
-                }
+                } else if userSearch {
+                    print("VM - fetchWeatherForecast - No Response from User Search")
+                    NotificationCenter.default.post(name: .noResponseForCity, object: city)
+
+//                    notification.post(name: Notification.Name("NoResponse"), object: nil)
+                } 
             }
+            print("CHECK")
         }
     }
     

@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Combine
 
 extension Date {
    
@@ -45,3 +46,8 @@ extension Date {
 
 }
 
+extension Notification.Name {
+    static let responseForCity = Notification.Name("Response")
+    static let noResponseForCity = Notification.Name("NoResponse")
+
+}

@@ -14,7 +14,7 @@ struct TopView: View {
     @State var showField: Bool = false
     @ObservedObject var forecastViewModel: APIViewModel
     
-        let pub = NotificationCenter.default
+    let pub = NotificationCenter.default
             .publisher(for: NSNotification.Name("NoResponse"))
     
     var body: some View {
@@ -24,7 +24,7 @@ struct TopView: View {
             
             ZStack(alignment: .leading) {
                 TextField("Enter City name", text: self.$forecastViewModel.cityName) {
-                    self.forecastViewModel.searchCity()
+                    self.forecastViewModel.searchCity(userSearch: true)
                 }.padding(.all, 10)
                     .frame(width: UIWidth - 50, height: 30)
                     .background(Color("customBlue"))
@@ -75,7 +75,7 @@ struct TopView: View {
     }
     
     private func fetch() {
-        self.forecastViewModel.searchCity()
+        self.forecastViewModel.searchCity(userSearch: false)
     }
 }
 

@@ -29,12 +29,10 @@ class AQIService {
     
     // Search function
     func getAQIIndex(matching query: String, completion: @escaping (AQIIndexResponse?) ->()){
-        
-        print("Query - \(query)")
-        
+      
         let queryString:String = query.replacingOccurrences(of: " ", with: "%20")
         
-        print("queryString - \(queryString)")
+        print("getAQIIndex queryString - \(queryString)")
 
         
         // Make sure we can create the URL

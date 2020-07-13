@@ -139,9 +139,9 @@ struct TopAreaView: View {
         
         
     }
-    
+    //TODO: Delete this?
     private func fetch() {
-        self.forecastViewModel.searchCity()
+        self.forecastViewModel.searchCity(userSearch: false)
     }
 }
 

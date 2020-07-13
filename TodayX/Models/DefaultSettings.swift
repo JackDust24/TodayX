@@ -23,14 +23,14 @@ import Foundation
 
 
 func setLocationNameFromUserDefaults(set city: String) {
-    print("setLocationNameFromUserDefaults")
+    print("Default Model - setLocationNameFromUserDefaults - \(city)")
     print(city)
     UserDefaults.standard.set(city, forKey: "City")
     
 }
 
 func retrieveLocationNameFromUserDefaults() -> String? {
-    print("retrieveLocationNameFromUserDefaults")
+    print("Default Model - retrieveLocationNameFromUserDefaults")
     let storedCity : String? = UserDefaults.standard.object(forKey: "City") as? String
     print(storedCity as Any)
 

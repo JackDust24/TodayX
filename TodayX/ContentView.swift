@@ -68,7 +68,7 @@ struct ContentView: View {
                     }
             }
             .tag(1)
-            SettingsView()
+            SettingsView(forecastViewModel: forecastViewModel)
                 .tabItem {
                     VStack {
                         Image("first")
