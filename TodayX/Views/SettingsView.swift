@@ -71,7 +71,7 @@ struct SettingsDetailView: View {
                 
                 Text("New Location - ")
                 
-                TextField("Enter City name", text: $name) {
+                TextField("Enter City Name", text: $name) {
                     print("City Name Change - \(self.name)")
                     
                     self.forecastViewModel.cityName = self.name

@@ -8,7 +8,14 @@
 
 import Foundation
 
+// Reminders Bullets & Headings
 let kTodayCAP = "TODAY"
 let kTomorrowCAP = "TOMORROW"
 let kOverdueCAP = "OVERDUE"
 
+// Colours and Fonts
+let kMainTextColour = "customMPurple"
+
+// Alert messages
+let kUnknown = "Unknown City"
+let kUnknownMessage = "No City Found, Try Again"

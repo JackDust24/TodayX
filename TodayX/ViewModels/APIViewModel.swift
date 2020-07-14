@@ -163,7 +163,7 @@ class APIViewModel: ObservableObject {
         //TODO: - DO we need this on another queue?
         self.weatherService.getWeatherForecast(matching: city) {
             forecast in
-            DispatchQueue.main.async {
+            DispatchQueue.main.async { [unowned self] in
                 
                 if let forecast = forecast {
                     print("VM - fetchWeatherForecast - Found Response")
@@ -179,6 +179,7 @@ class APIViewModel: ObservableObject {
                     
                 } else if userSearch {
                     print("VM - fetchWeatherForecast - No Response from User Search")
+                    self.cityName = ""
                     NotificationCenter.default.post(name: .noResponseForCity, object: city)
 
 //                    notification.post(name: Notification.Name("NoResponse"), object: nil)

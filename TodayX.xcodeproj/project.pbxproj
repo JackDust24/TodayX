@@ -131,7 +131,6 @@
 		9E1CEE342498C23300F5EDC9 = {
 			isa = PBXGroup;
 			children = (
-				9E671BDA24AF3F0300C1242A /* AddEditReminderView.swift */,
 				9E1CEE3F2498C23300F5EDC9 /* TodayX */,
 				9E1CEE592498C23A00F5EDC9 /* TodayXTests */,
 				9E1CEE642498C23A00F5EDC9 /* TodayXUITests */,
@@ -211,15 +210,16 @@
 		9E1CEE742498C5ED00F5EDC9 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				9E1CEE942498F59300F5EDC9 /* TopView.swift */,
+				9E1CEE962498F5C100F5EDC9 /* TopAreaView.swift */,
 				9E40D529249B8C0200DE70F0 /* ImageButton.swift */,
 				9E1CEE902498F53700F5EDC9 /* RemindersView.swift */,
 				9E1CEE922498F55100F5EDC9 /* BackgroundView.swift */,
-				9E1CEE942498F59300F5EDC9 /* TopView.swift */,
-				9E1CEE962498F5C100F5EDC9 /* TopAreaView.swift */,
 				9E1CEE982498F5D900F5EDC9 /* BottomAreaView.swift */,
 				9E1CEE9A2498F70000F5EDC9 /* CityDetailsView.swift */,
 				9E1CEE9C2498F71600F5EDC9 /* AddReminderView.swift */,
 				9E17CCEA24B843C000A66E75 /* SettingsView.swift */,
+				9E671BDA24AF3F0300C1242A /* AddEditReminderView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
