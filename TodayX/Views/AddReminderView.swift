@@ -10,65 +10,53 @@ import SwiftUI
 
 struct AddReminderView: View {
     
-    @Binding var isPresented: Bool
+    //MARK: Properties
+    @Binding var isPresented: Bool // Binded so the master view knows when dismissed.
     @State var addReminderVM = AddReminderVM()
     @State private var dateChosen = Date()
     
-  
     // For dismissing a view.
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     var body: some View {
         
-       // NavigationView {
-            
-            Group {
+        Group {
+            VStack {
                 
-                VStack {
+                Text("Set Reminder").padding()
+                TextField("Enter Reminder", text: self.$addReminderVM.reminder).padding()
+                Divider()
+                
+                Text("Set Priority").padding()
+                Picker(selection: self.$addReminderVM.tag, label: Text("")) {
+                    Text("Urgent").tag("urg")
+                    Text("Important").tag("imp")
+                    Text("Normal").tag("nrm")
+                }.pickerStyle(SegmentedPickerStyle())
+                    .padding()
+                
+                Text("Select a date").padding()
+                
+                DatePicker(selection: $dateChosen, in: Date()..., displayedComponents: .date) {
+                    Text("")
+                }.frame(width: UIWidth - 60, height: UIHeight / 4, alignment: .center)
+                
+                Button("Add Reminder", action:  {
+                    // place reminder
+                    let date = self.dateChosen
+                    let convertDate = Helper().convertDateFromPickerWithoutTime(for: date)
                     
-                    Text("Set Reminder").padding()
+                    self.addReminderVM.date = convertDate
+                    self.addReminderVM.saveReminder()
+                    self.isPresented = false
                     
-                    TextField("Enter Reminder", text: self.$addReminderVM.reminder).padding()
+                    self.presentationMode.wrappedValue.dismiss()
                     
-                    Divider()
-                    
-                    Text("Set Priority").padding()
-                    
-                    Picker(selection: self.$addReminderVM.tag, label: Text("")) {
-                        Text("Urgent").tag("urg")
-                        Text("Important").tag("imp")
-                        Text("Normal").tag("nrm")
-                    }.pickerStyle(SegmentedPickerStyle())
-                        .padding()
-                    
-                    //Spacer()
-                    
-                    Text("Select a date").padding()
-                    
-                    DatePicker(selection: $dateChosen, in: Date()..., displayedComponents: .date) {
-                        Text("")
-                    }.frame(width: UIWidth - 60, height: UIHeight / 4, alignment: .center)
-
-                    Button("Add Reminder", action:  {
-                        // place reminder
-                        let date = self.dateChosen
-                        let convertDate = Helper().convertDateFromPickerWithoutTime(for: date)
-                        print(convertDate)
-
-                        
-                        self.addReminderVM.date = convertDate
-                        self.addReminderVM.saveReminder()
-                        self.isPresented = false
-                        
-                        self.presentationMode.wrappedValue.dismiss()
-                        
-                    }).padding(8)
-                        .foregroundColor(Color.white)
-                        .background(Color.green)
-                        .cornerRadius(10)
-                    
-                    
-              //  }
+                }).padding(8)
+                    .foregroundColor(Color.white)
+                    .background(Color.green)
+                    .cornerRadius(10)
+                
             }.padding()
                 .navigationBarTitle("Add Reminder", displayMode: .inline)
         }

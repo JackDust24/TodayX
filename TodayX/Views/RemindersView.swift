@@ -10,11 +10,14 @@ import SwiftUI
 
 struct RemindersView: View {
     
+    // MARK: Properties
     @ObservedObject var reminderListVM: ReminderListVM
+    // isPresented is for the popup for addind a new reminder
     @State private var isPresented: Bool = false
+    // isEditable is for editing the reminder.
     @State private var isEditable: Bool = true
-
     
+    // For showing the date in a viewable way for the user
     var dateFormatter: DateFormatter {
         let formatter = DateFormatter()
         formatter.dateStyle = .long
@@ -22,10 +25,12 @@ struct RemindersView: View {
     }
     
     init() {
-        print("Init ReminderListVM")
         self.reminderListVM = ReminderListVM()
+        UITableView.appearance().backgroundColor = UIColor(named: kCustomBackground)
     }
     
+    //TODO:- Move to the View Model
+    // Delete the row
     private func delete(at offsets: IndexSet) {
         offsets.forEach { index in
             let reminderVM = self.reminderListVM.reminders[index]
@@ -33,23 +38,13 @@ struct RemindersView: View {
         }
     }
     
+    // Reload the view
     private func reload(at offsets: IndexSet) {
         offsets.forEach { index in
             let reminderVM = self.reminderListVM.reminders[index]
             self.reminderListVM.deleteReminder(reminderVM)
         }
     }
-    
-    private func getImagesForTheType(for type: Int) -> String {
-        if type == 0 {
-            return "urg"
-        } else if type == 1 {
-            return "imp"
-        } else {
-            return "nrm"
-        }
-    }
-    
     
     var body: some View {
         
@@ -59,7 +54,7 @@ struct RemindersView: View {
                     NavigationLink(destination: EditReminderView(isEditedReminder: self.$isEditable, reminderObject: reminder))  {
                         HStack {
                             
-                            Image(self.getImagesForTheType(for: reminder.type))
+                            Image(self.reminderListVM.getImagesForTheType(for: reminder.type))
                                 .resizable()
                                 .frame(width: 60, height: 60)
                                 .cornerRadius(10)
@@ -71,46 +66,35 @@ struct RemindersView: View {
                                     .padding(.bottom, 5)
                                     .frame(width: 200, height: 30, alignment: .leading)
                                 
-                                //                         Text(reminder.date)
                                 Text("\(reminder.date, formatter: self.dateFormatter)")
                                     .font(.subheadline)
-
-                                    //                          .font(.med)
                                     .padding([.leading], 10)
                             }
                             
                         }
                     }
-
+                    
                 }.onDelete(perform: delete)
-
+                    .listRowBackground(Color(kJeansBlue))
+                
             }.onAppear(perform: {
-                print("On Appear Check")
                 self.reminderListVM.fetchAllReminders()
             })
-            .sheet(isPresented: $isPresented, onDismiss: {
-                print("ONDISMISS")
-                self.reminderListVM.fetchAllReminders()
-            }, content: {
-                AddReminderView(isPresented: self.$isPresented)
-            })
+                .sheet(isPresented: $isPresented, onDismiss: {
+                    // This is the sheet for adding new reminders and onDismiss we want to be able to reload again.
+                    self.reminderListVM.fetchAllReminders()
+                }, content: {
+                    AddReminderView(isPresented: self.$isPresented)
+                })
                 .navigationBarTitle("Reminders")
                 .navigationBarItems(trailing:
-                   Button(action: { self.isPresented = true }, label: {Image(systemName: "plus")})
-                       )
-//                .navigationBarItems(trailing: Button("Add New Reminder") {
-//                    self.isPresented = true
-//                })
+                    Button(action: { self.isPresented = true }, label: {Image(systemName: "plus")})
+            )
+            
+        }
         
-           
-        
-        }.onAppear(perform: {
-            print("On Appear")
-
-        })
     }
     
-    //    private let imageType = self.reminderListVM.getImagesForType
 }
 
 

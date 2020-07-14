@@ -9,18 +9,16 @@
 import SwiftUI
 
 struct ContentView: View {
+    //MARK: Properties
     // For Tab Bar Selection
     @State private var selection = 0
     // For Getting the Information about the weather
     @State var showSearchField: Bool = false
+    // View models for Forecast and Reminders
     @ObservedObject var forecastViewModel: APIViewModel
     @ObservedObject var reminderListVM: ReminderListVM
     
-    //    @ObservedObject var testReminder: RemindersHomePageVM
-    
-    
     init() {
-        print("Content View init")
         self.forecastViewModel = APIViewModel()
         self.reminderListVM = ReminderListVM()
     }
@@ -28,54 +26,50 @@ struct ContentView: View {
     
     var body: some View {
         TabView(selection: $selection){
-            //            Text("Home View")
-            //                .font(.title)
             
             ZStack(alignment: .top) {
-                // Background Colour (we will change)
                 
                 BackgroundView()
                 
                 VStack {
                     // This shows the top area for doing a seach
                     TopView(forecastViewModel: self.forecastViewModel).layoutPriority(100)
-                    //Spacer()
-                    
-                    TopAreaView(showField: self.showSearchField, forecastViewModel: self.forecastViewModel)
+                    // The view showing the forecast and API
+                    TopAreaView(forecastViewModel: self.forecastViewModel)
                     
                     Spacer()
-                    //  SpacetestReminder: TestRemindersVMr()
-                    
-                    //                    BottomAreaView(reminderListVM: self.reminderListVM)
+                    // For showing the Reminder Bulletin
                     BottomAreaView()
                     
                 }
-            }
-            .tabItem {
+            }.tabItem {
                 VStack {
                     Image("first")
                     Text("Home")
                 }
-            }
-            .tag(0)
-            //            Text("Checklist View")
-            //                .font(.title)
-            RemindersView()
-                .tabItem {
-                    VStack {
-                        Image("second")
-                        Text("Reminders")
-                    }
-            }
-            .tag(1)
-            SettingsView(forecastViewModel: forecastViewModel)
-                .tabItem {
-                    VStack {
-                        Image("first")
-                        Text("Settings")
-                    }
-            }
-            .tag(2)
+            }.tag(0)
+            
+            ZStack(alignment: .top)  {
+                // BackgroundView().zIndex(2)
+                RemindersView().zIndex(10)
+                
+            }.tabItem {
+                VStack {
+                    Image("second")
+                    Text("Reminders")
+                }
+            }.tag(1)
+            
+            ZStack(alignment: .top)  {
+                BackgroundView()
+                SettingsView(forecastViewModel: forecastViewModel)
+                
+            }.tabItem {
+                VStack {
+                    Image("first")
+                    Text("Settings")
+                }
+            }.tag(2)
         }
     }
 }

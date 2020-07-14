@@ -15,13 +15,13 @@ struct SettingsView: View {
     var body: some View {
         
         NavigationView {
-            
+            //MARK" Settings View
             Form {
                 Section(header: Text("Change the default location here. This will show the temperature and AQI index for the default city.")) {
                     HStack {
                         Text("Default Location")
                         Spacer()
-                        NavigationLink(destination: SettingsDetailView(forecastViewModel: self.forecastViewModel)) {
+                        NavigationLink(destination: LocationDefaultsView(forecastViewModel: self.forecastViewModel)) {
                             Text(self.forecastViewModel.returnDefaultCity()).foregroundColor(Color.gray)
                             
                             
@@ -42,88 +42,71 @@ struct SettingsView: View {
     }
 }
 
-struct SettingsDetailView: View {
+// When user selects details about the City defaults
+struct LocationDefaultsView: View {
     
     @State private var name: String = ""
     @ObservedObject var forecastViewModel: APIViewModel
-    @State private var showingAlertForResponse = false
-    //private var showingAlertForNonResponse = false
+    @State private var responseConfirmingLocationFound = false
     @State private var showingAlert = false
-
-//    let noCityResponse = NotificationCenter.default
-//        .publisher(for: NSNotification.Name("NoResponse"))
-//    let CityResponse = NotificationCenter.default
-//        .publisher(for: NSNotification.Name("Response"))
+    
     let cityResponse = NotificationCenter.Publisher(center: .default, name: .responseForCity, object: nil)
-     let noCityResponse = NotificationCenter.Publisher(center: .default, name: .noResponseForCity, object: nil)
+    let noCityResponse = NotificationCenter.Publisher(center: .default, name: .noResponseForCity, object: nil)
     
     var body: some View {
         
         Group {
             VStack {
+                // MARK: Show Location
                 HStack {
-                    
                     Text("Current Location - ")
                     Text(self.forecastViewModel.returnDefaultCity()).foregroundColor(Color.gray)
                     
                 }.padding()
                     .onAppear(perform: fetch)
                 
+                // MARK: Set new location
                 Text("New Location - ")
                 
                 TextField("Enter City Name", text: $name) {
-                    print("City Name Change - \(self.name)")
-                    
                     self.forecastViewModel.cityName = self.name
                     self.forecastViewModel.searchCity(userSearch: true)
+                    
                 }.textFieldStyle(RoundedBorderTextFieldStyle())
+                
             }.onReceive(cityResponse)
             { obj in
-                self.showingAlertForResponse = true
-                print("NOTIFICATION response received")
-                self.showingAlert = true
-                
                 // Abstract the city name
-//                let city = obj.userInfo?.first?.value
                 let city = obj.object
                 self.forecastViewModel.saveCityLocationAsDefault(cityName: city as! String)
-
+                self.responseConfirmingLocationFound = true
+                self.showingAlert = true
+                
             }
             .onReceive(noCityResponse)
-            { obj in
-//                self.showingAlertForNonResponse = true
-                self.showingAlertForResponse = false
+            { _ in
+                self.responseConfirmingLocationFound = false
                 self.showingAlert = true
-                print("NOTIFICATION no response received")
                 self.name = ""
-                }
+            }
             .alert(isPresented: $showingAlert) {
-                    print("Show Alert - Response? - \(showingAlertForResponse)")
-                
-                    return alertToReturn(cityFound: showingAlertForResponse)
-   
-                }
-            
-            
+                return alertToReturn(cityFound: responseConfirmingLocationFound)
+            }
         }
-        //        Text(self.forecastViewModel.returnDefaultCity()).foregroundColor(Color.gray)
-        
     }
     
     private func fetch() {
+        // We want to automatically fetch current details, without it being a user search.
         self.forecastViewModel.searchCity(userSearch: false)
     }
     
     private func alertToReturn(cityFound response: Bool) -> Alert {
-        print("ALERT CALLED - \(response)")
-        
-        
-
-         if response {
-            return Alert(title: Text("Saved Default City"), message: Text("This is now stored as your default location"), dismissButton: .default(Text("Ok!")))
+        // If a response that the city exists etc, then set as default or message user there is no city
+        if response {
+            return Alert(title: Text(kCityDefault), message: Text(kCityDefaultMessage), dismissButton: .default(Text("Ok!")))
         } else {
             return
-                Alert(title: Text("Unknown City"), message: Text("No City Found, Try Again"), dismissButton: .default(Text("Ok!")))
+                Alert(title: Text(kUnknown), message: Text(kUnknownMessage), dismissButton: .default(Text("Ok!")))
         }
         
         

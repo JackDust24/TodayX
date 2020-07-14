@@ -10,57 +10,26 @@ import SwiftUI
 
 struct BottomAreaView: View {
     
-    // This will be separate, with a model.
-//    @ObservedObject var testReminder: RemindersHomePageVM
+    //MARK: Properties
+    // This is for showing the latest reminders
     @ObservedObject var reminderListVM: ReminderListVM
-//    @ObservedObject var summaryReminder: SummaryReminder
-    
     // For showing the Reminder View
     @State private var showReminder: Bool = false
     
     init() {
-        print("init BottomAreaView")
         self.reminderListVM = ReminderListVM()
     }
     
-//    let reminder: String?
-//    var reminderColour: Color?
-//    var reminderContents: (String, Color) {
-//        get {
-//            print("GET")
-//            return self.reminderListVM.returnReminder()
-//        }
-//        set {
-//            print("SET")
-//            self.reminderColour = newValue.1
-//        }
-//
-//    }
-   
-//    var reminderContents: (String, Color) = {
-//
-//        let reminder = ReminderListVM().returnReminder()
-//
-//        return (reminder.0, reminder.1)
-//    }()
-    
     var body: some View {
         
-        
         VStack {
+            //MARK: Showing the button
             ZStack {
                 
                 Button(action: {
-                    
+                    // User clicks button to show the reminder
                     self.showReminder.toggle()
-                    
                     self.reminderListVM.returnReminder()
-                    
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
-                        //self.showReminder = false
-                        
-                        // self.onTap()
-                    }
                     
                 }) {
                     
@@ -69,50 +38,50 @@ struct BottomAreaView: View {
                         .frame(width: 100, height: 100)
                         .clipShape(Circle())
                         .padding()
-                        .shadow(color: Color(#colorLiteral(red: 0.1294117719, green: 0.2156862766, blue: 0.06666667014, alpha: 1)), radius: 8, x: 9, y: 9)
-                        .shadow(color: Color(#colorLiteral(red: 0.3411764801, green: 0.6235294342, blue: 0.1686274558, alpha: 1)), radius: 8, x: -9, y: -9)
+                        .shadow(color: Color(kFranceBlue), radius: 8, x: 9, y: 9)
+                        .shadow(color: Color(kJeansBlue), radius: 8, x: -9, y: -9)
                 }.padding()
                     .clipShape(Circle().inset(by: 6))
                     .offset(y: -210)
-                    .shadow(color: Color(#colorLiteral(red: 0.1294117719, green: 0.2156862766, blue: 0.06666667014, alpha: 1)), radius: 10, x: 9, y: 9)
-                    .shadow(color: Color(#colorLiteral(red: 0.4666666687, green: 0.7647058964, blue: 0.2666666806, alpha: 1)), radius: 10, x: -9, y: -9)
+                    .shadow(color: Color(kFranceBlue), radius: 10, x: 9, y: 9)
+                    .shadow(color: Color(kJeansBlue), radius: 10, x: -9, y: -9)
                 
                 RoundedRectangle(cornerRadius: 10).stroke()
                     .foregroundColor(Color("customBlue"))
                     .frame(width: UIWidth - 40, height: UIHeight / 3 - 66)
                 Spacer()
                 
+                // MARK: Show the reminders
                 VStack(alignment: .center) {
                     
-                    Text("Reminders").padding()
-                    //                    Divider()
+                    Text("Reminders")
+                        .foregroundColor(Color(kMainTextColour))
+                        .font(.custom("Raleway-Medium", size: 24))
+                        .bold()
+                        .padding()
                     
                     Group {
-//                        let summary = reminderListVM.returnReminder()
-                        
-                        self.showReminder ? AnyView(Text("\(self.reminderListVM.summaryReminder.title ?? "")\(self.reminderListVM.summaryReminder.priority ?? "")\(self.reminderListVM.summaryReminder.reminder)").frame(width: UIWidth - 40, height: 80)
-                            .foregroundColor(self.reminderListVM.summaryReminder.colour)
-                            .multilineTextAlignment(.center))
-                            
-                            :
-                            AnyView(Text("\(self.reminderListVM.summaryReminder.title ?? "")\(self.reminderListVM.summaryReminder.priority ?? "")\(self.reminderListVM.summaryReminder.reminder)").frame(width: UIWidth - 40, height:80)
-                           .foregroundColor(self.reminderListVM.summaryReminder.colour)
-                        .multilineTextAlignment(.center))
+                        // Reminders go through each view and we call the function as each view will be the same
+                        self.showReminder ? returnViewForReminder() : returnViewForReminder()
                     }
-                 
+                    
                 }.offset(y: -10)
-                .padding()
-             }
-            //                .padding(.bottom, 60)
-            //            }.onTapGesture {
-            //                // HighlightsView()
-            //                self.showReminder.toggle()
-            //            }
-            
-            
+                    .padding()
+            }
             
         }
         
+    }
+
+    // So we are not duplicating code will return this
+    func returnViewForReminder() -> AnyView {
+        
+        // The view model has a counter loop that goes through all the reminders, so the code will be the same.
+        return AnyView(Text("\(self.reminderListVM.summaryReminder.title ?? "")\(self.reminderListVM.summaryReminder.priority ?? "")\(self.reminderListVM.summaryReminder.reminder)")
+            .frame(width: UIWidth - 40, height: 80)
+            .foregroundColor(self.reminderListVM.summaryReminder.colour)
+            .font(.custom("Raleway-Medium", size: 22))
+            .multilineTextAlignment(.center))
         
     }
 }

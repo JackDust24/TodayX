@@ -11,7 +11,7 @@ import SwiftUI
 struct BackgroundView: View {
     var body: some View {
         
-        Color("customAero")
+        Color(kCustomBackground)
         .edgesIgnoringSafeArea(.all)
     }
 }

@@ -9,25 +9,7 @@
 import Foundation
 
 struct Helper {
-    
-    // SO I can get the exact time
-    // TODO: - I might not need this anymore
-    
-    /*
-     func timeConverter(timeStamp: Int, isDay: Bool) -> String {
-     
-     let unixTimestamp = timeStamp // so we can get milliseconds!
-     let date = Date(timeIntervalSince1970: TimeInterval(unixTimestamp))
-     let dateFormatter = DateFormatter()
-     dateFormatter.timeZone = TimeZone(abbreviation: "GMT")
-     dateFormatter.locale = NSLocale.current
-     dateFormatter.dateFormat = isDay ? "EEEE" : "EEEE, MMM d, yyyy"
-     
-     return dateFormatter.string(from: date)
-     
-     }
-     */
-    
+ 
     // To convert the date into a String
     func convertDateIntoString(from dateToConvert: Date) -> String {
         
@@ -40,6 +22,13 @@ struct Helper {
         return dateToReturnAsString
     }
     
+    // Called by EditReminder View
+//    func convertDateToString(date: Date?) -> String? {
+//        
+//        guard date != nil else { return nil }
+//        let dateAsString = Helper().convertDateIntoString(from: date!)
+//        return dateAsString
+//    }
     
     
     // Called by WeatherForecastViewModel, for getting the day.
