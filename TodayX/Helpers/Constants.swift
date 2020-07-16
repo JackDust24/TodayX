@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 // Reminders Bullets & Headings
 let kTodayCAP = "TODAY"
@@ -15,8 +16,10 @@ let kOverdueCAP = "OVERDUE"
 
 // Colours and Fonts
 let kCustomBackgroundColour = "customAero"
-let kSubTextColour = "customMPurple"
-let kMainTextColour = "customMStateBlue"
+let kSubTextColour = "customBlue"
+//let kSubTextColour = "customMPurple"
+let kMainTextColour = "customBlue"
+//let kMainTextColour = "customMStateBlue"
 let kFranceBlueColour = "customBlueFrance"
 let kJeansBlueColour = "customBlueJeans"
 let kVeryLightBlueColour = "customBabyBlueEyes"
@@ -26,3 +29,9 @@ let kUnknownAlert = "Unknown City"
 let kUnknownMessageAlert = "No City Found, Try Again"
 let kCityDefaultAlert = "Saved Default City"
 let kCityDefaultMessageAlert = "This is now stored as your default location"
+
+//let kCustomBackgroundColourRGB: UIColor {
+//
+//
+//}
+

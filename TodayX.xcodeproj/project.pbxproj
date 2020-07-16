@@ -32,6 +32,7 @@
 		9E1CEE972498F5C100F5EDC9 /* TopAreaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1CEE962498F5C100F5EDC9 /* TopAreaView.swift */; };
 		9E1CEE992498F5D900F5EDC9 /* BottomAreaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1CEE982498F5D900F5EDC9 /* BottomAreaView.swift */; };
 		9E1CEE9D2498F71600F5EDC9 /* AddReminderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1CEE9C2498F71600F5EDC9 /* AddReminderView.swift */; };
+		9E4C1BBC24C07D8A0028D1FD /* TabBarItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E4C1BBB24C07D8A0028D1FD /* TabBarItems.swift */; };
 		9E671BDB24AF3F0300C1242A /* EditReminderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E671BDA24AF3F0300C1242A /* EditReminderView.swift */; };
 		9E726C8224A49875002B020A /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E726C8124A49875002B020A /* Extensions.swift */; };
 		9EA6DF5324991B0400C2F811 /* AddReminderVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA6DF5224991B0400C2F811 /* AddReminderVM.swift */; };
@@ -107,6 +108,7 @@
 		9E1CEE962498F5C100F5EDC9 /* TopAreaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopAreaView.swift; sourceTree = "<group>"; };
 		9E1CEE982498F5D900F5EDC9 /* BottomAreaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomAreaView.swift; sourceTree = "<group>"; };
 		9E1CEE9C2498F71600F5EDC9 /* AddReminderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddReminderView.swift; sourceTree = "<group>"; };
+		9E4C1BBB24C07D8A0028D1FD /* TabBarItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarItems.swift; sourceTree = "<group>"; };
 		9E671BDA24AF3F0300C1242A /* EditReminderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditReminderView.swift; sourceTree = "<group>"; };
 		9E726C8124A49875002B020A /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		9EA6DF5224991B0400C2F811 /* AddReminderVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddReminderVM.swift; sourceTree = "<group>"; };
@@ -257,6 +259,7 @@
 			children = (
 				9E1CEE8E2498F49D00F5EDC9 /* AQIObjects.swift */,
 				9EC5B41C24B4680600CB4C12 /* DefaultSettings.swift */,
+				9E4C1BBB24C07D8A0028D1FD /* TabBarItems.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -498,6 +501,7 @@
 				9E1CEE8F2498F49D00F5EDC9 /* AQIObjects.swift in Sources */,
 				9E1CEE952498F59300F5EDC9 /* TopView.swift in Sources */,
 				9E1CEE432498C23300F5EDC9 /* SceneDelegate.swift in Sources */,
+				9E4C1BBC24C07D8A0028D1FD /* TabBarItems.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

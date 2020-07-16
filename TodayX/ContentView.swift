@@ -11,7 +11,7 @@ import SwiftUI
 struct ContentView: View {
     //MARK: Properties
     // For Tab Bar Selection
-    @State private var selection = 0
+    @State private var selection = 1
     // For Getting the Information about the weather
     @State var showSearchField: Bool = false
     // View models for Forecast and Reminders
@@ -21,12 +21,21 @@ struct ContentView: View {
     init() {
         self.forecastViewModel = APIViewModel()
         self.reminderListVM = ReminderListVM()
+        UITabBar.appearance().backgroundColor = UIColor.lightGray
     }
     
     
     var body: some View {
         TabView(selection: $selection){
             
+            RemindersView().tabItem {
+                VStack {
+                    Image(TabBarImageName.tabBar0)
+                        .font(.title)
+                    Text("Reminders")
+                }
+            }.tag(0)
+
             ZStack(alignment: .top) {
                 
                 BackgroundView()
@@ -36,37 +45,26 @@ struct ContentView: View {
                     TopView(forecastViewModel: self.forecastViewModel).layoutPriority(100)
                     // The view showing the forecast and API
                     TopAreaView(forecastViewModel: self.forecastViewModel)
-                    
                     Spacer()
                     // For showing the Reminder Bulletin
                     BottomAreaView()
-                    
                 }
             }.tabItem {
                 VStack {
-                    Image("first")
-                    Text("Home")
-                }
-            }.tag(0)
-            
-            ZStack(alignment: .top)  {
-                RemindersView()
-                
-            }.tabItem {
-                VStack {
-                    Image("second")
-                    Text("Reminders")
+                    Image(TabBarImageName.tabBar1)
+                        .font(.title)
+                    Text(TabBarText.tabBar1)
                 }
             }.tag(1)
             
-                SettingsView(forecastViewModel: forecastViewModel)
-
-            .tabItem {
+            SettingsView(forecastViewModel: forecastViewModel).tabItem {
                 VStack {
-                    Image("first")
-                    Text("Settings")
+                    Image(TabBarImageName.tabBar2)
+                        .font(.title)
+                    Text("Info")
                 }
             }.tag(2)
+
         }
     }
 }

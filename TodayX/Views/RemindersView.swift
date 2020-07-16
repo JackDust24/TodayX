@@ -26,7 +26,7 @@ struct RemindersView: View {
     
     init() {
         self.reminderListVM = ReminderListVM()
-        UITableView.appearance().backgroundColor = UIColor(named: kVeryLightBlueColour)
+//        UITableView.appearance().backgroundColor = UIColor(named: kVeryLightBlueColour)
     }
     
     //TODO:- Move to the View Model

@@ -15,7 +15,7 @@ struct SettingsView: View {
     var body: some View {
         
         NavigationView {
-            //MARK" Settings View
+            //MARK: Info View
             Form {
                 Section(header: Text("Change the default location here. This will show the temperature and AQI index for the default city.")) {
                     HStack {
@@ -24,27 +24,25 @@ struct SettingsView: View {
                         NavigationLink(destination: LocationDefaultsView(forecastViewModel: self.forecastViewModel)) {
                             Text(self.forecastViewModel.returnDefaultCity()).foregroundColor(Color.gray)
                             
-                            
                         }.fixedSize()
                         
                     }.onAppear(perform: fetch)
                     
                 }
-// Color(kMainTextColour)
-        }.navigationBarTitle("Settings", displayMode: .inline)
-                .background(NavigationConfigurator { nc in
-                    nc.navigationBar.barTintColor = UIColor.init(displayP3Red: 0.475, green: 0.745, blue: 0.9333, alpha: 1.0)
-                    nc.navigationBar.titleTextAttributes = [.foregroundColor : UIColor.systemBlue]
-                })
+        }.navigationBarTitle("Info", displayMode: .inline)
+            //TODO: This causes the tab bar to become white again.
+//                .background(NavigationConfigurator { nc in
+//                    nc.navigationBar.barTintColor = UIColor.init(displayP3Red: 0.475, green: 0.745, blue: 0.9333, alpha: 1.0)
+//                    nc.navigationBar.titleTextAttributes = [.foregroundColor : UIColor.systemBlue]
+//                })
             }
-        .navigationViewStyle(StackNavigationViewStyle())
-        
-        
+//        .navigationViewStyle(StackNavigationViewStyle())
     }
     
     private func fetch() {
         self.forecastViewModel.searchCity(userSearch: false)
     }
+    
 }
 
 // When user selects details about the City defaults
@@ -59,27 +57,28 @@ struct LocationDefaultsView: View {
     let noCityResponse = NotificationCenter.Publisher(center: .default, name: .noResponseForCity, object: nil)
     
     var body: some View {
-        
-               
-        
+
         Group {
             
             ZStack {
 
-                Color(kCustomBackgroundColour)
+                Color.init(.lightGray)
                 
                 VStack {
                     // MARK: Show Location
                    
                     HStack {
                         Text("Current Location - ")
+                            .font(.subheadline)
                         Text(self.forecastViewModel.returnDefaultCity()).foregroundColor(Color.black)
+                            .font(.subheadline)
                         
                     }.padding()
                         .onAppear(perform: fetch)
                     
                     // MARK: Set new location
-                    Text("New Location - ")
+                    Text("Enter New Location Below")
+                        .font(.title)
                     
                     TextField("Enter City Name", text: $name) {
                         self.forecastViewModel.cityName = self.name
@@ -112,7 +111,7 @@ struct LocationDefaultsView: View {
                     
                 }
 
-            }.foregroundColor(Color(kMainTextColour))
+            }.foregroundColor(Color("customBlue"))
             
         }
     }

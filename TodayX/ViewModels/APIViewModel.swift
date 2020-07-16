@@ -67,20 +67,25 @@ class APIViewModel: ObservableObject {
         //TODO: - DO we need this on another queue?
         self.weatherService.getWeatherForecast(matching: city) {
             forecast in
-            DispatchQueue.main.async { [unowned self] in
+            
                 
                 if let forecast = forecast {
                     self.weatherResponse = forecast
                     if userRequest {
-                        NotificationCenter.default.post(name: .responseForCity, object: city)
-                        return
+                        DispatchQueue.main.async {
+                            NotificationCenter.default.post(name: .responseForCity, object: city)
+                        }
+                        // If it first search store as default.
+                        self.checkIfToSaveLocation()
                     }
                     
                 } else if userRequest {
                     self.cityName = ""
-                    NotificationCenter.default.post(name: .noResponseForCity, object: city)
+                    DispatchQueue.main.async {
+                        NotificationCenter.default.post(name: .noResponseForCity, object: city)
+                    }
                 }
-            }
+            
         }
     }
     
@@ -109,7 +114,6 @@ class APIViewModel: ObservableObject {
         }
         
         // Check to see whether we store as defaults
-        checkIfToSaveLocation()
         let city = self.cityName
         
         // We also want to send the Bool to the fetchWeatherForecast
@@ -118,14 +122,16 @@ class APIViewModel: ObservableObject {
         
     }
     
-    // For when we want to return the default city. Called by Settings view.
+    // For when we want to return the default city. Called by Info view.
     func returnDefaultCity() -> String {
         let returnCityName = returnDefaultLocation()
         return returnCityName
     }
     
-    // For when we want to save the new default setting. Called by Settings view.
+    // For when we want to save the new default setting. Called by Info view.
     func saveCityLocationAsDefault(cityName: String) {
+        print("Set Location 0")
+
         setLocationNameFromUserDefaults(set: cityName)
         
     }
@@ -162,9 +168,14 @@ class APIViewModel: ObservableObject {
             // If not then store the location in User Defaulys
             if cityStored == nil {
                 // If the Defaults are blank we will update this as the default property/
+                print("Set Location")
+
                 setLocationNameFromUserDefaults(set: cityName)
             }
+        } else {
+            print("City is bogus")
         }
+                
     }
     
     //MARK: AQI API Call and properties
