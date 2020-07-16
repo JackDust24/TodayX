@@ -8,16 +8,8 @@
 
 import SwiftUI
 import Combine
-// TODO: What is Combine?
 
-//
 let notification = NotificationCenter.default
-
-//let responsePublisher = NotificationCenter.Publisher(center: .default, name: .responseForCity, object: nil)
-//let noResponsePublisher = NotificationCenter.Publisher(center: .default, name: .noResponseForCity, object: nil)
-
-//TODO:- May not need this now
-var arrayOfIAQIs = [Any]()
 
 class APIViewModel: ObservableObject {
     
@@ -27,6 +19,8 @@ class APIViewModel: ObservableObject {
     
     //This is called to do searches
     var cityName: String = ""
+    
+    var arrayOfIAQIs = [Any]() // Not needed for Phase 1
     
     @Published var weatherResponse: ForecastWeatherResponse?
     @Published var aqiResponse: AQIIndexResponse?
@@ -43,7 +37,7 @@ class APIViewModel: ObservableObject {
         if let city = self.weatherResponse?.name {
             return city
         } else {
-            return "Choose City"
+            return "Set City"
         }
     }
     
@@ -53,16 +47,6 @@ class APIViewModel: ObservableObject {
             return country
         } else {
             return "Use Search Bar"
-        }
-    }
-    
-    // TODO:- Can delete this I expect
-    var weatherDescription: String {
-        if let description = self.weatherResponse?.weather?.description {
-            let formattedDesc = description.capitalized(with: .current)
-            return formattedDesc
-        }else {
-            return ""
         }
     }
     
@@ -76,56 +60,89 @@ class APIViewModel: ObservableObject {
         }
     }
     
-    // Today's date TODO:- May not need this now - so we will need to update CityDetails View
-    var weatherDay: String {
-        let formattedDay = Helper().getCurrentDate()
-        return formattedDay
+    //MARK: API Reponses
+    // Fetch Weather Forecast
+    func fetchWeatherForecast(by city: String, userSearch userRequest: Bool) {
         
+        //TODO: - DO we need this on another queue?
+        self.weatherService.getWeatherForecast(matching: city) {
+            forecast in
+            DispatchQueue.main.async { [unowned self] in
+                
+                if let forecast = forecast {
+                    self.weatherResponse = forecast
+                    if userRequest {
+                        NotificationCenter.default.post(name: .responseForCity, object: city)
+                        return
+                    }
+                    
+                } else if userRequest {
+                    self.cityName = ""
+                    NotificationCenter.default.post(name: .noResponseForCity, object: city)
+                }
+            }
+        }
     }
     
+    // See if AQI Response and set response for user
+    // TODO: Try getting this on a different background queue.
+    func fetchAQIIndex(by city: String) {
+        
+        self.aqiService.getAQIIndex(matching: city) {
+            aqiIndex in
+            if let aqiIndex = aqiIndex {
+                DispatchQueue.main.async {
+                    self.aqiResponse = aqiIndex
+                }
+            }
+        }
+    }
+    
+    //MARK: Locations Functions
     // Search City called by the views to search a specific city
     // We take the paramater for userSeacrch boolean, as we want to make it clear the difference if this is a search by the user or just the page loading/reloading.
-    func searchCity(userSearch: Bool ) {
+    func searchCity(userSearch userRequest: Bool ) {
         
         if self.cityName == "" {
-            // Check Defaults
-            print("Check Defaults")
             // Check if there is a default city
             checkForDefaultLocation() // If there is a default location, then we will updated the City name variable
         }
+        
         // Check to see whether we store as defaults
         checkIfToSaveLocation()
         let city = self.cityName
+        
         // We also want to send the Bool to the fetchWeatherForecast
-        fetchWeatherForecast(by: city, userSearch: userSearch)
+        fetchWeatherForecast(by: city, userSearch: userRequest)
         fetchAQIIndex(by: city)
         
     }
     
-    // For when we want to retyrn the default city
+    // For when we want to return the default city. Called by Settings view.
     func returnDefaultCity() -> String {
-        
         let returnCityName = returnDefaultLocation()
         return returnCityName
     }
     
+    // For when we want to save the new default setting. Called by Settings view.
     func saveCityLocationAsDefault(cityName: String) {
-        print("View Model - saveCityLocationAsDefault - call setLocationNameFromUserDefaults ")
         setLocationNameFromUserDefaults(set: cityName)
-
+        
     }
     
+    // MARK: Private Location functions
     private func checkForDefaultLocation() {
+        
         let cityStored = retrieveLocationNameFromUserDefaults()
         
         if let storedCity = cityStored {
             self.cityName = storedCity
-            print("Loading Default")
             
         }
     }
     
     private func returnDefaultLocation() -> String {
+        
         let cityStored = retrieveLocationNameFromUserDefaults()
         
         if let storedCity = cityStored {
@@ -135,57 +152,18 @@ class APIViewModel: ObservableObject {
         return "Not Set"
     }
     
+    // For when we log on first time.
     private func checkIfToSaveLocation() {
-        print("checkIfToSaveLocation")
         
         if self.cityName != "" {
-            // Check Defaults
+            // Check to see if default
             let cityStored = retrieveLocationNameFromUserDefaults()
             
-            if let storedCity = cityStored {
-                
-                print("View Model - \(storedCity)")
-            } else {
+            // If not then store the location in User Defaulys
+            if cityStored == nil {
                 // If the Defaults are blank we will update this as the default property/
-                print("SaveLocation")
-                
                 setLocationNameFromUserDefaults(set: cityName)
             }
-            
-            
-        }
-        
-    }
-    
-    // Fetch Weather Forecast
-    func fetchWeatherForecast(by city: String, userSearch: Bool) {
-        print("VM - fetchWeatherForecast")
-        //TODO: - DO we need this on another queue?
-        self.weatherService.getWeatherForecast(matching: city) {
-            forecast in
-            DispatchQueue.main.async { [unowned self] in
-                
-                if let forecast = forecast {
-                    print("VM - fetchWeatherForecast - Found Response")
-
-                    self.weatherResponse = forecast
-                    if userSearch {
-                        print("VM - fetchWeatherForecast - Found Response- User Search - YES")
-
-                       //notification.post(name: Notification.Name("Response"), object: nil, userInfo: ["City": city])
-                        NotificationCenter.default.post(name: .responseForCity, object: city)
-                        return
-                    }
-                    
-                } else if userSearch {
-                    print("VM - fetchWeatherForecast - No Response from User Search")
-                    self.cityName = ""
-                    NotificationCenter.default.post(name: .noResponseForCity, object: city)
-
-//                    notification.post(name: Notification.Name("NoResponse"), object: nil)
-                } 
-            }
-            print("CHECK")
         }
     }
     
@@ -199,6 +177,7 @@ class APIViewModel: ObservableObject {
             return "Not Set"
         }
     }
+    
     // AQI has a status
     var aqiConcernLevel: String {
         if let temp = self.aqiResponse?.data?.aqi {
@@ -209,6 +188,7 @@ class APIViewModel: ObservableObject {
         }
     }
     
+    // Return Details of AQI Status
     func returnAQIConcernLevel(for aqi: Int) -> String {
         
         switch aqi {
@@ -229,21 +209,8 @@ class APIViewModel: ObservableObject {
         }
     }
     
-    // TODO: Try getting this on a different background queue.
-    func fetchAQIIndex(by city: String) {
-        
-        self.aqiService.getAQIIndex(matching: city) {
-            aqiIndex in
-            if let aqiIndex = aqiIndex {
-                DispatchQueue.main.async {
-                    self.aqiResponse = aqiIndex
-                    notification.post(name: Notification.Name("ResponseFromAQIAPI"), object: nil)
-                }
-            }
-        }
-    }
     
-    //TODO: May not decide to use this population of AQI Index results
+    //MARK: Populate other AQI results. Not in Phase 1 release.
     var populateTheIAQI: Array<AQIObjects> {
         
         arrayOfIAQIs = []
@@ -284,7 +251,6 @@ class APIViewModel: ObservableObject {
             let o3 = AQIObjects.init(type: type, value: formattedString)
             arrayOfIAQIs.append(o3)
         }
-        print("CHECK ARRAY - \(arrayOfIAQIs)")
         
         return arrayOfIAQIs as! Array<AQIObjects>
         

@@ -32,7 +32,6 @@
 		9E1CEE972498F5C100F5EDC9 /* TopAreaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1CEE962498F5C100F5EDC9 /* TopAreaView.swift */; };
 		9E1CEE992498F5D900F5EDC9 /* BottomAreaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1CEE982498F5D900F5EDC9 /* BottomAreaView.swift */; };
 		9E1CEE9D2498F71600F5EDC9 /* AddReminderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1CEE9C2498F71600F5EDC9 /* AddReminderView.swift */; };
-		9E40D52C249CCCAA00DE70F0 /* RemindersHomePageVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E40D52B249CCCAA00DE70F0 /* RemindersHomePageVM.swift */; };
 		9E671BDB24AF3F0300C1242A /* EditReminderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E671BDA24AF3F0300C1242A /* EditReminderView.swift */; };
 		9E726C8224A49875002B020A /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E726C8124A49875002B020A /* Extensions.swift */; };
 		9EA6DF5324991B0400C2F811 /* AddReminderVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA6DF5224991B0400C2F811 /* AddReminderVM.swift */; };
@@ -108,7 +107,6 @@
 		9E1CEE962498F5C100F5EDC9 /* TopAreaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopAreaView.swift; sourceTree = "<group>"; };
 		9E1CEE982498F5D900F5EDC9 /* BottomAreaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomAreaView.swift; sourceTree = "<group>"; };
 		9E1CEE9C2498F71600F5EDC9 /* AddReminderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddReminderView.swift; sourceTree = "<group>"; };
-		9E40D52B249CCCAA00DE70F0 /* RemindersHomePageVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemindersHomePageVM.swift; sourceTree = "<group>"; };
 		9E671BDA24AF3F0300C1242A /* EditReminderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditReminderView.swift; sourceTree = "<group>"; };
 		9E726C8124A49875002B020A /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		9EA6DF5224991B0400C2F811 /* AddReminderVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddReminderVM.swift; sourceTree = "<group>"; };
@@ -235,7 +233,6 @@
 				9E1CEE8A2498EEC000F5EDC9 /* APIViewModel.swift */,
 				9EA6DF5224991B0400C2F811 /* AddReminderVM.swift */,
 				9EA6DF5424991B5600C2F811 /* ReminderListVM.swift */,
-				9E40D52B249CCCAA00DE70F0 /* RemindersHomePageVM.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -498,7 +495,6 @@
 				9E1CEE8D2498F2C900F5EDC9 /* AQIAPIModel.swift in Sources */,
 				9E1CEE9D2498F71600F5EDC9 /* AddReminderView.swift in Sources */,
 				9E726C8224A49875002B020A /* Extensions.swift in Sources */,
-				9E40D52C249CCCAA00DE70F0 /* RemindersHomePageVM.swift in Sources */,
 				9E1CEE8F2498F49D00F5EDC9 /* AQIObjects.swift in Sources */,
 				9E1CEE952498F59300F5EDC9 /* TopView.swift in Sources */,
 				9E1CEE432498C23300F5EDC9 /* SceneDelegate.swift in Sources */,

@@ -50,8 +50,7 @@ struct ContentView: View {
             }.tag(0)
             
             ZStack(alignment: .top)  {
-                // BackgroundView().zIndex(2)
-                RemindersView().zIndex(10)
+                RemindersView()
                 
             }.tabItem {
                 VStack {
@@ -60,11 +59,9 @@ struct ContentView: View {
                 }
             }.tag(1)
             
-            ZStack(alignment: .top)  {
-                BackgroundView()
                 SettingsView(forecastViewModel: forecastViewModel)
-                
-            }.tabItem {
+
+            .tabItem {
                 VStack {
                     Image("first")
                     Text("Settings")

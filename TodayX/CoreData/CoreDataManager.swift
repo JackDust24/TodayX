@@ -14,11 +14,9 @@ import SwiftUI
 
 class CoreDataManager {
     
-    static let shared = CoreDataManager(moc: NSManagedObjectContext.current)
-    
-    // Order of State Arrays
-    //TODO: Put this in the Model
-    let arrayTypeOrder = ["Urgent","Important", "Normal"]
+    //MARK: Properties
+    // Shared Context
+    static let sharedContext = CoreDataManager(moc: NSManagedObjectContext.current)
     
     var moc: NSManagedObjectContext
     
@@ -26,27 +24,7 @@ class CoreDataManager {
         self.moc = moc
     }
     
-    private func fetchReminder(reminderID: UUID) -> Reminders? {
-        
-        var reminders = [Reminders]()
-        
-        let request: NSFetchRequest<Reminders> = Reminders.fetchRequest()
-        request.predicate = NSPredicate(format: "id == %@", reminderID as CVarArg)
-//
-//        request(entity: Reminders.entity(), sortDescriptors: [
-//            NSSortDescriptor(keyPath: \Book.title, ascending: true),
-//            NSSortDescriptor(keyPath: \Book.author, ascending: true)
-//        ]) var books: FetchedResults<Book>
-        
-        do {
-            reminders = try self.moc.fetch(request)
-        } catch let error as NSError {
-            print(error)
-        }
-        return reminders.first
-    }
-    
-
+    // Delete Reminders
     func deleteReminder(reminderID: UUID) {
         
         do {
@@ -54,34 +32,36 @@ class CoreDataManager {
                 self.moc.delete(reminder)
                 try self.moc.save()
             }
+            
         } catch let error as NSError {
+            //TODO: Error Handling
             print(error)
         }
     }
     
+    // Update the Reminders if edited
     func updateReminder(reminder: String, type: Int, date: Date, id: UUID) {
-        print("THE UPDATE")
+        
         do {
             if let reminderRecord = fetchReminder(reminderID: id) {
-                print("THE UPDATE2")
                 reminderRecord.reminder = reminder
                 reminderRecord.date = date
                 reminderRecord.type = Int16(type)
                 self.moc.refresh(reminderRecord, mergeChanges: true)
-//                self.moc.refresh(reminder, mergeChanges: true)
-
-               // self.moc.refresh(reminder, mergeChanges: false)
+                
                 try self.moc.save()
             }
+            
         } catch let error as NSError {
+            //TODO: Error Handling
             print(error)
         }
     }
-
+    
+    // Get all the reminders
     func getAllReminders() -> [Reminders] {
         
         var reminders = [Reminders]()
-        
         let reminderRequest: NSFetchRequest<Reminders> = Reminders.fetchRequest()
         let sortByDate = NSSortDescriptor(key: #keyPath(Reminders.date), ascending: true)
         let sortByType = NSSortDescriptor(key: #keyPath(Reminders.type), ascending: true)
@@ -89,28 +69,51 @@ class CoreDataManager {
         
         do {
             reminders = try self.moc.fetch(reminderRequest)
+            
         } catch let error as NSError {
+            //TODO: Error Handling
             print(error)
         }
         return reminders
-       
+        
     }
     
+    // Save Reminder that's been added
     func saveReminder(reminder: String, type: Int, date: Date) {
-        print("saveReminder")
+        
         let remAttribute = Reminders(context: self.moc)
         remAttribute.reminder = reminder
         remAttribute.type = Int16(type)
         remAttribute.date = date
         remAttribute.id = UUID()
         
-//        print(remAttribute.reminder, remAttribute.id)
-        
         do {
             try self.moc.save()
+            
         } catch let error as NSError {
+            //TODO: Error Handling
             print(error)
         }
         
+    }
+    
+    //MARK: Private Functions
+    
+    // Fetch all the reminders
+    private func fetchReminder(reminderID: UUID) -> Reminders? {
+        
+        var reminders = [Reminders]()
+        let request: NSFetchRequest<Reminders> = Reminders.fetchRequest()
+        request.predicate = NSPredicate(format: "id == %@", reminderID as CVarArg)
+        
+        do {
+            reminders = try self.moc.fetch(request)
+            
+        } catch let error as NSError {
+            //TODO: Error Handling
+            print(error)
+        }
+        
+        return reminders.first
     }
 }

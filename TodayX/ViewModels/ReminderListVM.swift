@@ -39,14 +39,14 @@ class ReminderListVM: ObservableObject {
     }
    
     func deleteReminder(_ reminderVM: ReminderViewModel) {
-        CoreDataManager.shared.deleteReminder(reminderID: reminderVM.id)
+        CoreDataManager.sharedContext.deleteReminder(reminderID: reminderVM.id)
         fetchAllReminders()
     }
     
     func fetchAllReminders() {
         
         reminders = [] // Clear array
-        self.reminders = CoreDataManager.shared.getAllReminders().map(ReminderViewModel.init)
+        self.reminders = CoreDataManager.sharedContext.getAllReminders().map(ReminderViewModel.init)
         
         //TODO:= Debugging can remove.
         reminders.withUnsafeBufferPointer { (point) in

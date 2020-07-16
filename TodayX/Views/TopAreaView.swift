@@ -28,9 +28,10 @@ struct TopAreaView: View {
                 VStack {
                     Text("\(self.forecastViewModel.currentCity), \(self.forecastViewModel.currentCountry)")
                         .foregroundColor(Color(kMainTextColour))
-                        .font(.custom("Papyrus", size: 36))
+                        //.font(.custom("Papyrus", size: 36))
                         .fontWeight(.heavy)
                         .padding(5)
+                        .scaledFont(name: "Papyrus", size: 26)
                     
                     HStack(alignment: .top) {
                         // MARK: The Temperature Details
@@ -70,7 +71,7 @@ struct TopAreaView: View {
                                 .font(.custom("Raleway-Medium", size: 24))
                                 .bold()
                                 .padding(.trailing, 3)
-                               // .offset(y: (UIHeight / 6))
+
                             Text(self.forecastViewModel.aqiConcernLevel)
                                 .foregroundColor(Color(kSubTextColour))
                                 .font(.custom("Raleway-Medium", size: 24))

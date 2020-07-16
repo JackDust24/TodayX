@@ -9,8 +9,8 @@
 
 import Foundation
 
+// This is not yet for Phase 1
 struct AQIObjects : Hashable, Decodable {
-    //  var id = UUID()
     var type: String
     var value: String
 }

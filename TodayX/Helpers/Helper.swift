@@ -9,8 +9,8 @@
 import Foundation
 
 struct Helper {
- 
-    // To convert the date into a String
+    
+    //MARK: Date Helpers
     func convertDateIntoString(from dateToConvert: Date) -> String {
         
         let formatter = DateFormatter()
@@ -21,15 +21,6 @@ struct Helper {
         let dateToReturnAsString = formatter.string(from: dateToConvert)
         return dateToReturnAsString
     }
-    
-    // Called by EditReminder View
-//    func convertDateToString(date: Date?) -> String? {
-//        
-//        guard date != nil else { return nil }
-//        let dateAsString = Helper().convertDateIntoString(from: date!)
-//        return dateAsString
-//    }
-    
     
     // Called by WeatherForecastViewModel, for getting the day.
     func getCurrentDate() -> String {
@@ -46,22 +37,61 @@ struct Helper {
         
     }
     
+    // When we choose a date, we don't want timestamp to appear, as this will affect the priortity listing.
+    func convertDateFromPickerWithoutTime(for date: Date) -> Date {
+        
+        let dateToConvert = date
+        let dateConverted = type(of: dateToConvert).init(year: date.GetYear(), month: date.GetMonth(), day: date.GetDay())
+        return dateConverted
+        
+    }
+    
+    // Checks what day this is (called by Reminder Views)
+    func checkWhatDay(for date: Date) -> String {
+        // 1. Create Calendar property
+        var calendar = Calendar.current
+        calendar.timeZone = NSTimeZone.local
+        
+        // 2. Check if today or tomorrow, if so return that string
+        if calendar.isDateInToday(date) {
+            return kTodayCAP
+        }
+        
+        if calendar.isDateInTomorrow(date) {
+            return kTomorrowCAP
+        }
+        
+        // 3. Create if the date is in the past
+        let formatDate = DateFormatter()
+        formatDate.dateFormat = "dd/MM/yyyy HH:mm:ss"
+        
+        // Get the string version
+        let drawDate = formatDate.string(from: date)
+        if let date = formatDate.date(from: drawDate) {
+            
+            if date < Date() {
+                return kOverdueCAP
+            }
+        }
+        
+        // 4. Otherwise it will be in the future
+        return "" // We return nothing as its probably in the future .
+    }
+    
+    //MARK: Weather Helpers
+    //Weather Icon for type of weather called by API
     func showWeatherIcon(item: ForecastWeatherResponse?) -> String {
         
-        
-       // guard item != nil else { return "clear" }
+        // In case blank return a nil
+        guard item != nil else { return "cloud.sun.fill" }
         
         let main = item?.weather?.first?.main
         
-        print("Weather icon - \(String(describing: main))")
-        
-        
         if main == nil {
-            // If nil then return clear.
-            print("weather is nil")
+            // If nil then return clear. This will probably never be called but just in case.
             return "cloud.sun.fill"
         }
-       
+        
         switch main {
         case "Ash":
             return "cloud.hail"
@@ -95,54 +125,6 @@ struct Helper {
         }
         
     }
-    
-    func convertDateFromPickerWithoutTime(for date: Date) -> Date {
-       
-        let dateToConvert = date
-        let dateConverted = type(of: dateToConvert).init(year: date.GetYear(), month: date.GetMonth(), day: date.GetDay())
-        print("Check convertDateFromPickerWithoutTime \(dateConverted)")
-        return dateConverted
-        
-    }
-    
-    func checkWhatDay(for date: Date) -> String {
-        // 1. Create Calendar property
-        var calendar = Calendar.current
-        calendar.timeZone = NSTimeZone.local
-        
-        print("Check date for checkWhatDay \(date)")
-        // 2. Check if today or tomorrow, if so return that string
-        if calendar.isDateInToday(date) {
-            print("Check date for checkWhatDay Today")
-
-            return kTodayCAP
-        }
-        
-        if calendar.isDateInTomorrow(date) {
-            print("Check date for checkWhatDay Tomorrow")
-
-            return kTomorrowCAP
-        }
-        
-        print("Check date for checkWhatDay Finish")
-
-        // 3. Create if the date is in the past
-        let formatDate = DateFormatter()
-        formatDate.dateFormat = "dd/MM/yyyy HH:mm:ss"
-        let drawDate = formatDate.string(from: date)
-        
-        if let date = formatDate.date(from: drawDate) {
-
-            if date < Date() {
-                return kOverdueCAP
-            }
-        }
-        // 4. Otherwise it will be in the future
-        return "" // We return nothing as its probably in the future .
-    }
-    
-    
-    
     
     
 }

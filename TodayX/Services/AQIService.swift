@@ -29,41 +29,35 @@ class AQIService {
     
     // Search function
     func getAQIIndex(matching query: String, completion: @escaping (AQIIndexResponse?) ->()){
-      
-        let queryString:String = query.replacingOccurrences(of: " ", with: "%20")
         
-        print("getAQIIndex queryString - \(queryString)")
-
+        let queryString:String = query.replacingOccurrences(of: " ", with: "%20")
         
         // Make sure we can create the URL
         guard var urlComponents = URLComponents(string: "\(baseUrl)\(queryString)/") else {
-                preconditionFailure("Can't create url...")
+            preconditionFailure("Can't create url...")
             
         }
-
+        
         //TODO: - Set a default value for Query Item Units and store in Defaults
-         urlComponents.queryItems = [
-              URLQueryItem(name: "token", value: aqiIndexKey),
-         ]
-//        // Make sure we can create the URL with the added components
+        urlComponents.queryItems = [
+            URLQueryItem(name: "token", value: aqiIndexKey),
+        ]
+        //        // Make sure we can create the URL with the added components
         guard let url = urlComponents.url else {preconditionFailure("Can't create url from url components...")}
         
         URLSession.shared.dataTask(with: url) { data, response, error in
-                        
+            
             guard let data = data, error == nil else {
                 completion(nil)
                 return
             }
             // get the weather response
             let aqiResponse = try? JSONDecoder().decode(AQIIndexResponse.self, from: data)
-        
+            
             // Optional Binding to see if it exists
             if let aqiResponse = aqiResponse {
-               // let weather = weatherResponse.list
-               
+                
                 completion(aqiResponse) //just give me the entire payload response
-               // completion(weather![0]) //to get just the list
-                print("AQI Response - \(aqiResponse)")
             }else {
                 completion(nil)
             }

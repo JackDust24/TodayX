@@ -32,23 +32,22 @@ class WeatherService {
         
         // Make sure we can create the URL
         guard var urlComponents = URLComponents(string: "\(baseUrl)") else {
-                preconditionFailure("Can't create url...")
+            preconditionFailure("Can't create url...")
             
         }
         //api.getdata..?Queries
         //TODO: - Set a default value for Query Item Units and store in Defaults
-
-         urlComponents.queryItems = [
-              URLQueryItem(name: "q", value: query),
-              URLQueryItem(name: "appid", value: openWeatherAPIKey),
-              URLQueryItem(name: "units", value: "metric") //"imperial = farenheigt
-         ]
+        urlComponents.queryItems = [
+            URLQueryItem(name: "q", value: query),
+            URLQueryItem(name: "appid", value: openWeatherAPIKey),
+            URLQueryItem(name: "units", value: "metric") //"imperial = farenheigt
+        ]
         // Make sure we can create the URL with the added components
         guard let url = urlComponents.url else {preconditionFailure("Can't create url from url components...")}
-
+        
         // Make sure this is data we can work with
         URLSession.shared.dataTask(with: url) { data, response, error in
-                        
+            
             guard let data = data, error == nil else {
                 print("Error - \(String(describing: error))")
                 completion(nil)
@@ -56,28 +55,23 @@ class WeatherService {
             }
             // get the weather response
             let weatherResponse = try? JSONDecoder().decode(ForecastWeatherResponse.self, from: data)
-
+            
             // Optional Binding to see if it exists
             if let weatherResponse = weatherResponse {
-               // let weather = weatherResponse.list
-               
-                //TODO: - We want to send through something else if nil.
+                // let weather = weatherResponse.list
                 
+                //TODO: - We want to send through something else if nil.
                 if weatherResponse.name == nil {
-                    print("nilResponse - \(weatherResponse)")
                     // Need to set alert
                     completion(nil)
-
+                    
                 } else {
                     completion(weatherResponse)
-
+                    
                 }
-
-                 //just give me the entire payload response
-               // completion(weather![0]) //to get just the list
             } else {
                 completion(nil)
             }
-        }.resume()
+        }.resume() // Resumes the taks if suspended.
     }
 }

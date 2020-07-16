@@ -11,8 +11,8 @@ import SwiftUI
 
 class AddReminderVM {
     
-    // We want to conver the tag to a numnber
-    var tag: String = ""
+    //MARK: Priorities
+    var tag: String = "" // We want to convert the tag to a numnber. The tag is for the proorities.
     var reminder: String = ""
     var type: Int = 0
     var date = Date()
@@ -20,39 +20,20 @@ class AddReminderVM {
     
     //MARK: Add Reminders
     func saveReminder() {
-        print("SAVE REMINDER")
         // Do tag coversion first
         self.type = tagConversionToInt(from: self.tag)
-        
-        print(self.reminder, self.type, self.date)
-        
-        CoreDataManager.shared.saveReminder(reminder: self.reminder, type: self.type, date: self.date)
+        CoreDataManager.sharedContext.saveReminder(reminder: self.reminder, type: self.type, date: self.date)
     }
-    
-    private func tagConversionToInt(from tag: String) -> Int {
-        if tag == "urg" {
-            return 0
-        } else if tag == "imp" {
-            return 1
-        } else {
-            return 2
-        }
-    }
+
     
     // MARK: Edit Reminders
-    
     func updateReminder() {
-                print("UPDATE REMINDER")
         // Do tag coversion first
         self.type = tagConversionToInt(from: self.tag)
-        print(self.reminder, self.type, self.date, self.id)
-
-        
-        CoreDataManager.shared.updateReminder(reminder: self.reminder, type: self.type, date: self.date, id: self.id)
+        CoreDataManager.sharedContext.updateReminder(reminder: self.reminder, type: self.type, date: self.date, id: self.id)
     }
     
     func convertIntsToTag(from int: Int) -> String {
-        
         if int == 2 {
             return "Urgent"
         } else if int == 1 {
@@ -62,4 +43,14 @@ class AddReminderVM {
         }
     }
 
+    //MARK: Private Functions
+    private func tagConversionToInt(from tag: String) -> Int {
+        if tag == "urg" {
+            return 0
+        } else if tag == "imp" {
+            return 1
+        } else {
+            return 2
+        }
+    }
 }

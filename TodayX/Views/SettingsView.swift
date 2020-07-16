@@ -11,7 +11,7 @@ import SwiftUI
 struct SettingsView: View {
     
     @ObservedObject var forecastViewModel: APIViewModel
-    
+   
     var body: some View {
         
         NavigationView {
@@ -30,9 +30,14 @@ struct SettingsView: View {
                     }.onAppear(perform: fetch)
                     
                 }
-                .navigationBarTitle("Settings", displayMode: .inline)
+// Color(kMainTextColour)
+        }.navigationBarTitle("Settings", displayMode: .inline)
+                .background(NavigationConfigurator { nc in
+                    nc.navigationBar.barTintColor = UIColor.init(displayP3Red: 0.475, green: 0.745, blue: 0.9333, alpha: 1.0)
+                    nc.navigationBar.titleTextAttributes = [.foregroundColor : UIColor.systemBlue]
+                })
             }
-        }
+        .navigationViewStyle(StackNavigationViewStyle())
         
         
     }
@@ -55,43 +60,60 @@ struct LocationDefaultsView: View {
     
     var body: some View {
         
+               
+        
         Group {
-            VStack {
-                // MARK: Show Location
-                HStack {
-                    Text("Current Location - ")
-                    Text(self.forecastViewModel.returnDefaultCity()).foregroundColor(Color.gray)
+            
+            ZStack {
+
+                Color(kCustomBackgroundColour)
+                
+                VStack {
+                    // MARK: Show Location
+                   
+                    HStack {
+                        Text("Current Location - ")
+                        Text(self.forecastViewModel.returnDefaultCity()).foregroundColor(Color.black)
+                        
+                    }.padding()
+                        .onAppear(perform: fetch)
                     
-                }.padding()
-                    .onAppear(perform: fetch)
-                
-                // MARK: Set new location
-                Text("New Location - ")
-                
-                TextField("Enter City Name", text: $name) {
-                    self.forecastViewModel.cityName = self.name
-                    self.forecastViewModel.searchCity(userSearch: true)
+                    // MARK: Set new location
+                    Text("New Location - ")
                     
-                }.textFieldStyle(RoundedBorderTextFieldStyle())
-                
-            }.onReceive(cityResponse)
-            { obj in
-                // Abstract the city name
-                let city = obj.object
-                self.forecastViewModel.saveCityLocationAsDefault(cityName: city as! String)
-                self.responseConfirmingLocationFound = true
-                self.showingAlert = true
-                
-            }
-            .onReceive(noCityResponse)
-            { _ in
-                self.responseConfirmingLocationFound = false
-                self.showingAlert = true
-                self.name = ""
-            }
-            .alert(isPresented: $showingAlert) {
-                return alertToReturn(cityFound: responseConfirmingLocationFound)
-            }
+                    TextField("Enter City Name", text: $name) {
+                        self.forecastViewModel.cityName = self.name
+                        self.forecastViewModel.searchCity(userSearch: true)
+                        
+                    }.textFieldStyle(RoundedBorderTextFieldStyle())
+                        .frame(width: UIWidth - 40, height: 60, alignment: .center)
+                    
+                    Spacer()
+
+                   
+                    }.padding()
+                    .onReceive(cityResponse)
+                { obj in
+                    // Abstract the city name
+                    let city = obj.object
+                    self.forecastViewModel.saveCityLocationAsDefault(cityName: city as! String)
+                    self.responseConfirmingLocationFound = true
+                    self.showingAlert = true
+                    
+                }
+                .onReceive(noCityResponse)
+                { _ in
+                    self.responseConfirmingLocationFound = false
+                    self.showingAlert = true
+                    self.name = ""
+                }
+                .alert(isPresented: $showingAlert) {
+                    return alertToReturn(cityFound: responseConfirmingLocationFound)
+                    
+                }
+
+            }.foregroundColor(Color(kMainTextColour))
+            
         }
     }
     
@@ -103,14 +125,28 @@ struct LocationDefaultsView: View {
     private func alertToReturn(cityFound response: Bool) -> Alert {
         // If a response that the city exists etc, then set as default or message user there is no city
         if response {
-            return Alert(title: Text(kCityDefault), message: Text(kCityDefaultMessage), dismissButton: .default(Text("Ok!")))
+            return Alert(title: Text(kCityDefaultAlert), message: Text(kCityDefaultMessageAlert), dismissButton: .default(Text("Ok!")))
         } else {
             return
-                Alert(title: Text(kUnknown), message: Text(kUnknownMessage), dismissButton: .default(Text("Ok!")))
+                Alert(title: Text(kUnknownAlert), message: Text(kUnknownMessageAlert), dismissButton: .default(Text("Ok!")))
         }
-        
-        
     }
+}
+
+// Th is sets the colour of the Navigation bar
+struct NavigationConfigurator: UIViewControllerRepresentable {
+    
+    var configure: (UINavigationController) -> Void = { _ in }
+
+    func makeUIViewController(context: UIViewControllerRepresentableContext<NavigationConfigurator>) -> UIViewController {
+        UIViewController()
+    }
+    func updateUIViewController(_ uiViewController: UIViewController, context: UIViewControllerRepresentableContext<NavigationConfigurator>) {
+        if let nc = uiViewController.navigationController {
+            self.configure(nc)
+        }
+    }
+
 }
 
 //struct SettingsView_Previews: PreviewProvider {

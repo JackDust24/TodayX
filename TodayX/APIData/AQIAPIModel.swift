@@ -9,13 +9,14 @@
 import Foundation
 import SwiftUI
 
-// AQI Index
+//MARK: AQI Index
 struct AQIIndexResponse: Decodable {
     let status: String?
     let data: DataAQI?
 
 }
 
+//MARK: Info about the City
 struct DataAQI: Decodable {
     let aqi: Int?
     var idx: Int?
@@ -23,6 +24,11 @@ struct DataAQI: Decodable {
     let iaqi: IAQI?
 }
 
+struct City: Decodable {
+    var name: String?
+}
+
+//MARK: Other AQI info if I choose to use it.
 struct IAQI: Decodable {
     let pm10: ValueInt?
     var so2: ValueInt?
@@ -39,6 +45,3 @@ struct Value: Decodable {
     let v: Double?
 }
 
-struct City: Decodable {
-    var name: String?
-}

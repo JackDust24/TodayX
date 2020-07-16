@@ -26,7 +26,7 @@ struct RemindersView: View {
     
     init() {
         self.reminderListVM = ReminderListVM()
-        UITableView.appearance().backgroundColor = UIColor(named: kCustomBackground)
+        UITableView.appearance().backgroundColor = UIColor(named: kVeryLightBlueColour)
     }
     
     //TODO:- Move to the View Model
@@ -75,7 +75,7 @@ struct RemindersView: View {
                     }
                     
                 }.onDelete(perform: delete)
-                    .listRowBackground(Color(kJeansBlue))
+                    .listRowBackground(Color(kJeansBlueColour))
                 
             }.onAppear(perform: {
                 self.reminderListVM.fetchAllReminders()

@@ -14,14 +14,15 @@ let kTomorrowCAP = "TOMORROW"
 let kOverdueCAP = "OVERDUE"
 
 // Colours and Fonts
-let kCustomBackground = "customAero"
+let kCustomBackgroundColour = "customAero"
 let kSubTextColour = "customMPurple"
 let kMainTextColour = "customMStateBlue"
-let kFranceBlue = "customBlueFrance"
-let kJeansBlue = "customBlueJeans"
+let kFranceBlueColour = "customBlueFrance"
+let kJeansBlueColour = "customBlueJeans"
+let kVeryLightBlueColour = "customBabyBlueEyes"
 
 // Alert messages
-let kUnknown = "Unknown City"
-let kUnknownMessage = "No City Found, Try Again"
-let kCityDefault = "Saved Default City"
-let kCityDefaultMessage = "This is now stored as your default location"
+let kUnknownAlert = "Unknown City"
+let kUnknownMessageAlert = "No City Found, Try Again"
+let kCityDefaultAlert = "Saved Default City"
+let kCityDefaultMessageAlert = "This is now stored as your default location"

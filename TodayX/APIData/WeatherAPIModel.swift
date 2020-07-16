@@ -10,9 +10,8 @@ import Foundation
 
 import SwiftUI
 
-// The details from the JSON file
+// This extracts the data from the Weather API
 // MARK: - TopLevel
-
 struct ForecastWeatherResponse: Decodable {
     let name: String?
     let main: Temperature?

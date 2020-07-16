@@ -56,7 +56,7 @@ struct TopView: View {
                     self.cityName = ""
                     
             }.alert(isPresented: $showingAlertForUnknownCity) {
-                Alert(title: Text(kUnknown), message: Text(kUnknownMessage), dismissButton: .default(Text("Ok!")))
+                Alert(title: Text(kUnknownAlert), message: Text(kUnknownMessageAlert), dismissButton: .default(Text("Ok!")))
             }
             Spacer()
             //MARK: Title of app
