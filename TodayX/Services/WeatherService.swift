@@ -49,27 +49,42 @@ class WeatherService {
         URLSession.shared.dataTask(with: url) { data, response, error in
             
             guard let data = data, error == nil else {
-                print("Error - \(String(describing: error))")
-                completion(nil)
+                print("Error - \(String(describing: error?.localizedDescription))")
+                
+                var errorMessage = "Unable to Connect"
+                if let errorReceived = error?.localizedDescription {
+                    print("error received - \(errorReceived)")
+                    errorMessage = errorReceived
+                }
+                NotificationCenter.default.post(name: .noInternetConnetion, object: errorMessage)
                 return
             }
-            // get the weather response
+            // get the weather responseS
             let weatherResponse = try? JSONDecoder().decode(ForecastWeatherResponse.self, from: data)
+            
+            
             
             // Optional Binding to see if it exists
             if let weatherResponse = weatherResponse {
                 // let weather = weatherResponse.list
-                
+                print("1")
+
                 //TODO: - We want to send through something else if nil.
                 if weatherResponse.name == nil {
+                    print("2")
+
                     // Need to set alert
                     completion(nil)
                     
                 } else {
+                    print("3")
+
                     completion(weatherResponse)
                     
                 }
             } else {
+                print("4")
+
                 completion(nil)
             }
         }.resume() // Resumes the taks if suspended.

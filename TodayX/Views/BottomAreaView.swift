@@ -45,6 +45,7 @@ struct BottomAreaView: View {
                     .offset(y: -180)
                     .shadow(color: Color(kFranceBlueColour), radius: 10, x: 9, y: 9)
                     .shadow(color: Color(kJeansBlueColour), radius: 10, x: -9, y: -9)
+                    .accessibility(identifier: "ImageButton")
                 
                 RoundedRectangle(cornerRadius: 10).stroke()
                     .foregroundColor(Color("customBlue"))
@@ -59,6 +60,7 @@ struct BottomAreaView: View {
                         .font(.custom("Raleway-Medium", size: 24))
                         .bold()
                         .padding()
+                        .accessibility(identifier: "display")
                     
                     Group {
                         // Reminders go through each view and we call the function as each view will be the same

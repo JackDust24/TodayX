@@ -28,7 +28,7 @@ struct TopView: View {
             ZStack(alignment: .leading) {
                 //MARK: Search for City Location
                 TextField("Enter City Name", text: $cityName) {
-                    self.forecastViewModel.cityName = self.cityName
+                    self.forecastViewModel.location = self.cityName
                     self.forecastViewModel.searchCity(userSearch: true)
                 }.padding(.all, 10)
                     .frame(width: UIWidth - 50, height: 30)

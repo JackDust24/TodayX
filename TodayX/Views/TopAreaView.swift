@@ -83,7 +83,8 @@ struct TopAreaView: View {
                 }
              
             }.padding()
-            
+         
+            Spacer()
         }
         
     }

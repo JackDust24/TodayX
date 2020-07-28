@@ -52,7 +52,8 @@ extension Date {
 extension Notification.Name {
     static let responseForCity = Notification.Name("Response")
     static let noResponseForCity = Notification.Name("NoResponse")
-    static let noResponseFromAQIIndex = Notification.Name("NoResponse")
+    static let noResponseFromAQIIndex = Notification.Name("NoResponseAQI")
+    static let noInternetConnetion = Notification.Name("NoInternet")
 
 }
 

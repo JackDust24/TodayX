@@ -58,7 +58,9 @@ struct RemindersView: View {
                                 .resizable()
                                 .frame(width: 60, height: 60)
                                 .cornerRadius(10)
-                            
+                                .clipShape(Circle())
+                                .saturation(0.5)
+                                .blur(radius: 1)
                             VStack {
                                 Text(reminder.reminder)
                                     .font(.headline)
@@ -75,7 +77,7 @@ struct RemindersView: View {
                     }
                     
                 }.onDelete(perform: delete)
-                    .listRowBackground(Color(kJeansBlueColour))
+                    .listRowBackground(Color(kVeryLightBlueColour))
                 
             }.onAppear(perform: {
                 self.reminderListVM.fetchAllReminders()

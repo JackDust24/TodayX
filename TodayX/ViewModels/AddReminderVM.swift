@@ -9,7 +9,7 @@
 import Foundation
 import SwiftUI
 
-class AddReminderVM {
+class AddReminderVM: ObservableObject {
     
     //MARK: Priorities
     var tag: String = "" // We want to convert the tag to a numnber. The tag is for the proorities.
@@ -17,7 +17,8 @@ class AddReminderVM {
     var type: Int = 0
     var date = Date()
     var id = UUID()
-    
+   // let characterLimit = kMaxCharsReminder
+      
     //MARK: Add Reminders
     func saveReminder() {
         // Do tag coversion first
@@ -42,7 +43,7 @@ class AddReminderVM {
             return "Normal"
         }
     }
-
+   
     //MARK: Private Functions
     private func tagConversionToInt(from tag: String) -> Int {
         if tag == "urg" {
@@ -52,5 +53,39 @@ class AddReminderVM {
         } else {
             return 2
         }
+    }
+}
+
+// For controlling a text limit for characters
+class TextFieldManager: ObservableObject {
+    
+    let characterLimit = kMaxCharsReminder
+       
+    @Published var characterCount = 0
+      
+      @Published var userInput = "" {
+          didSet {
+              print("Reminder Set")
+              characterCount = self.userInput.count
+              print(characterCount)
+              if userInput.count > kMaxCharsReminder {
+                  userInput = String(userInput.prefix(kMaxCharsReminder))
+              }
+          }
+      }
+    
+}
+
+extension TextFieldManager {
+    
+    func isReminderValid() -> Bool {
+        if self.userInput.count < kMinCharsReminder {
+            print("FALSE CHECK")
+            return false
+        }
+      
+        print("TRUE CHECK")
+        return true
+        
     }
 }

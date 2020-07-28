@@ -32,6 +32,27 @@ class TodayXUITests: XCTestCase {
         // Use XCTAssert and related functions to verify your tests produce the correct results.
     }
 
+    func testCardAnimatesWhenPressed() throws {
+        // UI tests must launch the application that they test.
+        let app = XCUIApplication()
+        app.launch()
+        
+        let resetButton = app.buttons["ImageButton"]
+        resetButton.tap()
+        
+        // 1
+        let display = app.staticTexts["display"]
+        // 2
+        let displayText = display.label
+        // 3
+        XCTAssert(displayText == "Reminders")
+
+        // Use recording to get started writing UI tests.
+        // Use XCTAssert and related functions to verify your tests produce theSD correct results.
+    }
+
+    
+    
     func testLaunchPerformance() throws {
         if #available(macOS 10.15, iOS 13.0, tvOS 13.0, *) {
             // This measures how long it takes to launch your application.

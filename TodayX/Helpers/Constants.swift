@@ -30,8 +30,18 @@ let kUnknownMessageAlert = "No City Found, Try Again"
 let kCityDefaultAlert = "Saved Default City"
 let kCityDefaultMessageAlert = "This is now stored as your default location"
 
+// Set m,in and max characters that we will allow,
+let kMinCharsReminder = 1
+let kMaxCharsReminder = 25
 //let kCustomBackgroundColourRGB: UIColor {
 //
 //
 //}
 
+enum ResponseError: Error {
+    case notConnectedToInternet
+    case weatherRequestFailed
+    case aqiRequestFailed
+    case weatherLocationFailed
+    case failedToDecodeRequest
+}

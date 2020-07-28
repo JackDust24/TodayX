@@ -11,7 +11,7 @@ import SwiftUI
 struct SettingsView: View {
     
     @ObservedObject var forecastViewModel: APIViewModel
-   
+    
     var body: some View {
         
         NavigationView {
@@ -29,14 +29,14 @@ struct SettingsView: View {
                     }.onAppear(perform: fetch)
                     
                 }
-        }.navigationBarTitle("Info", displayMode: .inline)
+            }.navigationBarTitle("Info", displayMode: .inline)
             //TODO: This causes the tab bar to become white again.
-//                .background(NavigationConfigurator { nc in
-//                    nc.navigationBar.barTintColor = UIColor.init(displayP3Red: 0.475, green: 0.745, blue: 0.9333, alpha: 1.0)
-//                    nc.navigationBar.titleTextAttributes = [.foregroundColor : UIColor.systemBlue]
-//                })
-            }
-//        .navigationViewStyle(StackNavigationViewStyle())
+            //                .background(NavigationConfigurator { nc in
+            //                    nc.navigationBar.barTintColor = UIColor.init(displayP3Red: 0.475, green: 0.745, blue: 0.9333, alpha: 1.0)
+            //                    nc.navigationBar.titleTextAttributes = [.foregroundColor : UIColor.systemBlue]
+            //                })
+        }
+        //        .navigationViewStyle(StackNavigationViewStyle())
     }
     
     private func fetch() {
@@ -57,21 +57,21 @@ struct LocationDefaultsView: View {
     let noCityResponse = NotificationCenter.Publisher(center: .default, name: .noResponseForCity, object: nil)
     
     var body: some View {
-
+        
         Group {
             
             ZStack {
-
+                
                 Color.init(.lightGray)
                 
                 VStack {
                     // MARK: Show Location
-                   
-                    HStack {
+                    
+                    HStack(alignment: .firstTextBaseline) {
                         Text("Current Location - ")
                             .font(.subheadline)
                         Text(self.forecastViewModel.returnDefaultCity()).foregroundColor(Color.black)
-                            .font(.subheadline)
+                            .font(.title)
                         
                     }.padding()
                         .onAppear(perform: fetch)
@@ -81,24 +81,35 @@ struct LocationDefaultsView: View {
                         .font(.title)
                     
                     TextField("Enter City Name", text: $name) {
-                        self.forecastViewModel.cityName = self.name
+                        self.forecastViewModel.location = self.name
                         self.forecastViewModel.searchCity(userSearch: true)
                         
-                    }.textFieldStyle(RoundedBorderTextFieldStyle())
-                        .frame(width: UIWidth - 40, height: 60, alignment: .center)
+                    }
+                        .padding(EdgeInsets(top: 8, leading: 16,
+                                            bottom: 8, trailing: 16))
+                        .background(Color.white).cornerRadius(8)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 8)
+                                .stroke(lineWidth: 2)
+                                .foregroundColor(.blue)
+                            
+                        )
+                        .shadow(color: Color.gray.opacity(0.4),
+                                radius: 3, x: 1, y: 2)
+                        
                     
                     Spacer()
-
-                   
-                    }.padding()
-                    .onReceive(cityResponse)
-                { obj in
-                    // Abstract the city name
-                    let city = obj.object
-                    self.forecastViewModel.saveCityLocationAsDefault(cityName: city as! String)
-                    self.responseConfirmingLocationFound = true
-                    self.showingAlert = true
                     
+                    
+                }.padding()
+                    .onReceive(cityResponse)
+                    { obj in
+                        // Abstract the city name
+                        let city = obj.object
+                        self.forecastViewModel.saveCityLocationAsDefault(cityName: city as! String)
+                        self.responseConfirmingLocationFound = true
+                        self.showingAlert = true
+                        
                 }
                 .onReceive(noCityResponse)
                 { _ in
@@ -110,7 +121,7 @@ struct LocationDefaultsView: View {
                     return alertToReturn(cityFound: responseConfirmingLocationFound)
                     
                 }
-
+                
             }.foregroundColor(Color("customBlue"))
             
         }
@@ -136,7 +147,7 @@ struct LocationDefaultsView: View {
 struct NavigationConfigurator: UIViewControllerRepresentable {
     
     var configure: (UINavigationController) -> Void = { _ in }
-
+    
     func makeUIViewController(context: UIViewControllerRepresentableContext<NavigationConfigurator>) -> UIViewController {
         UIViewController()
     }
@@ -145,7 +156,7 @@ struct NavigationConfigurator: UIViewControllerRepresentable {
             self.configure(nc)
         }
     }
-
+    
 }
 
 //struct SettingsView_Previews: PreviewProvider {
@@ -153,3 +164,9 @@ struct NavigationConfigurator: UIViewControllerRepresentable {
 //        SettingsView()
 //    }
 //}
+
+struct SettingsView_Previews: PreviewProvider {
+    static var previews: some View {
+        SettingsView(forecastViewModel: APIViewModel())
+    }
+}

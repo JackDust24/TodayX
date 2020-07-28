@@ -26,6 +26,7 @@ struct ContentView: View {
     
     
     var body: some View {
+               
         TabView(selection: $selection){
             
             RemindersView().tabItem {
@@ -48,6 +49,7 @@ struct ContentView: View {
                     Spacer()
                     // For showing the Reminder Bulletin
                     BottomAreaView()
+                    Spacer()
                 }
             }.tabItem {
                 VStack {

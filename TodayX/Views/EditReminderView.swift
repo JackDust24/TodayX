@@ -15,6 +15,8 @@ struct EditReminderView: View {
     var reminderObject: ReminderViewModel
     @State var addReminderVM = AddReminderVM()
     @State private var dateChosen = Date()
+    // For counting the length of the text field
+    @ObservedObject var textFieldManager = TextFieldManager()
     
     init(isEditedReminder: Binding<Bool>, reminderObject: ReminderViewModel) {
         self._isEditedReminder = isEditedReminder
@@ -81,8 +83,19 @@ struct EditReminderView: View {
             VStack {
                 HStack {
                     Text("Reminder Set - ")
-                    TextField(isEditedReminder ? "\(reminder)" : "Enter Reminder", text: self.$addReminderVM.reminder)
+                    TextField(isEditedReminder ? "\(reminder)" : "Enter Reminder", text: self.$textFieldManager.userInput)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
+                    
+                    Spacer()
+                                       
+                                       Text("\(textFieldManager.characterCount)/25")
+                                           .font(.caption)
+                                           // 3
+                                           .foregroundColor(
+                                               textFieldManager.characterCount > 0
+                                                   ? .green
+                                                   : .red)
+                                           .padding(.trailing)
                     
                 }.padding()
                 
@@ -118,8 +131,12 @@ struct EditReminderView: View {
                     
                     if self.isEditedReminder {
                         self.addReminderVM.id = self.uuid
-                        if self.addReminderVM.reminder.isEmpty {
+                        if self.textFieldManager.userInput.isEmpty {
+                            // If the text has not been changed then just make the reminder the same.
                             self.addReminderVM.reminder = self.reminder
+                        } else {
+                            // Otherwise make it the new one.
+                            self.addReminderVM.reminder = self.textFieldManager.userInput
                         }
                         self.addReminderVM.updateReminder()
                         
@@ -152,3 +169,9 @@ struct EditReminderView: View {
 //        EditReminderView(isEditedReminder: true, reminder: "reminder", typeString: "type", dateString: "date", id: UUID())
 //    }
 //}
+
+struct EditReminderView_Previews: PreviewProvider {
+    static var previews: some View {
+        EditReminderView(isEditedReminder: .constant(true), reminderObject: ReminderViewModel(reminder: Reminders()))
+    }
+}

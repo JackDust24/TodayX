@@ -17,8 +17,18 @@ class APIViewModel: ObservableObject {
     var weatherService: WeatherService!
     var aqiService: AQIService!
     
-    //This is called to do searches
-    var cityName: String = ""
+    //This is called to do searches for that location
+    private var cityName: String = ""
+    // Computed Property so that we canupdate the cityName
+    var location: String {
+        get {
+            cityName
+        }
+        
+        set(newLocation) {
+            cityName = newLocation
+        }
+    }
     
     var arrayOfIAQIs = [Any]() // Not needed for Phase 1
     
@@ -29,6 +39,8 @@ class APIViewModel: ObservableObject {
         self.weatherService = WeatherService()
         self.aqiService = AQIService()
     }
+    
+    
     
     //MARK: Weather Forecast Properties
     // We need this to get the city
@@ -63,29 +75,33 @@ class APIViewModel: ObservableObject {
     //MARK: API Reponses
     // Fetch Weather Forecast
     func fetchWeatherForecast(by city: String, userSearch userRequest: Bool) {
-        
+        print("fetchWeatherForecast")
+
         //TODO: - DO we need this on another queue?
         self.weatherService.getWeatherForecast(matching: city) {
             forecast in
-            
+            print("fetchWeatherForecast1")
+            DispatchQueue.main.async { [unowned self] in
                 
                 if let forecast = forecast {
+                    print("fetchWeatherForecast2")
+
                     self.weatherResponse = forecast
                     if userRequest {
-                        DispatchQueue.main.async {
-                            NotificationCenter.default.post(name: .responseForCity, object: city)
-                        }
-                        // If it first search store as default.
+                        NotificationCenter.default.post(name: .responseForCity, object: city)
+                        // If it is the first search, set as default.
                         self.checkIfToSaveLocation()
                     }
                     
                 } else if userRequest {
+                    print("fetchWeatherForecast3")
+
                     self.cityName = ""
-                    DispatchQueue.main.async {
-                        NotificationCenter.default.post(name: .noResponseForCity, object: city)
-                    }
+                    NotificationCenter.default.post(name: .noResponseForCity, object: city)
                 }
-            
+            }
+            print("fetchWeatherForecast4")
+
         }
     }
     
@@ -108,7 +124,7 @@ class APIViewModel: ObservableObject {
     // We take the paramater for userSeacrch boolean, as we want to make it clear the difference if this is a search by the user or just the page loading/reloading.
     func searchCity(userSearch userRequest: Bool ) {
         
-        if self.cityName == "" {
+        if self.location == "" {
             // Check if there is a default city
             checkForDefaultLocation() // If there is a default location, then we will updated the City name variable
         }
@@ -142,7 +158,8 @@ class APIViewModel: ObservableObject {
         let cityStored = retrieveLocationNameFromUserDefaults()
         
         if let storedCity = cityStored {
-            self.cityName = storedCity
+            print("Updating new location")
+            self.location = storedCity
             
         }
     }
@@ -161,7 +178,7 @@ class APIViewModel: ObservableObject {
     // For when we log on first time.
     private func checkIfToSaveLocation() {
         
-        if self.cityName != "" {
+        if self.location != "" {
             // Check to see if default
             let cityStored = retrieveLocationNameFromUserDefaults()
             
