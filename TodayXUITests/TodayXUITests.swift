@@ -32,7 +32,7 @@ class TodayXUITests: XCTestCase {
         // Use XCTAssert and related functions to verify your tests produce the correct results.
     }
 
-    func testCardAnimatesWhenPressed() throws {
+    func testButtonAnimatesWhenPressed() throws {
         // UI tests must launch the application that they test.
         let app = XCUIApplication()
         app.launch()

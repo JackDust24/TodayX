@@ -30,6 +30,8 @@ class WeatherService {
     // Search function
     func getWeatherForecast(matching query: String, completion: @escaping (ForecastWeatherResponse?) ->()){
         
+        print("getWeatherForecast \(query)")
+        
         // Make sure we can create the URL
         guard var urlComponents = URLComponents(string: "\(baseUrl)") else {
             preconditionFailure("Can't create url...")
@@ -67,24 +69,17 @@ class WeatherService {
             // Optional Binding to see if it exists
             if let weatherResponse = weatherResponse {
                 // let weather = weatherResponse.list
-                print("1")
 
                 //TODO: - We want to send through something else if nil.
                 if weatherResponse.name == nil {
-                    print("2")
-
                     // Need to set alert
                     completion(nil)
                     
                 } else {
-                    print("3")
-
                     completion(weatherResponse)
                     
                 }
             } else {
-                print("4")
-
                 completion(nil)
             }
         }.resume() // Resumes the taks if suspended.
