@@ -30,11 +30,11 @@ class ReminderListVM: ObservableObject {
     // For returning the images
     func getImagesForTheType(for type: Int) -> String {
         if type == 0 {
-            return "urg"
+            return "Urgent"
         } else if type == 1 {
-            return "imp"
+            return "Important"
         } else {
-            return "nrm"
+            return "Normal"
         }
     }
    

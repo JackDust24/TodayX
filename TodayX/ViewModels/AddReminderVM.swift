@@ -46,9 +46,9 @@ class AddReminderVM: ObservableObject {
    
     //MARK: Private Functions
     private func tagConversionToInt(from tag: String) -> Int {
-        if tag == "urg" {
+        if tag == "Urgent" {
             return 0
-        } else if tag == "imp" {
+        } else if tag == "Important" {
             return 1
         } else {
             return 2
@@ -79,7 +79,13 @@ class TextFieldManager: ObservableObject {
 extension TextFieldManager {
     
     func isReminderValid() -> Bool {
+        print(userInput)
+        print(userInput.count)
         if self.userInput.count < kMinCharsReminder {
+            print(userInput)
+            print(userInput.count)
+
+
             print("FALSE CHECK")
             return false
         }

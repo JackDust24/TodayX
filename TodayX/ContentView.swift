@@ -21,7 +21,13 @@ struct ContentView: View {
     init() {
         self.forecastViewModel = APIViewModel()
         self.reminderListVM = ReminderListVM()
-        UITabBar.appearance().backgroundColor = UIColor.lightGray
+        UITabBar.appearance().backgroundColor = UIColor.init(displayP3Red: 0.475, green: 0.745, blue: 0.9333, alpha: 1.0)
+        
+         // for navigation bar title color
+         UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor:UIColor.systemBlue]
+        // For navigation bar background color
+        UINavigationBar.appearance().backgroundColor = UIColor.init(displayP3Red: 0.475, green: 0.745, blue: 0.9333, alpha: 1.0)
+        
     }
     
     

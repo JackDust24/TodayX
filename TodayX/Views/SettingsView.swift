@@ -10,6 +10,8 @@ import SwiftUI
 
 struct SettingsView: View {
     
+
+    
     @ObservedObject var forecastViewModel: APIViewModel
     
     var body: some View {
@@ -31,15 +33,17 @@ struct SettingsView: View {
                 }
             }.navigationBarTitle("Info", displayMode: .inline)
             //TODO: This causes the tab bar to become white again.
-            //                .background(NavigationConfigurator { nc in
-            //                    nc.navigationBar.barTintColor = UIColor.init(displayP3Red: 0.475, green: 0.745, blue: 0.9333, alpha: 1.0)
-            //                    nc.navigationBar.titleTextAttributes = [.foregroundColor : UIColor.systemBlue]
-            //                })
+//                            .background(NavigationConfigurator { nc in
+//
+//                                nc.navigationBar.barTintColor = UIColor.init(displayP3Red: 0.475, green: 0.745, blue: 0.9333, alpha: 1.0)
+//                                nc.navigationBar.titleTextAttributes = [.foregroundColor : UIColor.systemBlue]
+//                            })
         }
-        //        .navigationViewStyle(StackNavigationViewStyle())
+     //           .navigationViewStyle(StackNavigationViewStyle())
     }
     
     private func fetch() {
+        print("fetch")
         self.forecastViewModel.searchCity(userSearch: false)
     }
     
@@ -62,18 +66,29 @@ struct LocationDefaultsView: View {
             
             ZStack {
                 
-                Color.init(.lightGray)
+                Color.init(UIColor(named: kVeryLightBlueColour)!)
+                    .opacity(0.5)
                 
                 VStack {
                     // MARK: Show Location
                     
-                    HStack(alignment: .firstTextBaseline) {
-                        Text("Current Location - ")
+//                    HStack(alignment: .firstTextBaseline) {
+//                        Text("Current Location - ")
+//                            .font(.subheadline)
+//                        Text(self.forecastViewModel.returnDefaultCity()).foregroundColor(Color.black)
+//                            .font(.title)
+//
+//                    }
+                    VStack {
+                        Text("Current Location:  ")
                             .font(.subheadline)
+                            .padding(.bottom, 5)
                         Text(self.forecastViewModel.returnDefaultCity()).foregroundColor(Color.black)
                             .font(.title)
                         
-                    }.padding()
+                    }
+                    
+                    .padding()
                         .onAppear(perform: fetch)
                     
                     // MARK: Set new location
@@ -98,7 +113,7 @@ struct LocationDefaultsView: View {
                                 radius: 3, x: 1, y: 2)
                         
                     
-                    Spacer()
+                  //  Spacer()
                     
                     
                 }.padding()
@@ -121,6 +136,7 @@ struct LocationDefaultsView: View {
                     return alertToReturn(cityFound: responseConfirmingLocationFound)
                     
                 }
+                .offset(y: -60)
                 
             }.foregroundColor(Color("customBlue"))
             
@@ -145,14 +161,17 @@ struct LocationDefaultsView: View {
 
 // Th is sets the colour of the Navigation bar
 struct NavigationConfigurator: UIViewControllerRepresentable {
-    
     var configure: (UINavigationController) -> Void = { _ in }
     
     func makeUIViewController(context: UIViewControllerRepresentableContext<NavigationConfigurator>) -> UIViewController {
         UIViewController()
     }
     func updateUIViewController(_ uiViewController: UIViewController, context: UIViewControllerRepresentableContext<NavigationConfigurator>) {
+        print("CONFIG")
+
         if let nc = uiViewController.navigationController {
+            print("CONFIG2")
+
             self.configure(nc)
         }
     }
@@ -165,8 +184,8 @@ struct NavigationConfigurator: UIViewControllerRepresentable {
 //    }
 //}
 
-struct SettingsView_Previews: PreviewProvider {
-    static var previews: some View {
-        SettingsView(forecastViewModel: APIViewModel())
-    }
-}
+//struct SettingsView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        SettingsView(forecastViewModel: APIViewModel())
+//    }
+//}

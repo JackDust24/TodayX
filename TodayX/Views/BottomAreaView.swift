@@ -42,7 +42,7 @@ struct BottomAreaView: View {
                         .shadow(color: Color(kJeansBlueColour), radius: 8, x: -9, y: -9)
                 }.padding()
                     .clipShape(Circle().inset(by: 6))
-                    .offset(y: -180)
+                    .offset(y: -UIHeight / 3.5)
                     .shadow(color: Color(kFranceBlueColour), radius: 10, x: 9, y: 9)
                     .shadow(color: Color(kJeansBlueColour), radius: 10, x: -9, y: -9)
                     .accessibility(identifier: "ImageButton")
@@ -78,6 +78,7 @@ struct BottomAreaView: View {
     // So we are not duplicating code will return this
     func returnViewForReminder() -> AnyView {
         
+        print("UIWIDTH - \(UIHeight)")
         // The view model has a counter loop that goes through all the reminders, so the code will be the same.
         return AnyView(Text("\(self.reminderListVM.summaryReminder.title ?? "")\(self.reminderListVM.summaryReminder.priority ?? "")\(self.reminderListVM.summaryReminder.reminder)")
             .frame(width: UIWidth - 40, height: 80)

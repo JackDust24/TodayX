@@ -1,15 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "imp.png",
+      "filename" : "Urgent.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "Urgent@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "Urgent@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

@@ -107,9 +107,9 @@ struct EditReminderView: View {
                 // Spacer()
                 
                 Picker(selection: self.$addReminderVM.tag, label: Text("")) {
-                    Text("Urgent").tag("urg")
-                    Text("Important").tag("imp")
-                    Text("Normal").tag("nrm")
+                    Text("Urgent").tag("Urgent")
+                    Text("Important").tag("Important")
+                    Text("Normal").tag("Normal")
                 }.pickerStyle(SegmentedPickerStyle())
                 
                 

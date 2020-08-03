@@ -59,8 +59,8 @@ struct RemindersView: View {
                                 .frame(width: 60, height: 60)
                                 .cornerRadius(10)
                                 .clipShape(Circle())
-                                .saturation(0.5)
-                                .blur(radius: 1)
+                                .saturation(1.5)
+                                .blur(radius: 0.3)
                             VStack {
                                 Text(reminder.reminder)
                                     .font(.headline)
@@ -77,7 +77,7 @@ struct RemindersView: View {
                     }
                     
                 }.onDelete(perform: delete)
-                    .listRowBackground(Color(kVeryLightBlueColour))
+                    .listRowBackground(Color(kVeryLightBlueColour).opacity(0.5))
                 
             }.onAppear(perform: {
                 self.reminderListVM.fetchAllReminders()
@@ -88,13 +88,12 @@ struct RemindersView: View {
                 }, content: {
                     AddReminderView(isPresented: self.$isPresented)
                 })
-                .navigationBarTitle("Reminders")
+                .navigationBarTitle("Reminders", displayMode: .inline)
                 .navigationBarItems(trailing:
                     Button(action: { self.isPresented = true }, label: {Image(systemName: "plus")})
             )
             
         }
-        
     }
     
 }

@@ -11,6 +11,9 @@ import XCTest
 
 class TodayXTests: XCTestCase {
     
+    var reminder = AddReminderVM()
+    var textFieldCheck = TextFieldManager()
+    
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
     }
@@ -60,4 +63,12 @@ class TodayXTests: XCTestCase {
         XCTAssertEqual(result, "Normal", "Wrong Result")
     }
     
+    func testTextFieldCharacterLength() {
+        
+        let string = "444"
+        
+        textFieldCheck.userInput = string
+        
+        XCTAssertFalse(textFieldCheck.isReminderValid())
+    }
 }
