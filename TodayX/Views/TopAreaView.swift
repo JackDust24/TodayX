@@ -17,6 +17,17 @@ struct TopAreaView: View {
 //    @State var showField: Bool = false
     @ObservedObject var forecastViewModel: APIViewModel
     
+    // This is for showing the latest reminders
+   @ObservedObject var reminderListVM: ReminderListVM
+    
+//    init() {
+//        //self._showReminder = showReminder
+//        self.forecastViewModel = APIViewModel()
+//          self.reminderListVM = ReminderListVM()
+//      }
+    // For showing the Reminder View
+    @Binding var showNewReminder: Bool
+    
     var body: some View {
           
         VStack {
@@ -81,6 +92,42 @@ struct TopAreaView: View {
                         }.padding()
                     }
                 }
+                
+                Button(action: {
+                    // User clicks button to show the reminder
+                    self.showNewReminder.toggle()
+                    print("Reminder Check Pre - \(self.reminderListVM.summaryReminder), count - \(self.reminderListVM.reminders.count)")
+
+                    self.reminderListVM.returnReminder()
+                    print("Reminder - \(self.showNewReminder)")
+                    print("Reminder Check Post - \(self.reminderListVM.summaryReminder)")
+
+                    
+//                    print("Reminder1 - \(self.reminderListVM.summaryReminder)")
+//
+//                    self.reminderListVM.returnReminder()
+//                    print("Reminder2 - \(self.reminderListVM.summaryReminder)")
+                    
+//                    BottomAreaView(reminderListVM: self.reminderListVM, showReminder: self.$showReminder)
+                }) {
+                    
+                    Image("Spiral").renderingMode(.original)
+                        .resizable()
+                        .frame(width: 100, height: 100)
+                        .clipShape(Circle())
+                        .padding()
+                        .shadow(color: Color(kFranceBlueColour), radius: 8, x: 9, y: 9)
+                        .shadow(color: Color(kJeansBlueColour), radius: 8, x: -9, y: -9)
+                }.padding()
+                    .clipShape(Circle().inset(by: 6))
+                    .offset(y: -UIHeight / 3.5 + 10)
+                    .shadow(color: Color(kFranceBlueColour), radius: 10, x: 9, y: 9)
+                    .shadow(color: Color(kJeansBlueColour), radius: 10, x: -9, y: -9)
+                    .accessibility(identifier: "ImageButton")
+                
+                RoundedRectangle(cornerRadius: 10).stroke()
+                    .foregroundColor(Color("customBlue"))
+                    .frame(width: UIWidth - 40, height: UIHeight / 3 - 66)
              
             }.padding()
          
@@ -91,15 +138,15 @@ struct TopAreaView: View {
 
 }
 
-struct TopAreaView_Previews: PreviewProvider {
-
-    static var previews: some View {
-        
-        ZStack {
-            // Just for testing purposes only
-            Color("customGreen")
-            .edgesIgnoringSafeArea(.all)
-            TopAreaView(forecastViewModel: APIViewModel())
-        }
-    }
-}
+//struct TopAreaView_Previews: PreviewProvider {
+//
+//    static var previews: some View {
+//
+//        ZStack {
+//            // Just for testing purposes only
+//            Color("customGreen")
+//            .edgesIgnoringSafeArea(.all)
+//            TopAreaView(forecastViewModel: APIViewModel(), showReminder: false)
+//        }
+//    }
+//}

@@ -35,6 +35,7 @@
 		9E4C1BBC24C07D8A0028D1FD /* TabBarItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E4C1BBB24C07D8A0028D1FD /* TabBarItems.swift */; };
 		9E671BDB24AF3F0300C1242A /* EditReminderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E671BDA24AF3F0300C1242A /* EditReminderView.swift */; };
 		9E726C8224A49875002B020A /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E726C8124A49875002B020A /* Extensions.swift */; };
+		9E8B3AC124D7F475000B0C1A /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E8B3AC024D7F475000B0C1A /* SnapshotHelper.swift */; };
 		9EA6DF5324991B0400C2F811 /* AddReminderVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA6DF5224991B0400C2F811 /* AddReminderVM.swift */; };
 		9EA6DF5524991B5600C2F811 /* ReminderListVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA6DF5424991B5600C2F811 /* ReminderListVM.swift */; };
 		9EC5B41D24B4680600CB4C12 /* DefaultSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EC5B41C24B4680600CB4C12 /* DefaultSettings.swift */; };
@@ -111,6 +112,7 @@
 		9E4C1BBB24C07D8A0028D1FD /* TabBarItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarItems.swift; sourceTree = "<group>"; };
 		9E671BDA24AF3F0300C1242A /* EditReminderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditReminderView.swift; sourceTree = "<group>"; };
 		9E726C8124A49875002B020A /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		9E8B3AC024D7F475000B0C1A /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SnapshotHelper.swift; path = fastlane/SnapshotHelper.swift; sourceTree = SOURCE_ROOT; };
 		9EA6DF5224991B0400C2F811 /* AddReminderVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddReminderVM.swift; sourceTree = "<group>"; };
 		9EA6DF5424991B5600C2F811 /* ReminderListVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderListVM.swift; sourceTree = "<group>"; };
 		9EC5B41C24B4680600CB4C12 /* DefaultSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultSettings.swift; sourceTree = "<group>"; };
@@ -223,6 +225,7 @@
 		9E1CEE642498C23A00F5EDC9 /* TodayXUITests */ = {
 			isa = PBXGroup;
 			children = (
+				9E8B3AC024D7F475000B0C1A /* SnapshotHelper.swift */,
 				9E1CEE652498C23A00F5EDC9 /* TodayXUITests.swift */,
 				9E1CEE672498C23A00F5EDC9 /* Info.plist */,
 			);
@@ -518,6 +521,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9E1CEE662498C23A00F5EDC9 /* TodayXUITests.swift in Sources */,
+				9E8B3AC124D7F475000B0C1A /* SnapshotHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -666,6 +670,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Apple Development: Jason Whittaker (9Y7C6796F6)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"TodayX/Preview Content\"";
 				DEVELOPMENT_TEAM = 987569WUE7;
@@ -687,6 +692,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Apple Development: Jason Whittaker (9Y7C6796F6)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"TodayX/Preview Content\"";
 				DEVELOPMENT_TEAM = 987569WUE7;

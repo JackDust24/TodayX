@@ -14,6 +14,7 @@ struct ContentView: View {
     @State private var selection = 1
     // For Getting the Information about the weather
     @State var showSearchField: Bool = false
+    @State var showNewReminder: Bool = false
     // View models for Forecast and Reminders
     @ObservedObject var forecastViewModel: APIViewModel
     @ObservedObject var reminderListVM: ReminderListVM
@@ -21,13 +22,13 @@ struct ContentView: View {
     init() {
         self.forecastViewModel = APIViewModel()
         self.reminderListVM = ReminderListVM()
+        
         UITabBar.appearance().backgroundColor = UIColor.init(displayP3Red: 0.475, green: 0.745, blue: 0.9333, alpha: 1.0)
         
          // for navigation bar title color
          UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor:UIColor.systemBlue]
         // For navigation bar background color
         UINavigationBar.appearance().backgroundColor = UIColor.init(displayP3Red: 0.475, green: 0.745, blue: 0.9333, alpha: 1.0)
-        
     }
     
     
@@ -51,10 +52,10 @@ struct ContentView: View {
                     // This shows the top area for doing a seach
                     TopView(forecastViewModel: self.forecastViewModel).layoutPriority(100)
                     // The view showing the forecast and API
-                    TopAreaView(forecastViewModel: self.forecastViewModel)
+                    TopAreaView(forecastViewModel: self.forecastViewModel, reminderListVM: self.reminderListVM, showNewReminder: $showNewReminder)
                     Spacer()
                     // For showing the Reminder Bulletin
-                    BottomAreaView()
+                    BottomAreaView(reminderListVM: self.reminderListVM, showNewReminder: $showNewReminder)
                     Spacer()
                 }
             }.tabItem {

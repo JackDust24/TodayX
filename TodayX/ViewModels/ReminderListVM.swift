@@ -46,16 +46,22 @@ class ReminderListVM: ObservableObject {
     func fetchAllReminders() {
         
         reminders = [] // Clear array
+
         self.reminders = CoreDataManager.sharedContext.getAllReminders().map(ReminderViewModel.init)
-        
+        print("fetchAllReminders3 - \(self.reminders.count)")
+
         //TODO:= Debugging can remove.
         reminders.withUnsafeBufferPointer { (point) in
-            print("fetchAllReminders - \(point)")
+            print("fetchAllReminders4 - \(point)")
         }
     }
     
     //MARK: For the Home Page
     func returnReminder()  {
+        
+         fetchAllReminders()
+        
+        print("Return Reminders - \(reminders.count)")
         if self.reminders.count == 0 {
             let message = "Access the reminders tab to set."
             summaryReminder = SummaryReminder(reminder: message, priority: nil, title: "No Reminders Set\n", colour: nil)
@@ -95,6 +101,7 @@ class ReminderListVM: ObservableObject {
     
     private func returnReminder(index: Int) -> SummaryReminder {
         
+        print(">> Index - \(index) counter - \(counter) remindersCount - \(self.reminders.count)")
         //1. Get the s[ecific remindern and string we will return
         let reminder = self.reminders[index]
         

@@ -71,6 +71,8 @@ struct RemindersView: View {
                                 Text("\(reminder.date, formatter: self.dateFormatter)")
                                     .font(.subheadline)
                                     .padding([.leading], 10)
+                                    .frame(width: 260, height: 30, alignment: .center)
+
                             }
                             
                         }
