@@ -10,8 +10,7 @@ import SwiftUI
 
 struct SettingsView: View {
     
-
-    
+   
     @ObservedObject var forecastViewModel: APIViewModel
     
     var body: some View {
@@ -32,6 +31,7 @@ struct SettingsView: View {
                     
                 }
             }.navigationBarTitle("Info", displayMode: .inline)
+                
             //TODO: This causes the tab bar to become white again.
 //                            .background(NavigationConfigurator { nc in
 //
@@ -79,19 +79,12 @@ struct LocationDefaultsView: View {
 //                            .font(.title)
 //
 //                    }
-                    VStack {
-                        Text("Current Location:  ")
-                            .font(.subheadline)
-                            .padding(.bottom, 5)
-                        Text(self.forecastViewModel.returnDefaultCity()).foregroundColor(Color.black)
-                            .font(.title)
-                        
-                    }
-                    
-                    .padding()
-                        .onAppear(perform: fetch)
+
                     
                     // MARK: Set new location
+                    
+                    Spacer()
+                    
                     Text("Enter New Location Below")
                         .font(.title)
                     
@@ -112,7 +105,18 @@ struct LocationDefaultsView: View {
                         .shadow(color: Color.gray.opacity(0.4),
                                 radius: 3, x: 1, y: 2)
                         
+                    VStack {
+                        Text("Current Location:  ")
+                            .font(.subheadline)
+                            .padding(.bottom, 5)
+                        Text(self.forecastViewModel.returnDefaultCity()).foregroundColor(Color.black)
+                            .font(.subheadline)
+                        
+                    }
+                    .padding()
+                        .onAppear(perform: fetch)
                     
+                    Spacer()
                   //  Spacer()
                     
                     
@@ -178,14 +182,17 @@ struct NavigationConfigurator: UIViewControllerRepresentable {
     
 }
 
-//struct SettingsView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        SettingsView()
-//    }
-//}
 
-//struct SettingsView_Previews: PreviewProvider {
+
+struct SettingsView_Previews: PreviewProvider {
+    static var previews: some View {
+        SettingsView(forecastViewModel: APIViewModel())
+    }
+}
+
+
+//struct LocationDefaultsView_Previews: PreviewProvider {
 //    static var previews: some View {
-//        SettingsView(forecastViewModel: APIViewModel())
+//        LocationDefaultsView(forecastViewModel: APIViewModel())
 //    }
 //}

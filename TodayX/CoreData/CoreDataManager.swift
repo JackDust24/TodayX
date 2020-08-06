@@ -60,7 +60,7 @@ class CoreDataManager {
     
     // Get all the reminders
     func getAllReminders() -> [Reminders] {
-        
+        print("Get all reminders")
         var reminders = [Reminders]()
         let reminderRequest: NSFetchRequest<Reminders> = Reminders.fetchRequest()
         let sortByDate = NSSortDescriptor(key: #keyPath(Reminders.date), ascending: true)
@@ -74,6 +74,8 @@ class CoreDataManager {
             //TODO: Error Handling
             print(error)
         }
+        
+        //print(reminders)
         return reminders
         
     }

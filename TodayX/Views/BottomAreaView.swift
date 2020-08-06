@@ -14,55 +14,20 @@ struct BottomAreaView: View {
     // This is for showing the latest reminders
     @ObservedObject var reminderListVM: ReminderListVM
     
-    @Binding var showNewReminder: Bool
+   //  @Binding var showNewReminder: Bool
+
+//    private var screenLoadUp: Bool = false
     
-//    init() {
-//        self.reminderListVM = ReminderListVM()
-//
-//    }
-    
-//    init() {
-//          self.reminderListVM = ReminderListVM()
-//      }
-    // For showing the Reminder View
-   // let showReminder: Bool
-    
-//    init(showReminder: Binding<Bool>, reminderListVM: ReminderListVM) {
-//        self.reminderListVM = ReminderListVM()
-//        self._showReminder = showReminder
-//    }
-    
-//    @State private var showReminderPart: Bool
-//
-//    @Binding var showReminder: Bool {
-//
-//        didSet {
-//            if showReminder {
-//                self.reminderListVM.returnReminder()
-//                print("Reminder3 - \(self.reminderListVM.summaryReminder)")
-//                // Call your reset logic here
-//            }
-//            self.reminderListVM.returnReminder()
-//            print("Reminder4 - \(self.reminderListVM.summaryReminder)")
-//        }
-//    }
-//
-//    init() {
-//        self.reminderListVM = ReminderListVM()
-////        self._showReminder = showReminder
-//
-//    }
-    
-    
+   
     var body: some View {
-        
-//        #if DEBUG
-//                print(">> CHECKS")
-//        #endif
         
         VStack {
             //MARK: Showing the button
             ZStack {
+                
+                RoundedRectangle(cornerRadius: 10).stroke()
+                                   .foregroundColor(Color("customBlue"))
+                                   .frame(width: UIWidth - 40, height: UIHeight / 3 - 66)
                 
 //                Button(action: {
 //                    // User clicks button to show the reminder
@@ -100,49 +65,45 @@ struct BottomAreaView: View {
                         .padding()
                         .accessibility(identifier: "display")
                     
-                    
-//                    Text(showNewReminder ? "Hide" : "Show")
-//
-//                    Text("\(self.reminderListVM.reminders.count)")
-//
-                    
                     Group {
                         // Reminders go through each view and we call the function as each view will be the same
-//                        self.showReminder ?
-//                            returnViewForReminder() : returnViewForReminder()
-//                       // returnViewForReminder()
-//
-//                        self.returnViewForReminder()
-//
-//
-//
-//
-                        Text("\(self.reminderListVM.summaryReminder.title ?? "")\(self.reminderListVM.summaryReminder.priority ?? "")\(self.reminderListVM.summaryReminder.reminder)").padding()
-                        .frame(width: UIWidth - 40, height: 100)
-                        .foregroundColor(self.reminderListVM.summaryReminder.colour)
-                        .font(.custom("Raleway-Medium", size: 22))
-                        .lineLimit(nil)
-                        .multilineTextAlignment(.center)
 
+                        returnViewForReminder()
+//                        Text("\(self.reminderListVM.summaryReminder.title ?? "")\(self.reminderListVM.summaryReminder.priority ?? "")\(self.reminderListVM.summaryReminder.reminder)").padding()
+//                        .frame(width: UIWidth - 40, height: 100)
+//                        .foregroundColor(self.reminderListVM.summaryReminder.colour)
+//                        .font(.custom("Raleway-Medium", size: 22))
+//                        .lineLimit(nil)
+//                        .multilineTextAlignment(.center)
+//                        .scaledToFill()
 
-                    }.onAppear(perform: toggleCalled)
+                    }
                     
                 }.offset(y: -10)
                     .padding()
             }
             
-        }
+        }.onAppear(perform: {
+            print("JJJJJ")
+            //self.screenLoaded()
+        })
+            .onDisappear(perform: {
+                print("LLLL")
+                self.reminderListVM.resetOnExit()
+//                self.reminderListVM.summaryReminder.title = nil
+//                self.reminderListVM.summaryReminder.priority = nil
+//                self.reminderListVM.summaryReminder.reminder = "Press Button To See Reminders"
+//                self.reminderListVM.summaryReminder.colour = .white
+            })
         
     }
-
+    
     // So we are not duplicating code will return this
     func returnViewForReminder() -> AnyView {
-       
-        print("UIWIDTH - \(UIHeight)")
-        print(showNewReminder)
-       
+
+
         print("Reminder3 - \(self.reminderListVM.summaryReminder)")
-        
+
         // The view model has a counter loop that goes through all the reminders, so the code will be the same.
         return AnyView(Text("\(self.reminderListVM.summaryReminder.title ?? "")\(self.reminderListVM.summaryReminder.priority ?? "")\(self.reminderListVM.summaryReminder.reminder)").padding()
             .frame(width: UIWidth - 40, height: 100)
@@ -150,13 +111,13 @@ struct BottomAreaView: View {
             .font(.custom("Raleway-Medium", size: 22))
             .lineLimit(nil)
             .multilineTextAlignment(.center))
-            
-        
+
+
     }
-    
-    func toggleCalled() {
-        print("Toggle")
-    }
+//
+//    func toggleCalled() {
+//        print("Toggle")
+//    }
 }
 //
 //struct BottomAreaView_Previews: PreviewProvider {

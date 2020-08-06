@@ -12,7 +12,7 @@ import SwiftUI
 let UIWidth = UIScreen.main.bounds.width
 let UIHeight = UIScreen.main.bounds.height
 
-struct TopAreaView: View {
+struct APIResultsView: View {
     //MARK: Properties for showing the City and the the Forecast
 //    @State var showField: Bool = false
     @ObservedObject var forecastViewModel: APIViewModel
@@ -102,13 +102,7 @@ struct TopAreaView: View {
                     print("Reminder - \(self.showNewReminder)")
                     print("Reminder Check Post - \(self.reminderListVM.summaryReminder)")
 
-                    
-//                    print("Reminder1 - \(self.reminderListVM.summaryReminder)")
-//
-//                    self.reminderListVM.returnReminder()
-//                    print("Reminder2 - \(self.reminderListVM.summaryReminder)")
-                    
-//                    BottomAreaView(reminderListVM: self.reminderListVM, showReminder: self.$showReminder)
+
                 }) {
                     
                     Image("Spiral").renderingMode(.original)
@@ -120,14 +114,12 @@ struct TopAreaView: View {
                         .shadow(color: Color(kJeansBlueColour), radius: 8, x: -9, y: -9)
                 }.padding()
                     .clipShape(Circle().inset(by: 6))
-                    .offset(y: -UIHeight / 3.5 + 10)
+                    //.offset(y: -UIHeight / 2)
                     .shadow(color: Color(kFranceBlueColour), radius: 10, x: 9, y: 9)
                     .shadow(color: Color(kJeansBlueColour), radius: 10, x: -9, y: -9)
                     .accessibility(identifier: "ImageButton")
                 
-                RoundedRectangle(cornerRadius: 10).stroke()
-                    .foregroundColor(Color("customBlue"))
-                    .frame(width: UIWidth - 40, height: UIHeight / 3 - 66)
+               
              
             }.padding()
          

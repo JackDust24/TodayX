@@ -29,7 +29,7 @@
 		9E1CEE912498F53700F5EDC9 /* RemindersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1CEE902498F53700F5EDC9 /* RemindersView.swift */; };
 		9E1CEE932498F55100F5EDC9 /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1CEE922498F55100F5EDC9 /* BackgroundView.swift */; };
 		9E1CEE952498F59300F5EDC9 /* TopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1CEE942498F59300F5EDC9 /* TopView.swift */; };
-		9E1CEE972498F5C100F5EDC9 /* TopAreaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1CEE962498F5C100F5EDC9 /* TopAreaView.swift */; };
+		9E1CEE972498F5C100F5EDC9 /* APIResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1CEE962498F5C100F5EDC9 /* APIResultsView.swift */; };
 		9E1CEE992498F5D900F5EDC9 /* BottomAreaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1CEE982498F5D900F5EDC9 /* BottomAreaView.swift */; };
 		9E1CEE9D2498F71600F5EDC9 /* AddReminderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E1CEE9C2498F71600F5EDC9 /* AddReminderView.swift */; };
 		9E4C1BBC24C07D8A0028D1FD /* TabBarItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E4C1BBB24C07D8A0028D1FD /* TabBarItems.swift */; };
@@ -106,7 +106,7 @@
 		9E1CEE902498F53700F5EDC9 /* RemindersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemindersView.swift; sourceTree = "<group>"; };
 		9E1CEE922498F55100F5EDC9 /* BackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundView.swift; sourceTree = "<group>"; };
 		9E1CEE942498F59300F5EDC9 /* TopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopView.swift; sourceTree = "<group>"; };
-		9E1CEE962498F5C100F5EDC9 /* TopAreaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopAreaView.swift; sourceTree = "<group>"; };
+		9E1CEE962498F5C100F5EDC9 /* APIResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIResultsView.swift; sourceTree = "<group>"; };
 		9E1CEE982498F5D900F5EDC9 /* BottomAreaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomAreaView.swift; sourceTree = "<group>"; };
 		9E1CEE9C2498F71600F5EDC9 /* AddReminderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddReminderView.swift; sourceTree = "<group>"; };
 		9E4C1BBB24C07D8A0028D1FD /* TabBarItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarItems.swift; sourceTree = "<group>"; };
@@ -247,7 +247,7 @@
 			children = (
 				9E1CEE922498F55100F5EDC9 /* BackgroundView.swift */,
 				9E1CEE942498F59300F5EDC9 /* TopView.swift */,
-				9E1CEE962498F5C100F5EDC9 /* TopAreaView.swift */,
+				9E1CEE962498F5C100F5EDC9 /* APIResultsView.swift */,
 				9E1CEE982498F5D900F5EDC9 /* BottomAreaView.swift */,
 				9E1CEE902498F53700F5EDC9 /* RemindersView.swift */,
 				9E1CEE9C2498F71600F5EDC9 /* AddReminderView.swift */,
@@ -397,13 +397,16 @@
 				TargetAttributes = {
 					9E1CEE3C2498C23300F5EDC9 = {
 						CreatedOnToolsVersion = 11.5;
+						ProvisioningStyle = Automatic;
 					};
 					9E1CEE552498C23A00F5EDC9 = {
 						CreatedOnToolsVersion = 11.5;
+						ProvisioningStyle = Automatic;
 						TestTargetID = 9E1CEE3C2498C23300F5EDC9;
 					};
 					9E1CEE602498C23A00F5EDC9 = {
 						CreatedOnToolsVersion = 11.5;
+						ProvisioningStyle = Automatic;
 						TestTargetID = 9E1CEE3C2498C23300F5EDC9;
 					};
 				};
@@ -487,7 +490,7 @@
 				9EEE4EBC24AB5C330058027A /* Constants.swift in Sources */,
 				9E1CEE7E2498C92400F5EDC9 /* NSManagedObjectContext+Extensions.swift in Sources */,
 				9EC5B41D24B4680600CB4C12 /* DefaultSettings.swift in Sources */,
-				9E1CEE972498F5C100F5EDC9 /* TopAreaView.swift in Sources */,
+				9E1CEE972498F5C100F5EDC9 /* APIResultsView.swift in Sources */,
 				9E1CEE462498C23300F5EDC9 /* TodayX.xcdatamodeld in Sources */,
 				9E1CEE992498F5D900F5EDC9 /* BottomAreaView.swift in Sources */,
 				9E1CEE932498F55100F5EDC9 /* BackgroundView.swift in Sources */,
@@ -670,8 +673,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "Apple Development: Jason Whittaker (9Y7C6796F6)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"TodayX/Preview Content\"";
 				DEVELOPMENT_TEAM = 987569WUE7;
 				ENABLE_BITCODE = YES;
@@ -685,6 +689,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
 		};
@@ -692,8 +697,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "Apple Development: Jason Whittaker (9Y7C6796F6)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"TodayX/Preview Content\"";
 				DEVELOPMENT_TEAM = 987569WUE7;
 				ENABLE_BITCODE = YES;
@@ -707,6 +713,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
 		};

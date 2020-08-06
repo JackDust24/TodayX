@@ -17,13 +17,15 @@ class ReminderListVM: ObservableObject {
     @Published
     var reminders = [ReminderViewModel]()
     
-    @Published var summaryReminder =  SummaryReminder(reminder: "Press Button To See Reminders")
+    @Published var summaryReminder = SummaryReminder(reminder: "Press Button To See Reminders")
     
     //TODO:= DO a computed property.
     private var counter: Int = 0
     
     init() {
         fetchAllReminders()
+      //  defaultReminder()
+//        summaryReminder =  SummaryReminder(reminder: "Press Button To See Reminders")
     }
     
     //MARK: Properties that the ReminderView can call
@@ -56,15 +58,19 @@ class ReminderListVM: ObservableObject {
         }
     }
     
+    func defaultReminder() {
+        summaryReminder = SummaryReminder(reminder: "Press Button To See Reminders")
+    }
+    
     //MARK: For the Home Page
     func returnReminder()  {
         
-         fetchAllReminders()
+        fetchAllReminders()
         
         print("Return Reminders - \(reminders.count)")
         if self.reminders.count == 0 {
-            let message = "Access the reminders tab to set."
-            summaryReminder = SummaryReminder(reminder: message, priority: nil, title: "No Reminders Set\n", colour: nil)
+            let message = "Access the reminders tab to set some reminders."
+            summaryReminder = SummaryReminder(reminder: message, priority: nil, title: nil, colour: nil)
             return
         }
         
@@ -80,6 +86,13 @@ class ReminderListVM: ObservableObject {
         summaryReminder = getReminder
     }
     
+    // Reset on exit after leaving the screen
+    func resetOnExit() {
+        counter = 0
+        reminders = []
+        summaryReminder = SummaryReminder(reminder: "Press Button To See Reminders")
+    }
+    
     // The counter loops to return all the reminders.
     private func counterReturn() -> Int {
         
@@ -93,6 +106,8 @@ class ReminderListVM: ObservableObject {
         }
         return 0
     }
+    
+
     
     
     private func resetCounter() {

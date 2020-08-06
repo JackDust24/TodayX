@@ -13,7 +13,7 @@ struct EditReminderView: View {
     //MARK: Properties
     @Binding var isEditedReminder: Bool
     var reminderObject: ReminderViewModel
-    @State var addReminderVM = AddReminderVM()
+    @State var editCurrentReminder = AddReminderVM()
     @State private var dateChosen = Date()
     // For counting the length of the text field
     @ObservedObject var textFieldManager = TextFieldManager()
@@ -63,7 +63,7 @@ struct EditReminderView: View {
     private func convertTypeToString(type: Int?) -> String? {
         
         guard type != nil else { return nil }
-        let typeAsString = addReminderVM.convertIntsToTag(from: type!)
+        let typeAsString = editCurrentReminder.convertIntsToTag(from: type!)
         return typeAsString
     }
     
@@ -82,20 +82,20 @@ struct EditReminderView: View {
         Group {
             VStack {
                 HStack {
-                    Text("Reminder Set - ")
+                    Text("Reminder Set - ").scaledToFill()
                     TextField(isEditedReminder ? "\(reminder)" : "Enter Reminder", text: self.$textFieldManager.userInput)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                     
                     Spacer()
-                                       
-                                       Text("\(textFieldManager.characterCount)/25")
-                                           .font(.caption)
-                                           // 3
-                                           .foregroundColor(
-                                               textFieldManager.characterCount > 0
-                                                   ? .green
-                                                   : .red)
-                                           .padding(.trailing)
+                    
+                    Text("\(textFieldManager.characterCount)/25")
+                        .font(.caption)
+                        // 3
+                        .foregroundColor(
+                            textFieldManager.characterCount > 0
+                                ? .green
+                                : .red)
+                        .padding(.trailing)
                     
                 }.padding()
                 
@@ -106,7 +106,7 @@ struct EditReminderView: View {
                 }
                 // Spacer()
                 
-                Picker(selection: self.$addReminderVM.tag, label: Text("")) {
+                Picker(selection: self.$editCurrentReminder.tag, label: Text("")) {
                     Text("Urgent").tag("Urgent")
                     Text("Important").tag("Important")
                     Text("Normal").tag("Normal")
@@ -119,29 +119,40 @@ struct EditReminderView: View {
                 
                 DatePicker(selection: $dateChosen, in: Date()..., displayedComponents: .date) {
                     Text("")
-                }.frame(width: UIWidth - 60, height: UIHeight / 4, alignment: .center)
-                    .padding(.bottom, 20)
+                }.onAppear() {
+                    self.dateChosen = self.reminderObject.date
+                }
+                .frame(width: UIWidth - 60, height: UIHeight / 4, alignment: .center)
+                .padding(.bottom, 20)
                 
                 Button(isEditedReminder ? "Save Changes" : "Add Reminder", action:  {
                     // place reminder
                     let date = self.dateChosen
                     let convertDate = Helper().convertDateFromPickerWithoutTime(for: date)
                     
-                    self.addReminderVM.date = convertDate
+                    self.editCurrentReminder.date = convertDate
                     
+                    // 1. Check if this is anm EditemendReminder (it will but just acts as extra check.
                     if self.isEditedReminder {
-                        self.addReminderVM.id = self.uuid
+                        // 2. Make the Edited Reminder equal the ID
+                        self.editCurrentReminder.id = self.uuid
+                        // 3. If nothing hsd changed then it equals the current Input
                         if self.textFieldManager.userInput.isEmpty {
-                            // If the text has not been changed then just make the reminder the same.
-                            self.addReminderVM.reminder = self.reminder
+                            
+                            self.editCurrentReminder.reminder = self.reminder
                         } else {
                             // Otherwise make it the new one.
-                            self.addReminderVM.reminder = self.textFieldManager.userInput
+                            self.editCurrentReminder.reminder = self.textFieldManager.userInput
                         }
-                        self.addReminderVM.updateReminder()
+                        
+                        if self.editCurrentReminder.tag == "" {
+                            self.editCurrentReminder.tag = self.typeString
+                        }
+                        
+                        self.editCurrentReminder.updateReminder()
                         
                     } else {
-                        self.addReminderVM.saveReminder()
+                        self.editCurrentReminder.saveReminder()
                         
                     }
                     
@@ -158,17 +169,6 @@ struct EditReminderView: View {
         
     }
 }
-
-
-
-//struct EditReminderView_Previews: PreviewProvider {
-//    
-//    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-//    
-//    static var previews: some View {
-//        EditReminderView(isEditedReminder: true, reminder: "reminder", typeString: "type", dateString: "date", id: UUID())
-//    }
-//}
 
 struct EditReminderView_Previews: PreviewProvider {
     static var previews: some View {

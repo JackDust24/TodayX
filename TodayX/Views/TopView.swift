@@ -60,7 +60,7 @@ struct TopView: View {
             }
             Spacer()
             //MARK: Title of app
-            Text(kTodayCAP)
+            Text(kAppName)
                 .foregroundColor(Color(kMainTextColour))
                 .font(.custom("Papyrus", size: 48))
                 .fontWeight(.heavy)

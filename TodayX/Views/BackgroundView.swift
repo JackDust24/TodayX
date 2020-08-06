@@ -13,6 +13,7 @@ struct BackgroundView: View {
         
         Color(kCustomBackgroundColour)
         .edgesIgnoringSafeArea(.all)
+        
     }
 }
 

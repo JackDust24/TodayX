@@ -35,7 +35,7 @@ class AddReminderVM: ObservableObject {
     }
     
     func convertIntsToTag(from int: Int) -> String {
-        if int == 2 {
+        if int == 0 {
             return "Urgent"
         } else if int == 1 {
             return "Important"
@@ -46,6 +46,7 @@ class AddReminderVM: ObservableObject {
    
     //MARK: Private Functions
     private func tagConversionToInt(from tag: String) -> Int {
+        print("TAG CHECK = \(tag)")
         if tag == "Urgent" {
             return 0
         } else if tag == "Important" {

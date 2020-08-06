@@ -19,20 +19,30 @@ struct ContentView: View {
     @ObservedObject var forecastViewModel: APIViewModel
     @ObservedObject var reminderListVM: ReminderListVM
     
+    @Environment(\.colorScheme) var colorScheme: ColorScheme
+    
     init() {
         self.forecastViewModel = APIViewModel()
         self.reminderListVM = ReminderListVM()
         
-        UITabBar.appearance().backgroundColor = UIColor.init(displayP3Red: 0.475, green: 0.745, blue: 0.9333, alpha: 1.0)
+      //  UITabBar.appearance().backgroundColor = UIColor.init(displayP3Red: 0.475, green: 0.745, blue: 0.9333, alpha: 1.0)
+        UITabBar.appearance().backgroundColor = UIColor(named: "customSeaBlue")
+
+//        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor:UIColor.green]
         
-         // for navigation bar title color
-         UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor:UIColor.systemBlue]
-        // For navigation bar background color
-        UINavigationBar.appearance().backgroundColor = UIColor.init(displayP3Red: 0.475, green: 0.745, blue: 0.9333, alpha: 1.0)
+        UINavigationBar.appearance().titleTextAttributes = colorScheme == .light ? [NSAttributedString.Key.foregroundColor:UIColor.systemGreen] : [NSAttributedString.Key.foregroundColor:UIColor.systemBlue]
+        
+//        UINavigationBar.appearance().text
+       //  For navigation bar background color
+        UINavigationBar.appearance().backgroundColor = UIColor(named: "customSeaBlue")
+        UINavigationBar.appearance().tintColor = UIColor.systemBlue
+       
     }
     
     
     var body: some View {
+        
+        
                
         TabView(selection: $selection){
             
@@ -46,16 +56,18 @@ struct ContentView: View {
 
             ZStack(alignment: .top) {
                 
+                
+                
                 BackgroundView()
                 
                 VStack {
                     // This shows the top area for doing a seach
                     TopView(forecastViewModel: self.forecastViewModel).layoutPriority(100)
                     // The view showing the forecast and API
-                    TopAreaView(forecastViewModel: self.forecastViewModel, reminderListVM: self.reminderListVM, showNewReminder: $showNewReminder)
+                    APIResultsView(forecastViewModel: self.forecastViewModel, reminderListVM: self.reminderListVM, showNewReminder: $showNewReminder)
                     Spacer()
                     // For showing the Reminder Bulletin
-                    BottomAreaView(reminderListVM: self.reminderListVM, showNewReminder: $showNewReminder)
+                    BottomAreaView(reminderListVM: self.reminderListVM)
                     Spacer()
                 }
             }.tabItem {
@@ -63,6 +75,7 @@ struct ContentView: View {
                     Image(TabBarImageName.tabBar1)
                         .font(.title)
                     Text(TabBarText.tabBar1)
+                    
                 }
             }.tag(1)
             
@@ -74,7 +87,7 @@ struct ContentView: View {
                 }
             }.tag(2)
 
-        }
+        }.accentColor(.green)
     }
 }
 

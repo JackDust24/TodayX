@@ -20,7 +20,7 @@ struct RemindersView: View {
     // For showing the date in a viewable way for the user
     var dateFormatter: DateFormatter {
         let formatter = DateFormatter()
-        formatter.dateStyle = .long
+        formatter.dateStyle = .medium
         return formatter
     }
     
@@ -64,13 +64,13 @@ struct RemindersView: View {
                             VStack {
                                 Text(reminder.reminder)
                                     .font(.headline)
-                                    .padding([.leading], 10)
+                                    .padding(.leading, 5)
                                     .padding(.bottom, 5)
-                                    .frame(width: 200, height: 30, alignment: .leading)
+                                    .frame(width: 260, height: 30, alignment: .leading)
                                 
                                 Text("\(reminder.date, formatter: self.dateFormatter)")
                                     .font(.subheadline)
-                                    .padding([.leading], 10)
+//                                    .padding(.leading, 5)
                                     .frame(width: 260, height: 30, alignment: .center)
 
                             }

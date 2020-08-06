@@ -10,6 +10,7 @@ import Foundation
 import SwiftUI
 
 // Reminders Bullets & Headings
+let kAppName = "TODAYX"
 let kTodayCAP = "TODAY"
 let kTomorrowCAP = "TOMORROW"
 let kOverdueCAP = "OVERDUE"
